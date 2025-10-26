@@ -1,0 +1,7 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple minimal logo matching Roampal's clean UI aesthetic -->
+  <!-- Represents the 5-tier memory system with a central node -->
+  <circle cx="16" cy="16" r="12" fill="#18181b"/>
+  <circle cx="16" cy="16" r="10" stroke="#3b82f6" stroke-width="1.5"/>
+  <circle cx="16" cy="16" r="3" fill="#10b981"/>
+</svg>

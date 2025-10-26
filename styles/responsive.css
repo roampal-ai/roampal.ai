@@ -1,0 +1,183 @@
+/* Responsive Media Queries - Mobile First */
+
+/* Small devices (tablets, ≥640px) */
+@media (min-width: 640px) {
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-visual {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .use-case-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Medium devices (laptops, ≥768px) */
+@media (min-width: 768px) {
+  .hero {
+    padding: calc(var(--section-padding-desktop) + 100px) 0 var(--section-padding-desktop);
+  }
+
+  .problem {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .solution {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .how-it-works {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .technical {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .comparison {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .use-cases {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .social-proof {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .faq {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .final-cta {
+    padding: var(--section-padding-desktop) 0;
+  }
+
+  .footer {
+    padding: var(--section-padding-desktop) 0 var(--space-8);
+  }
+
+  .demo-step {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .step-number {
+    margin: 0 0 var(--space-4);
+  }
+}
+
+/* Large devices (desktops, ≥1024px) */
+@media (min-width: 1024px) {
+  .problem-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .use-case-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .testimonials {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+/* Extra large devices (large desktops, ≥1280px) */
+@media (min-width: 1280px) {
+  .use-case-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile navigation adjustments */
+@media (max-width: 639px) {
+  .nav-links {
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: var(--text-xs);
+    padding: 0.4rem 0.6rem;
+  }
+
+  .logo span {
+    display: none;
+  }
+
+  /* Hide text nav links on small screens, keep CTA */
+  .nav-links a:not(.btn-primary-small) {
+    display: none;
+  }
+
+  /* Email capture form on mobile */
+  .email-capture form {
+    flex-direction: column !important;
+  }
+
+  .email-capture button {
+    width: 100%;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-cta .btn-primary,
+  .hero-cta .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .trust-badges {
+    flex-direction: column;
+  }
+
+  .trust-badges .badge {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary-large,
+  .btn-secondary-large {
+    width: 100%;
+  }
+}

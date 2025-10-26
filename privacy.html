@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Roampal</title>
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <style>
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--brand-primary);
+    }
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--brand-primary);
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-link">← Back to Home</a>
+
+  <h1>Privacy Policy</h1>
+  <p><em>Last updated: January 2025</em></p>
+
+  <h2>TL;DR</h2>
+  <p><strong>We don't collect anything.</strong> Roampal runs 100% locally on your machine. No telemetry, no analytics, no tracking. Your data never leaves your computer.</p>
+
+  <h2>Data Storage</h2>
+  <p>All Roampal data is stored locally on your device in:</p>
+  <ul>
+    <li><strong>Windows:</strong> <code>%APPDATA%\Roampal\data\</code></li>
+    <li><strong>macOS:</strong> <code>~/Library/Application Support/Roampal/data</code></li>
+    <li><strong>Linux:</strong> <code>~/.local/share/roampal/data</code></li>
+  </ul>
+  <p>This includes:</p>
+  <ul>
+    <li>Conversation history</li>
+    <li>Memory banks</li>
+    <li>Uploaded documents</li>
+    <li>User preferences</li>
+    <li>All AI interactions</li>
+  </ul>
+
+  <h2>Network Activity</h2>
+  <p>Roampal communicates only with:</p>
+  <ul>
+    <li><strong>Ollama (localhost)</strong> - For running AI models locally</li>
+    <li><strong>ChromaDB (localhost)</strong> - For vector storage</li>
+  </ul>
+  <p>No external servers. No cloud services. No data transmission.</p>
+
+  <h2>Third-Party Services</h2>
+  <p>The Roampal website (roampal.ai) uses standard web hosting, but the application itself has:</p>
+  <ul>
+    <li>❌ No Google Analytics</li>
+    <li>❌ No tracking cookies</li>
+    <li>❌ No error reporting services</li>
+    <li>❌ No telemetry of any kind</li>
+  </ul>
+
+  <h2>Payment Processing</h2>
+  <p>Purchases are handled by <a href="https://gumroad.com" target="_blank">Gumroad</a>. We receive only:</p>
+  <ul>
+    <li>Email address (for delivery)</li>
+    <li>Purchase confirmation</li>
+  </ul>
+  <p>We do not store credit card information or process payments directly.</p>
+
+  <h2>Open Source</h2>
+  <p>Roampal is open source (MIT License). You can verify everything above by reviewing the source code at <a href="https://github.com/roampal-ai/roampal" target="_blank">github.com/roampal-ai/roampal</a>.</p>
+
+  <h2>Data Deletion</h2>
+  <p>To delete all your data, simply delete the data folder listed above. Uninstalling Roampal does NOT automatically delete your data (to prevent accidental loss).</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Email <a href="mailto:0xroampal@gmail.com">0xroampal@gmail.com</a></p>
+</body>
+</html>

@@ -1,0 +1,106 @@
+/* Design System Variables - Extracted from Roampal App */
+
+:root {
+  /* PRIMARY COLORS - Direct from ui-implementation/src/index.css */
+
+  /* Backgrounds */
+  --bg-primary: #000000;              /* Pure black (body) */
+  --bg-secondary: #18181b;            /* zinc-900 (panels, cards) */
+  --bg-tertiary: #27272a;             /* zinc-800 (hover states) */
+  --bg-code: #18181b;                 /* zinc-900 (code blocks) */
+
+  /* Text */
+  --text-primary: #fafafa;            /* zinc-100 (main text) */
+  --text-secondary: #a1a1aa;          /* zinc-400 (muted text) */
+  --text-tertiary: #71717a;           /* zinc-500 (disabled) */
+
+  /* Accents */
+  --accent-primary: #2563eb;          /* blue-600 (CTAs, buttons) */
+  --accent-hover: #1d4ed8;            /* blue-700 (hover) */
+  --accent-muted: rgba(37, 99, 235, 0.3); /* blue-600/30 (selection) */
+
+  /* Status Colors */
+  --success: #10b981;                 /* green-500 (worked) */
+  --error: #ef4444;                   /* red-500 (failed) */
+  --warning: #f59e0b;                 /* amber-500 (partial) */
+  --info: #3b82f6;                    /* blue-500 (info) */
+
+  /* Scrollbar */
+  --scroll-track: #18181b;            /* zinc-900 */
+  --scroll-thumb: #3f3f46;            /* zinc-700 */
+  --scroll-thumb-hover: #52525b;      /* zinc-600 */
+
+  /* Font Stack */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+
+  /* Type Scale */
+  --text-xs: 0.75rem;      /* 12px - captions, labels */
+  --text-sm: 0.875rem;     /* 14px - body small */
+  --text-base: 1rem;       /* 16px - body */
+  --text-lg: 1.125rem;     /* 18px - large body */
+  --text-xl: 1.25rem;      /* 20px - subheadings */
+  --text-2xl: 1.5rem;      /* 24px - section titles */
+  --text-3xl: 1.875rem;    /* 30px - page titles */
+  --text-4xl: 2.25rem;     /* 36px - hero (mobile) */
+  --text-5xl: 3rem;        /* 48px - hero (desktop) */
+
+  /* Font Weights */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Spacing System */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+
+  /* Section spacing */
+  --section-padding-mobile: var(--space-12);
+  --section-padding-desktop: var(--space-20);
+
+  /* Border Radius */
+  --radius-sm: 0.5rem;     /* 8px - buttons, inputs (rounded-lg) */
+  --radius-md: 0.5rem;     /* 8px - cards */
+  --radius-lg: 0.75rem;    /* 12px - large cards */
+  --radius-xl: 1rem;       /* 16px - hero sections */
+  --radius-full: 9999px;   /* Pills, badges */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+
+  /* Glow effect for accents */
+  --glow-blue: 0 0 20px rgba(59, 130, 246, 0.3);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Easing functions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Container */
+  --container-max: 1280px;
+  --container-padding: var(--space-6);
+}

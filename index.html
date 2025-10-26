@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI that grows with you. Roampal remembers who you are, learns from outcomes, and tracks what actually works with you. 100% local.">
+  <meta name="keywords" content="AI chatbot, local AI, privacy, persistent memory, outcome learning, pattern learning, personal AI, Ollama, memory bank, knowledge base">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://roampal.ai/">
+  <meta property="og:title" content="Roampal (Alpha) - AI That Grows With You">
+  <meta property="og:description" content="Stop re-explaining yourself every conversation. Roampal learns from outcomes and tracks what actually works with you. 100% local.">
+  <meta property="og:image" content="https://roampal.ai/assets/social-share.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://roampal.ai/">
+  <meta name="twitter:title" content="Roampal (Alpha) - AI That Grows With You">
+  <meta name="twitter:description" content="Stop re-explaining yourself. AI that learns from outcomes and tracks what actually works with you. 100% local.">
+  <meta name="twitter:image" content="https://roampal.ai/assets/social-share.jpg">
+
+  <title>Roampal (Alpha) - AI That Grows With You</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sections.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="#" class="logo">
+        <img src="assets/logo.png" alt="Roampal">
+        <span>Roampal</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content" data-animate>
+      <!-- Eyebrow -->
+      <span class="eyebrow">Alpha Release • Open Source • 100% Local</span>
+
+      <!-- Main headline -->
+      <h1 class="hero-title">
+        AI That <span class="highlight">Grows With You</span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p class="hero-subtitle">
+        Stop re-explaining yourself every conversation. Roampal remembers
+        your context, learns what actually works with you, and gets smarter
+        over time—100% local on your machine.
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="hero-cta">
+        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary" target="_blank" rel="noopener">
+          Get Started - $9.99
+          <span class="btn-icon">→</span>
+        </a>
+        <a href="https://github.com/roampal-ai/roampal" class="btn-secondary" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          Build from Source
+        </a>
+      </div>
+
+      <!-- Compact value prop -->
+      <p style="margin-top: 1.25rem; font-size: 0.875rem; color: #94a3b8;">
+        Pre-built: Embedded Python, ready to run • Source: Free, requires toolchain
+      </p>
+
+      <!-- Trust badges -->
+      <div class="trust-badges">
+        <div class="badge">
+          <svg class="badge-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
+          </svg>
+          <span class="badge-text">100% Local</span>
+        </div>
+        <div class="badge">
+          <svg class="badge-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span class="badge-text">Open Source</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo video -->
+    <div class="hero-video" id="demo" data-animate>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/bgL35eJVh8w?rel=0&modestbranding=1"
+          title="Roampal Demo - AI with Persistent Memory"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Statement Section -->
+  <section class="problem" id="problem">
+    <div class="container">
+      <h2 class="section-title" data-animate>
+        Tired of AI That Never Learns From Its Mistakes?
+      </h2>
+
+      <div class="problem-grid">
+        <div class="problem-item" data-animate>
+          <span class="problem-icon">❌</span>
+          <h3>They Don't Learn From Outcomes</h3>
+          <p>Cloud AI remembers what you say—but not what actually worked vs failed with you.</p>
+        </div>
+
+        <div class="problem-item" data-animate>
+          <span class="problem-icon">🔄</span>
+          <h3>You Start From Zero Daily</h3>
+          <p>Re-explain your stack, your goals, your context. Every. Single. Day.</p>
+        </div>
+
+        <div class="problem-item" data-animate>
+          <span class="problem-icon">💸</span>
+          <h3>Your Data Lives on Their Servers</h3>
+          <p>Memory features behind paywalls. Your conversations stored in the cloud. Forever.</p>
+        </div>
+      </div>
+
+      <!-- Visual comparison -->
+      <div class="comparison-visual">
+        <div class="comparison-before" data-animate>
+          <h4>Traditional AI</h4>
+          <div class="conversation">
+            <div class="msg">User: "How do I fix X?"</div>
+            <div class="msg">AI: "Try A"</div>
+            <div class="msg">User: "Didn't work"</div>
+            <div class="msg">AI: "Try A" (again)</div>
+          </div>
+        </div>
+
+        <div class="comparison-after" data-animate>
+          <h4>Roampal</h4>
+          <div class="conversation">
+            <div class="msg">User: "How do I fix X?"</div>
+            <div class="msg">AI: "Try A"</div>
+            <div class="msg">User: "Didn't work"</div>
+            <div class="msg success">
+              AI: "Try B (A failed before)" ✓
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="solution" id="features">
+    <div class="container">
+      <h2 class="section-title" data-animate>
+        Three Ways Roampal Knows You Better Than Any AI
+      </h2>
+
+      <div class="feature-grid">
+        <!-- Feature 1: Memory Bank -->
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title">Remembers Who You Are</h3>
+          <p class="feature-desc">
+            AI autonomously stores facts about YOU in permanent Memory Bank: your identity, preferences, goals, projects.
+          </p>
+          <div class="feature-example">
+            <code>
+              You: "I'm building a SaaS in Next.js"<br>
+              AI: *[stores: identity=founder, stack=Next.js]*<br>
+              Week later → Always suggests Next.js solutions
+            </code>
+          </div>
+        </div>
+
+        <!-- Feature 2: Books -->
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Learns Your Knowledge Base</h3>
+          <p class="feature-desc">
+            Upload docs, research papers, notes (.txt, .md). Creates searchable knowledge base that persists forever.
+          </p>
+          <div class="feature-example">
+            <code>
+              Upload: project_architecture.md<br>
+              Upload: api_conventions.md<br>
+              → AI references YOUR docs when answering
+            </code>
+          </div>
+        </div>
+
+        <!-- Feature 3: Outcome Learning -->
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Learns What Actually Works</h3>
+          <p class="feature-desc">
+            Tracks outcomes for every conversation. Good advice gets promoted. Bad advice gets deleted. Success rates guide future recommendations.
+          </p>
+          <div class="feature-example">
+            <code>
+              "Try approach A" → Worked! (score +0.2)<br>
+              "Try approach B" → Failed (score -0.3)<br>
+              Tracked: A = 90% success, B = 0%<br>
+              Next time: Suggests A automatically
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title" data-animate>See It Learn In Real-Time</h2>
+
+      <div class="demo-steps">
+        <!-- Step 1 -->
+        <div class="demo-step" data-animate>
+          <div class="step-content">
+            <div class="step-number">1</div>
+            <h3>Bad Advice Fails</h3>
+            <div class="demo-box">
+              <div class="demo-conversation">
+                <p class="user-msg">What's a good restaurant for a date night?</p>
+                <p class="ai-msg">How about that new sushi place downtown?</p>
+                <p class="user-msg">Went there, wasn't great...</p>
+              </div>
+              <div class="demo-outcome">
+                <span class="outcome-badge failed">
+                  Recording: FAILED
+                </span>
+                <span class="score-change">
+                  Score: 0.5 → 0.2 ↓
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="demo-step" data-animate>
+          <div class="step-content">
+            <div class="step-number">2</div>
+            <h3>Good Advice Works</h3>
+            <div class="demo-box">
+              <div class="demo-conversation">
+                <p class="user-msg">Any other suggestions?</p>
+                <p class="ai-msg">There's that Italian place on Main Street - quiet atmosphere, great reviews.</p>
+                <p class="user-msg">Perfect! Had an amazing time there.</p>
+              </div>
+              <div class="demo-outcome">
+                <span class="outcome-badge success">
+                  Recording: WORKED
+                </span>
+                <span class="score-change">
+                  Score: 0.5 → 0.7 ↑
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="demo-step" data-animate>
+          <div class="step-content">
+            <div class="step-number">3</div>
+            <h3>Next Time: Instant Recall</h3>
+            <div class="demo-box">
+              <div class="demo-conversation">
+                <p class="user-msg">Need a restaurant recommendation for tonight</p>
+                <div class="context-box">
+                  <div class="context-header">Past Experience</div>
+                  <ul class="context-list">
+                    <li class="failed">Sushi place downtown: Didn't work out</li>
+                    <li class="success">Italian place on Main St: Loved it</li>
+                  </ul>
+                </div>
+                <p class="ai-msg smart">
+                  Based on what you enjoyed last time, I'd suggest the Italian place on Main Street again, or something similar in that area.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unique Features Section -->
+  <section class="solution" style="background: var(--bg-secondary);">
+    <div class="container">
+      <h2 class="section-title" data-animate>What Makes This Different</h2>
+
+      <div class="feature-grid">
+        <!-- Knowledge Graph -->
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 1v6m0 6v6M1 12h6m6 0h6"></path>
+              <circle cx="12" cy="5" r="1"></circle>
+              <circle cx="12" cy="19" r="1"></circle>
+              <circle cx="5" cy="12" r="1"></circle>
+              <circle cx="19" cy="12" r="1"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title">Pattern Recognition & Learning</h3>
+          <p class="feature-desc">
+            Tracks which solutions work with YOUR specific problems. Learns success rates over multiple interactions and surfaces proven patterns automatically.
+          </p>
+          <div class="feature-example" style="text-align: left;">
+            <strong style="display: block; margin-bottom: 0.5rem;">How It Learns:</strong>
+            <code style="display: block; white-space: pre-line;">
+1st time: "Try approach A" → works ✓
+   Tracks: Approach A = 1 success (100%)
+
+2nd time: Similar problem → suggests A
+   → works ✓ → Approach A = 2 successes (100%)
+
+You try: "What about approach B?" → fails ✗
+   Tracks: Approach B = 0% success
+
+Next time: "How should I handle this?"
+   AI checks: Approach A 100%, Approach B 0%
+   → Automatically suggests approach A
+            </code>
+          </div>
+        </div>
+
+        <!-- Transparent Tools -->
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Watch It Work</h3>
+          <p class="feature-desc">
+            See the AI search memory, create notes, and stream responses in real-time. Full transparency into what it's doing.
+          </p>
+          <div class="feature-example">
+            <code>
+              🔍 Searching memory_bank...<br>
+              ✓ Found 3 relevant memories<br>
+              💭 Generating response...<br>
+              [Streams answer token by token]
+            </code>
+          </div>
+        </div>
+
+        <!-- Cross-Conversation -->
+        <div class="feature-card" data-animate>
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Cross-Conversation Memory</h3>
+          <p class="feature-desc">
+            Remembers your preferences and learned patterns across ALL conversations. No need to repeat yourself.
+          </p>
+          <div class="feature-example">
+            <code>
+              Current chat: "Database design help"<br>
+              AI recalls: You prefer PostgreSQL<br>
+              (learned from past conversations)<br>
+              → Suggests Postgres-specific solution
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Deep Dive Section -->
+  <section class="technical" id="technical">
+    <div class="container">
+      <h2 class="section-title" data-animate>How It Works Under The Hood</h2>
+
+      <div class="tech-diagram" data-animate>
+        <!-- Promotion flow: Working → History → Patterns -->
+        <div style="margin-bottom: 3rem;">
+          <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">Memory Promotion Flow</h3>
+          <div class="memory-tier" data-tier="working">
+            <div class="tier-label">Working (24h)</div>
+            <div class="tier-desc">Current context</div>
+            <div class="tier-score">Score ≥0.7 + 2 uses</div>
+          </div>
+
+          <div class="arrow-down">↓</div>
+
+          <div class="memory-tier" data-tier="history">
+            <div class="tier-label">History (30d)</div>
+            <div class="tier-desc">Recent conversations</div>
+            <div class="tier-score">Score ≥0.9 + 3 uses</div>
+          </div>
+
+          <div class="arrow-down">↓</div>
+
+          <div class="memory-tier" data-tier="patterns">
+            <div class="tier-label">Patterns (∞)</div>
+            <div class="tier-desc">Proven solutions</div>
+            <div class="tier-score">Permanent storage</div>
+          </div>
+        </div>
+
+        <!-- Standalone permanent collections -->
+        <div style="border-top: 2px solid var(--border-color); padding-top: 2rem;">
+          <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">Permanent Collections (No Promotion)</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="memory-tier" data-tier="memory-bank">
+              <div class="tier-label">Memory Bank</div>
+              <div class="tier-desc">Your preferences & context</div>
+              <div class="tier-score">LLM-controlled</div>
+            </div>
+
+            <div class="memory-tier" data-tier="books">
+              <div class="tier-label">Books</div>
+              <div class="tier-desc">Reference docs</div>
+              <div class="tier-score">User-uploaded</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expandable details -->
+      <div class="tech-details">
+        <details class="tech-accordion">
+          <summary>Outcome Detection Algorithm</summary>
+          <div class="accordion-content">
+            <p>Roampal uses LLM to detect outcomes from natural language:</p>
+            <ul>
+              <li>Positive signals: "that worked!", "perfect", "exactly what I needed"</li>
+              <li>Negative signals: "didn't work", "that failed", "not helpful"</li>
+              <li>Implicit signals: Topic changes, abandoning approach, asking similar question</li>
+            </ul>
+            <pre><code># LLM analyzes conversation and detects outcome
+if outcome == "worked":
+    score += 0.2  # Positive outcome
+elif outcome == "failed":
+    score -= 0.3  # Negative outcome
+elif outcome == "partial":
+    score += 0.05  # Partial success</code></pre>
+          </div>
+        </details>
+
+        <details class="tech-accordion">
+          <summary>Knowledge Graph Learning</summary>
+          <div class="accordion-content">
+            <p>Roampal builds a Knowledge Graph tracking problem→solution patterns with success rates:</p>
+            <ul>
+              <li><strong>Problem Categories:</strong> Groups similar problems by concept signatures</li>
+              <li><strong>Solution Tracking:</strong> Links solutions to problems with success counts</li>
+              <li><strong>Success Rates:</strong> Calculates success_rate = successes / (successes + failures)</li>
+              <li><strong>Pattern Recognition:</strong> Surfaces proven patterns before searching memory</li>
+            </ul>
+            <pre><code># When outcome = "worked", track pattern
+problem_concepts = ["deploy", "docker", "production"]
+solution_id = "working_abc123"
+
+knowledge_graph["problem_solutions"][signature] = {
+  "doc_id": solution_id,
+  "success_count": 5,
+  "failure_count": 0,
+  "success_rate": 1.0  # 5/5 = 100%
+}
+
+# Next time you ask about deployment:
+# AI finds Docker has 100% success rate
+# Kubernetes has 0% success rate
+# → Automatically suggests Docker</code></pre>
+          </div>
+        </details>
+
+        <details class="tech-accordion">
+          <summary>Privacy Architecture</summary>
+          <div class="accordion-content">
+            <p>All data stored locally:</p>
+            <ul>
+              <li>Vector DB: ChromaDB (local files)</li>
+              <li>Outcomes: SQLite database</li>
+              <li>Knowledge graph: JSON file</li>
+              <li>LLM: Runs via Ollama (local)</li>
+            </ul>
+            <p><strong>Zero network calls. Zero telemetry.</strong></p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table Section -->
+  <section class="comparison" id="comparison">
+    <div class="container">
+      <h2 class="section-title" data-animate>Cloud Memory vs Local Learning</h2>
+      <p class="comparison-note" style="margin-bottom: 2rem; text-align: center;">Cloud AI remembers facts. Roampal learns what works.</p>
+
+      <div class="comparison-table" data-animate>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Cloud AI Memory</th>
+              <th class="highlight-col">Roampal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Memory Type</td>
+              <td><span class="no">Stores what you say</span></td>
+              <td class="highlight-col"><span class="check">✓ Learns what works</span></td>
+            </tr>
+            <tr>
+              <td>Outcome Tracking</td>
+              <td><span class="no">No feedback loop</span></td>
+              <td class="highlight-col"><span class="check">✓ Scores every result</span></td>
+            </tr>
+            <tr>
+              <td>Bad Advice Handling</td>
+              <td><span class="no">Stays in memory</span></td>
+              <td class="highlight-col"><span class="check">✓ Auto-deleted</span></td>
+            </tr>
+            <tr>
+              <td>Pattern Recognition</td>
+              <td><span class="no">None</span></td>
+              <td class="highlight-col"><span class="check">✓ Tracks success rates per approach</span></td>
+            </tr>
+            <tr>
+              <td>Failure Avoidance</td>
+              <td><span class="no">No tracking</span></td>
+              <td class="highlight-col"><span class="check">✓ Warns about past failures</span></td>
+            </tr>
+            <tr>
+              <td>Privacy</td>
+              <td><span class="no">Cloud servers</span></td>
+              <td class="highlight-col"><span class="check">✓ Your machine only</span></td>
+            </tr>
+            <tr>
+              <td>Works Offline</td>
+              <td><span class="no">No</span></td>
+              <td class="highlight-col"><span class="check">✓ Yes</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="comparison-note">
+        Different tools for different needs. Use cloud AI for broad knowledge, Roampal for personal learning that compounds over time.
+      </p>
+    </div>
+  </section>
+
+  <!-- Use Cases Section -->
+  <section class="use-cases" id="use-cases">
+    <div class="container">
+      <h2 class="section-title" data-animate>Who Builds With Roampal?</h2>
+
+      <div class="use-case-grid">
+        <!-- Persona 1 -->
+        <div class="use-case-card" data-animate>
+          <div class="persona-icon">👨‍💻</div>
+          <h3>Developers</h3>
+          <p class="persona-desc">
+            "Remembers my entire stack. Never suggests Python when I use Rust."
+          </p>
+          <ul class="persona-benefits">
+            <li>Learns debugging patterns that work with YOU</li>
+            <li>Recalls past solutions: "This worked 3 weeks ago"</li>
+            <li>Builds knowledge base of your architecture</li>
+          </ul>
+        </div>
+
+        <!-- Persona 2 -->
+        <div class="use-case-card" data-animate>
+          <div class="persona-icon">🎓</div>
+          <h3>Students & Learners</h3>
+          <p class="persona-desc">
+            "My personal tutor that remembers what I struggle with."
+          </p>
+          <ul class="persona-benefits">
+            <li>Tracks what concepts you've mastered</li>
+            <li>Adapts explanations to your learning style</li>
+            <li>Builds on previous lessons automatically</li>
+          </ul>
+        </div>
+
+        <!-- Persona 3 -->
+        <div class="use-case-card" data-animate>
+          <div class="persona-icon">✍️</div>
+          <h3>Writers & Creators</h3>
+          <p class="persona-desc">
+            "Remembers my story world, characters, and tone."
+          </p>
+          <ul class="persona-benefits">
+            <li>Stores worldbuilding details permanently</li>
+            <li>Tracks character arcs across conversations</li>
+            <li>Learns your writing voice over time</li>
+          </ul>
+        </div>
+
+        <!-- Persona 4 -->
+        <div class="use-case-card" data-animate>
+          <div class="persona-icon">💼</div>
+          <h3>Entrepreneurs & Founders</h3>
+          <p class="persona-desc">
+            "My business advisor that knows my entire strategy."
+          </p>
+          <ul class="persona-benefits">
+            <li>Remembers your business model and goals</li>
+            <li>Tracks what marketing approaches worked</li>
+            <li>Builds institutional knowledge as you grow</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Proof Section -->
+  <section class="social-proof" id="social-proof">
+    <div class="container">
+      <div class="stats-row">
+        <div class="stat-item" data-animate>
+          <div class="stat-number">Private Alpha</div>
+          <div class="stat-label">Limited Early Access</div>
+        </div>
+
+        <div class="stat-item" data-animate>
+          <div class="stat-number">5-Tier Memory</div>
+          <div class="stat-label">Learns & Remembers</div>
+        </div>
+
+        <div class="stat-item" data-animate>
+          <div class="stat-number">Zero Telemetry</div>
+          <div class="stat-label">Fully Private</div>
+        </div>
+      </div>
+
+      <!-- Testimonials (add when available) -->
+      <!-- <div class="testimonials">
+        <div class="testimonial-card" data-animate>
+          <p class="testimonial-text">
+            "This is what ChatGPT should be. Finally, an AI that learns from mistakes."
+          </p>
+          <div class="testimonial-author">
+            <img src="assets/avatar-placeholder.png" alt="">
+            <div>
+              <div class="author-name">@username</div>
+              <div class="author-source">Twitter</div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2 class="section-title" data-animate>Frequently Asked Questions</h2>
+
+      <div class="faq-list">
+        <details class="faq-item" data-animate>
+          <summary>How is this different from cloud AI memory (ChatGPT, Claude, etc.)?</summary>
+          <div class="faq-answer">
+            <p>Cloud AI stores what you say. Roampal learns what works.</p>
+            <p>Three key differences:</p>
+            <ol>
+              <li><strong>Outcome-based learning:</strong> Roampal tracks which approaches succeeded vs failed with you, building a pattern library of what actually works for your specific problems. Cloud AI just remembers facts you told it.</li>
+              <li><strong>Local-first privacy:</strong> Your data stays on your machine. No cloud servers, no subscriptions ($9.99 one-time vs $20/month forever).</li>
+              <li><strong>True ownership:</strong> You own your data, your models, your memory. Export everything anytime. No vendor lock-in.</li>
+            </ol>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>What models does it support?</summary>
+          <div class="faq-answer">
+            <p>Multiple model families with tool-calling support:</p>
+            <ul>
+              <li><strong>Llama</strong> - Meta's models (3B - 70B)</li>
+              <li><strong>Qwen</strong> - Alibaba models (3B - 72B)</li>
+              <li><strong>GPT</strong> - OpenAI models (20B - 120B)</li>
+              <li><strong>Mixtral</strong> - Mistral's mixture-of-experts (8x7B)</li>
+            </ul>
+            <p>All support Roampal's memory tools. Install via Settings → Model Management.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>Does it work offline?</summary>
+          <div class="faq-answer">
+            <p>Yes! After downloading models, Roampal works completely offline.
+            No internet required.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>What are the system requirements?</summary>
+          <div class="faq-answer">
+            <p>Minimum: 8GB RAM, 10GB disk space, Python 3.10+, Ollama installed.</p>
+            <p>Recommended: 16GB RAM, 20GB disk, dedicated GPU for faster inference.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>How do I export my data?</summary>
+          <div class="faq-answer">
+            <p>All data is stored in plain text files you can access anytime:
+            <code>data/chromadb/</code>, <code>data/knowledge_graph.json</code>,
+            <code>data/sessions/</code>. Copy the entire folder to backup.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>Why charge if it's open source?</summary>
+          <div class="faq-answer">
+            <p>The code is <strong>free on GitHub</strong>. The $9.99 gets you:</p>
+            <ul>
+              <li><strong>Pre-packaged executable</strong> - No Python setup required</li>
+              <li><strong>Bundled dependencies</strong> - Everything included</li>
+              <li><strong>Tested build</strong> - Guaranteed to work</li>
+              <li><strong>Lifetime updates</strong> - All future releases included</li>
+            </ul>
+            <p>Technical users can build from source for free. The $9.99 is for convenience.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>Is Roampal's advice always reliable?</summary>
+          <div class="faq-answer">
+            <p><strong>No.</strong> Roampal uses AI models that can generate incorrect information, hallucinate facts, or reflect training biases.</p>
+            <p><strong>Always verify critical information</strong> from authoritative sources. Do not rely on AI-generated content for:</p>
+            <ul>
+              <li>Medical, legal, or financial advice</li>
+              <li>Safety-critical systems or decisions</li>
+              <li>Production code without thorough review</li>
+            </ul>
+          </div>
+        </details>
+
+        </div>
+    </div>
+  </section>
+
+
+  <!-- Philosophy Section -->
+  <section class="philosophy" id="philosophy" style="padding: 4rem 0; background: var(--bg-secondary);">
+    <div class="container" style="max-width: 900px; margin: 0 auto;">
+      <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 1.5rem;">Why Roampal Exists</h2>
+      
+      <p class="philosophy-text" data-animate style="font-size: 1.25rem; line-height: 1.8; text-align: center; color: var(--text-primary); margin-bottom: 2rem; font-weight: 500;">
+        Roampal is an experiment in building sustainable technology companies without artificial scarcity, surveillance capitalism, or bait-and-switch licensing.
+      </p>
+
+      <ul class="philosophy-principles" data-animate style="list-style: none; padding: 0; display: grid; gap: 1rem; max-width: 600px; margin: 0 auto;">
+        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
+          <span style="color: var(--success-color); font-size: 1.5rem;">✓</span>
+          <span>Open source from day one (MIT License)</span>
+        </li>
+        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
+          <span style="color: var(--success-color); font-size: 1.5rem;">✓</span>
+          <span>One-time payment, not subscription trap</span>
+        </li>
+        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
+          <span style="color: var(--success-color); font-size: 1.5rem;">✓</span>
+          <span>Zero telemetry, zero tracking</span>
+        </li>
+        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
+          <span style="color: var(--success-color); font-size: 1.5rem;">✓</span>
+          <span>Your data stays on your machine</span>
+        </li>
+        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
+          <span style="color: var(--success-color); font-size: 1.5rem;">✓</span>
+          <span>Free to build from source forever</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta" id="download">
+    <div class="container">
+      <div class="cta-box" data-animate>
+        <h2 class="cta-title">
+          Ready to Try AI That Actually Learns?
+        </h2>
+
+        <p class="cta-subtitle">
+          Get instant access to AI that learns and grows with you. Your data stays on your machine.
+        </p>
+
+        <div class="cta-buttons">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-large" target="_blank" rel="noopener">
+            <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
+              <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+            </svg>
+            <span>Download Pre-built - $9.99</span>
+            <span class="btn-note">Embedded Python • Ready to run • Lifetime updates</span>
+          </a>
+
+          </div>
+
+        <div class="cta-requirements">
+          <p>Pre-built: No dependencies needed • Or build from source (free, requires Node/Rust/Python)</p>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Column 1: Brand -->
+        <div class="footer-col">
+          <div class="footer-logo">
+            <img src="assets/logo.png" alt="Roampal">
+            <span>Roampal</span>
+          </div>
+          <p class="footer-tagline">
+            AI that remembers what worked.
+          </p>
+          <div class="footer-social">
+            <a href="https://discord.gg/qM4yEXfF" aria-label="Discord" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/roampal-ai/roampal" aria-label="GitHub" target="_blank" rel="noopener">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Product -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Product</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="mailto:roampal@protonmail.com?subject=Roampal Demo Request">Download</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Legal & Support -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Support & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:roampal@protonmail.com">Contact</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Roampal. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="scripts/main.js"></script>
+</body>
+</html>
