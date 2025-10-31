@@ -46,6 +46,7 @@
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#how-it-works">How It Works</a>
+        <a href="#releases">Releases</a>
         <a href="#philosophy">Philosophy</a>
         <a href="#faq">FAQ</a>
         <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
@@ -693,6 +694,129 @@ knowledge_graph["problem_solutions"][signature] = {
           </div>
         </div>
       </div> -->
+    </div>
+  </section>
+
+  <!-- Releases Section -->
+  <section class="releases" id="releases" style="padding: 4rem 0; background: var(--bg-primary);">
+    <div class="container" style="max-width: 1000px; margin: 0 auto;">
+      <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
+
+      <!-- v0.1.5 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.1.5 - Multi-Provider Support
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released October 31, 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Major update adding support for both Ollama and LM Studio providers, enhanced model management, and critical performance fixes.
+        </p>
+
+        <!-- Key Features Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">🔄 Multi-Provider Support</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Use both Ollama and LM Studio. Auto-detects providers and seamlessly switches between them.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">📚 Enhanced Model Library</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Browse and download models from both providers with unified management interface.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">⚙️ Provider Status</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Settings show which providers are running and how many models each has installed.
+            </p>
+          </div>
+        </div>
+
+        <!-- What's New Details -->
+        <details style="margin-bottom: 1rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Changelog</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Multi-Provider Support</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
+              <li><strong>LM Studio Support:</strong> Use LM Studio alongside or instead of Ollama</li>
+              <li><strong>Provider Auto-Detection:</strong> Automatically detects which providers are running</li>
+              <li><strong>Provider Switching:</strong> Switch between Ollama and LM Studio without losing chat context</li>
+              <li><strong>Unified Model Library:</strong> Browse and download models from both providers in one interface</li>
+              <li><strong>Provider Status:</strong> Settings show active providers and model counts</li>
+              <li><strong>Model Dropdown Filtering:</strong> Only shows models for the currently selected provider</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Performance & Reliability Improvements</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
+              <li><strong>Fixed Redundant Memory Searches:</strong> AI was searching memory 3 times for the same query - now searches once and reuses results</li>
+              <li><strong>Collection-Specific Memory Search:</strong> AI can now target specific memory collections (books, history, patterns) instead of always searching everything</li>
+              <li><strong>Fixed Cancel Button:</strong> Cancel button now properly stops generation and cleans up backend tasks</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Technical Details</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem;">
+              <li>Multi-provider architecture with auto-detection</li>
+              <li>New API endpoints for provider detection and management</li>
+              <li>Enhanced error handling and logging throughout backend</li>
+              <li>Performance optimizations for memory search operations</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Download CTA -->
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            Download v0.1.5 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- v0.1.0 Alpha Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; opacity: 0.85;">
+        <div style="margin-bottom: 1rem;">
+          <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+            v0.1.0 - Alpha Release
+          </h3>
+          <p style="color: var(--text-secondary); font-size: 0.875rem;">
+            Initial public release
+          </p>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;">
+          First public alpha featuring 5-tier memory system, outcome learning, knowledge graph, and persistent memory bank.
+        </p>
+
+        <details style="margin-bottom: 1rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 0.95rem;">Key Features</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem;">
+              <li>5-tier memory system (Working, History, Patterns, Memory Bank, Books)</li>
+              <li>Outcome tracking and learning from success/failure</li>
+              <li>Knowledge graph with pattern recognition</li>
+              <li>Persistent memory bank for user preferences</li>
+              <li>Document upload (Books) for reference knowledge</li>
+              <li>Cross-conversation memory with ChromaDB</li>
+              <li>Tool-based LLM interaction with memory search</li>
+              <li>100% local - Ollama integration</li>
+            </ul>
+          </div>
+        </details>
+      </div>
     </div>
   </section>
 
