@@ -151,7 +151,9 @@
 .problem-icon {
   font-size: 3rem;
   margin-bottom: var(--space-4);
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .problem-item h3 {
@@ -501,7 +503,9 @@ td {
 .persona-icon {
   font-size: 3rem;
   margin-bottom: var(--space-4);
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .use-case-card h3 {
