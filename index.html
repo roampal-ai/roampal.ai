@@ -100,14 +100,14 @@
             <circle cx="12" cy="12" r="6"></circle>
             <circle cx="12" cy="12" r="2"></circle>
           </svg>
-          <span><strong style="color: #10b981;">100% vs 3%</strong> vs vector DB</span>
+          <span><strong style="color: #10b981;">100% vs 0-3%</strong> on 130 tests</span>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
             <polyline points="17 6 23 6 23 12"></polyline>
           </svg>
-          <span><strong style="color: #10b981;">35% better</strong> over time</span>
+          <span><strong style="color: #10b981;">63% fewer</strong> tokens vs RAG</span>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -215,28 +215,44 @@
 
       <!-- The test results -->
       <div data-animate style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto;">
-        <h4 style="color: #10b981; margin: 0 0 1rem 0; font-size: 1.1rem;">We tested this with 30 tricky questions:</h4>
+        <h4 style="color: #10b981; margin: 0 0 1rem 0; font-size: 1.1rem;">We tested this with 130 adversarial scenarios:</h4>
 
-        <div style="display: flex; justify-content: center; gap: 3rem; margin: 1.5rem 0;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0;">
           <div style="text-align: center;">
-            <div style="font-size: 3rem; font-weight: bold; color: #ef4444;">3%</div>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin: 0;">Regular AI memory</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">0-3%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Plain vector DB</p>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 3rem; font-weight: bold; color: #10b981;">100%</div>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin: 0;">Roampal</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">100%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Roampal</p>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">63%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Fewer tokens vs RAG</p>
           </div>
         </div>
 
         <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: center;">
           Every question was worded to match the <em>wrong</em> answer.<br>
-          Regular AI got fooled 97% of the time. Roampal got fooled 0% of the time.
+          Regular AI got fooled. Roampal didn't — and used less context doing it.
+        </p>
+      </div>
+
+      <!-- Why this matters -->
+      <div data-animate style="background: rgba(96, 165, 250, 0.05); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
+        <h4 style="color: #60a5fa; margin: 0 0 1rem 0; font-size: 1.1rem;">Why this matters:</h4>
+        <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0;">
+          <strong style="color: white;">Better answers with less context.</strong> Roampal returns ~20 tokens per query vs RAG's 55-93.
+          That means lower API costs, faster responses, and less noise in your context window.<br><br>
+          <strong style="color: white;">And it gets better over time.</strong> As outcomes accumulate, accuracy improves from 58% → 93% (p=0.005).
+          Your AI actually learns what works <em>for you</em>.
         </p>
       </div>
 
       <!-- Stats for nerds -->
       <p data-animate style="text-align: center; font-size: 0.85rem; color: #64748b; margin-top: 2rem;">
-        Statistical details: p=0.001, Cohen's d=7.49. <a href="https://github.com/roampal-ai/roampal/blob/main/docs/BENCHMARKS.md" target="_blank" style="color: #60a5fa;">Full methodology</a>
+        Coding (30): p=0.001, d=7.49 • Finance (100): p&lt;0.001, χ²=98 • Learning: p=0.005, d=13.4<br>
+        <a href="https://github.com/roampal-ai/roampal/blob/main/docs/BENCHMARKS.md" target="_blank" style="color: #60a5fa;">Full methodology & reproducible benchmarks</a>
       </p>
 
     </div>
@@ -1064,7 +1080,7 @@ elif outcome == "partial":
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
             <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Statistically Proven</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              100% vs 3% accuracy vs plain vector DB (p=0.001, d=7.49). 40/40 infrastructure tests. Latency: p95=77ms. 1000 stores, zero corruption.
+              100% vs 0-3% accuracy on 130 adversarial scenarios (p&lt;0.001). 63% fewer tokens per query. Learning improves 58%→93% over time. Sub-100ms latency.
             </p>
           </div>
 
@@ -1099,10 +1115,10 @@ elif outcome == "partial":
 
             <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Comprehensive Benchmark Suite</h4>
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Roampal vs Vector DB:</strong> 100% vs 3% on 30 adversarial queries (p=0.001, d=7.49)</li>
-              <li><strong>Dynamic Weight Shifting:</strong> 5/5 scenarios - proven memories outrank semantic matches</li>
-              <li><strong>Learning Curve:</strong> 58% to 93% accuracy as memory accumulates (p=0.005)</li>
-              <li><strong>Infrastructure:</strong> 40/40 tests, 1000 stores zero corruption, p95 latency 77ms</li>
+              <li><strong>Roampal vs Vector DB:</strong> 100% vs 0-3% on 130 adversarial scenarios (coding + finance)</li>
+              <li><strong>Token Efficiency:</strong> 63% fewer tokens per query (~20 vs 55-93) with better accuracy</li>
+              <li><strong>Learning Curve:</strong> 58% → 93% accuracy as memory accumulates (p=0.005, d=13.4)</li>
+              <li><strong>Statistical Rigor:</strong> Coding p=0.001, d=7.49 • Finance p&lt;0.001, χ²=98</li>
               <li><strong>All 5 Memory Tiers:</strong> books, working, history, patterns, memory_bank</li>
               <li><strong>3 Knowledge Graphs:</strong> Routing KG, Content KG, Action-Effectiveness KG</li>
             </ul>
