@@ -1044,6 +1044,122 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
 
+      <!-- v0.2.3 Release Card (includes v0.2.2 features) -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.2.3 - Multi-Format Documents + Smart Model Selection + 100% Benchmark Accuracy
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released December 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Upload PDFs, Word docs, Excel spreadsheets, and more. VRAM-aware model selection recommends optimal quality for your GPU. 100% accuracy on 100 adversarial finance scenarios (vs 0% for plain vector search).
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">8 Document Formats</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              PDF, DOCX, Excel, CSV, HTML, RTF + existing TXT/MD. Automatic metadata extraction. Semantic search over tabular data.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Smart Quantization</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              GPU auto-detection recommends optimal model quality for your VRAM. 6 levels from Q2_K to Q8_0. Prevents VRAM overflow.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">100% vs 0% Accuracy</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              100 adversarial personal finance scenarios. Roampal: 100% correct. Plain vector: 0%. 63% fewer tokens per query.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">MCP Enhancements</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Enriched search results (score, uses, age). Auto-scores retrieved memories based on user outcome. Better LLM integration.
+            </p>
+          </div>
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Multi-Format Document Support</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>PDF:</strong> Text extraction via PyMuPDF with automatic metadata (title, author)</li>
+              <li><strong>Word (.docx):</strong> Preserves heading structure, extracts document properties</li>
+              <li><strong>Excel (.xlsx, .xls):</strong> Row-based chunking with column headers, 50 rows per chunk</li>
+              <li><strong>CSV/TSV:</strong> Auto-detects delimiters and encoding, semantic search over tabular data</li>
+              <li><strong>HTML:</strong> BeautifulSoup parsing for web page ingestion</li>
+              <li><strong>RTF:</strong> Legacy document support via striprtf</li>
+              <li><strong>Limitations:</strong> No OCR (text-based PDFs only), no password-protected files</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">VRAM-Aware Quantization Selection</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>GPU Detection:</strong> Detects NVIDIA GPUs via nvidia-smi, queries available VRAM</li>
+              <li><strong>Smart Recommendations:</strong> Pre-selects highest quality that fits in detected VRAM</li>
+              <li><strong>6 Quantization Levels:</strong> Q2_K (minimal) → Q8_0 (maximum quality)</li>
+              <li><strong>9 Models:</strong> Qwen2.5 (3b/7b/14b/32b/72b), Llama3.2:3b, Llama3.1:8b, Llama3.3:70b, Mixtral:8x7b</li>
+              <li><strong>Visual Indicators:</strong> Green checkmark for safe options, red warning for oversized models</li>
+              <li><strong>Provider Protection:</strong> Install buttons disabled when Ollama/LM Studio offline</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Token Efficiency Benchmark (100 Scenarios)</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Domain:</strong> Personal finance - where bad advice sounds better than good advice</li>
+              <li><strong>Design:</strong> Adversarial queries semantically match the WRONG answer</li>
+              <li><strong>Results:</strong> Roampal 100/100 correct, Plain Vector 0/100 correct</li>
+              <li><strong>Token Efficiency:</strong> Roampal 20 tokens/query vs RAG-5 93 tokens/query (4.7x more)</li>
+              <li><strong>Categories:</strong> Investing, Retirement, Debt, Insurance, Tax, Real Estate, Behavioral Finance, Common Myths</li>
+              <li><strong>Research Sources:</strong> S&P SPIVA, Schwab, DALBAR, Vanguard</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">MCP Tool Improvements</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Enriched Results:</strong> [collection] (score:0.75, uses:3, last:worked, age:2d) [id:abc123]</li>
+              <li><strong>Auto-Scoring:</strong> record_response scores all memories from last search with same outcome</li>
+              <li><strong>Better Integration:</strong> Claude Code, Claude Desktop, Cursor see more actionable metadata</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Bug Fixes</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Backend Cleanup:</strong> Python process properly terminates on window close (no more orphans)</li>
+              <li><strong>Data Path:</strong> PROD builds correctly use AppData/Roampal/data</li>
+              <li><strong>LM Studio 404:</strong> Quantized model names now resolve to HuggingFace downloads</li>
+              <li><strong>Provider Check:</strong> Quant modal Install button disabled when provider offline</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li>Release notes: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.3.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.3.md</a></li>
+              <li>Benchmark release: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.2.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.2.md</a></li>
+              <li>100 finance scenarios: benchmarks/comprehensive_test/test_token_efficiency.py</li>
+            </ul>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            Download v0.2.3 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.3" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
       <!-- v0.2.1 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1055,7 +1171,6 @@ elif outcome == "partial":
               Released November 27, 2025
             </p>
           </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
