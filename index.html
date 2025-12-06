@@ -100,7 +100,7 @@
             <circle cx="12" cy="12" r="6"></circle>
             <circle cx="12" cy="12" r="2"></circle>
           </svg>
-          <span><strong style="color: #10b981;">100% vs 0-3%</strong> on 130 tests</span>
+          <span><strong style="color: #10b981;">Outcomes beat rerankers 4×</strong> (40 pts vs 10 pts)</span>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -119,7 +119,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
           </svg>
-          <span><strong style="color: #10b981;">MIT</strong> Open Source</span>
+          <span><strong style="color: #10b981;">Apache 2.0</strong> Open Source</span>
         </div>
       </div>
 
@@ -213,28 +213,63 @@
         </p>
       </div>
 
-      <!-- The test results -->
-      <div data-animate style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto;">
-        <h4 style="color: #10b981; margin: 0 0 1rem 0; font-size: 1.1rem;">We tested this with 130 adversarial scenarios:</h4>
+      <!-- 4-Way Comparison - THE PROOF -->
+      <div data-animate style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto;">
+        <h4 style="color: #a78bfa; margin: 0 0 0.5rem 0; font-size: 1.1rem;">We tested each fix separately:</h4>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">200 adversarial tests. Every query worded to match the wrong answer.</p>
+        <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+          <thead>
+            <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.3);">
+              <th style="text-align: left; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Approach</th>
+              <th style="text-align: center; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Accuracy</th>
+              <th style="text-align: center; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Improvement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.15);">
+              <td style="padding: 0.75rem; color: #94a3b8;">RAG Baseline (vector search)</td>
+              <td style="padding: 0.75rem; color: #ef4444; text-align: center;">10%</td>
+              <td style="padding: 0.75rem; color: #64748b; text-align: center;">-</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.15);">
+              <td style="padding: 0.75rem; color: #94a3b8;">+ Cross-encoder reranker</td>
+              <td style="padding: 0.75rem; color: #f59e0b; text-align: center;">20%</td>
+              <td style="padding: 0.75rem; color: #60a5fa; text-align: center;">+10 pts</td>
+            </tr>
+            <tr>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600;">+ Outcome tracking</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">50%</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">+40 pts</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin: 0; text-align: center;">
+          Rerankers help a little. <strong style="color: #a78bfa;">Outcome tracking helps 4× more.</strong>
+        </p>
+      </div>
+
+      <!-- Learning curve test -->
+      <div data-animate style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
+        <h4 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Learning Curve Test: The system improves over time</h4>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">50 tests measuring retrieval accuracy as outcomes accumulate. (Tests the memory layer, not the LLM.)</p>
 
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0;">
           <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">0-3%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Plain vector DB</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">10%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Cold start (0 uses)</p>
           </div>
           <div style="text-align: center;">
             <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">100%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Roampal</p>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">After 3 uses</p>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">63%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Fewer tokens vs RAG</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">p=0.005</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Statistically significant</p>
           </div>
         </div>
 
         <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: center;">
-          Every question was worded to match the <em>wrong</em> answer.<br>
-          Regular AI got fooled. Roampal didn't — and used less context doing it.
+          After just 3 outcome signals, the retrieval system learns what works for you.
         </p>
       </div>
 
@@ -243,9 +278,7 @@
         <h4 style="color: #60a5fa; margin: 0 0 1rem 0; font-size: 1.1rem;">Why this matters:</h4>
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0;">
           <strong style="color: white;">Better answers with less context.</strong> Roampal returns ~20 tokens per query vs RAG's 55-93.
-          That means lower API costs, faster responses, and less noise in your context window.<br><br>
-          <strong style="color: white;">And it gets better over time.</strong> As outcomes accumulate, accuracy improves from 58% → 93% (p=0.005).
-          Your AI actually learns what works <em>for you</em>.
+          That means lower API costs, faster responses, and less noise in your context window.
         </p>
       </div>
 
@@ -1044,6 +1077,99 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
 
+      <!-- v0.2.5 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.2.5 - MCP Client + Wilson Scoring + Multilingual Ranking
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released December 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Roampal can now connect to external MCP tool servers (Blender, filesystem, GitHub, databases). Wilson score ranking ensures proven memories outrank "lucky" new ones. Multilingual cross-encoder supports 14 languages.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">MCP Client Integration</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Connect to external tool servers like Blender, filesystem, GitHub, SQLite, Brave Search. Your local LLM can now use any MCP-compatible tool.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Wilson Score Ranking</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Statistical confidence intervals favor proven track records. A memory with 90/100 success now correctly outranks "lucky" 1/1 success.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Multilingual Reranking</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              14-language cross-encoder for international users. English, Spanish, German, French, Chinese, Japanese, Korean, Arabic, and more.
+            </p>
+          </div>
+
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">MCP Client Architecture</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>External Tools:</strong> Blender, filesystem, GitHub, SQLite, Brave Search, Puppeteer</li>
+              <li><strong>Connection Manager:</strong> Spawns and manages stdio connections to MCP servers</li>
+              <li><strong>Tool Discovery:</strong> Auto-discovers available tools from connected servers</li>
+              <li><strong>Graceful Degradation:</strong> Internal Roampal tools continue if external servers fail</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Memory Ranking Improvements</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Wilson Score:</strong> Statistical lower bounds favor proven memories over lucky new ones</li>
+              <li><strong>Balanced Weighting:</strong> Proven high-value (80% learned), Failing patterns (30% learned)</li>
+              <li><strong>Uses Counter Fix:</strong> All outcomes (worked, failed, partial) now increment uses correctly</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">New Models Added</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Llama 4 Scout:</strong> MoE 109B (17B active), 10M context, native tool calling</li>
+              <li><strong>Llama 4 Maverick:</strong> MoE 401B (17B active), 128 experts, best reasoning</li>
+              <li><strong>Qwen3:32b:</strong> Dense 32B with native Hermes tools</li>
+              <li><strong>Qwen3-coder:30b:</strong> MoE 30B for coding tasks</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">UI Improvements</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Memory Bank:</strong> Virtualized list rendering (60fps with 500+ memories)</li>
+              <li><strong>Thinking Filter:</strong> LLM thinking tags filtered during streaming (no flash)</li>
+              <li><strong>Chronological:</strong> True text/tool interleaving in message display</li>
+              <li><strong>Error Handling:</strong> Better model download and context length error messages</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li>Release notes: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.5.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.5.md</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            Download v0.2.5 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
       <!-- v0.2.3 Release Card (includes v0.2.2 features) -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1055,7 +1181,6 @@ elif outcome == "partial":
               Released December 2025
             </p>
           </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
@@ -1152,9 +1277,9 @@ elif outcome == "partial":
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.3 - $9.99
+            Download v0.2.5 - $9.99
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.3" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1291,9 +1416,9 @@ elif outcome == "partial":
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.3 - $9.99
+            Download v0.2.5 - $9.99
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.3" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1815,7 +1940,7 @@ elif outcome == "partial":
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          <span>Open source from day one (MIT License)</span>
+          <span>Open source from day one (Apache 2.0 License)</span>
         </li>
         <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
