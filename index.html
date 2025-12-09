@@ -1077,6 +1077,84 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
 
+      <!-- v0.2.6 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.2.6 - Unified Learning + Directive Insights + Contextual Embeddings
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released December 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Internal LLM now contributes to Action KG (unified learning across all interfaces). get_context_insights outputs actionable prompts. Contextual book embeddings improve retrieval by ~49%.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Unified Action KG</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Internal LLM and MCP clients now both contribute to Action-Effectiveness KG. Tracks ANY tool—built-in and external MCP tools.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Directive Insights</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              get_context_insights now outputs actionable prompts with workflow guidance. Model-agnostic descriptions work across all LLMs.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Contextual Book Embeddings</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Book chunks now embedded with "Book: {title}, Section: {section}" prefix. ~49% improved retrieval for ambiguous queries.
+            </p>
+          </div>
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Six Parts Summary</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Part 1:</strong> Internal Action KG - Internal LLM now contributes to Action KG</li>
+              <li><strong>Part 2:</strong> Document-Level Insights - Aggregate doc success from Action KG examples</li>
+              <li><strong>Part 3:</strong> Directive Insights - get_context_insights outputs actionable prompts</li>
+              <li><strong>Part 4:</strong> Model-Agnostic Prompts - Workflow-based descriptions for all LLMs</li>
+              <li><strong>Part 5:</strong> Contextual Book Embeddings - ~49% improved retrieval</li>
+              <li><strong>Part 6:</strong> Action KG Cleanup - Prevent stale doc_ids on book deletion</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Technical Details</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Tracks ANY Tool:</strong> Action KG now tracks built-in tools AND external MCP tools (e.g., mcp__github__create_issue)</li>
+              <li><strong>MCP Unified:</strong> Both internal and MCP now cache all doc_ids for Action KG tracking</li>
+              <li><strong>Backward Compatible:</strong> No migrations, existing data preserved</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><a href="https://github.com/roampal-ai/roampal/blob/master/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            Download v0.2.6 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.6" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
       <!-- v0.2.5 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1088,7 +1166,6 @@ elif outcome == "partial":
               Released December 2025
             </p>
           </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
