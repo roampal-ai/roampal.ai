@@ -64,13 +64,13 @@
 
       <!-- Main headline -->
       <h1 class="hero-title">
-        THE <span class="highlight">Memory Layer</span> That Actually Learns
+        Memory that <span class="highlight">learns what works.</span>
       </h1>
 
       <!-- Subheadline -->
       <p class="hero-subtitle">
-        <strong>Local-first privacy. Outcome-based learning.</strong>
-        AI memory that learns what works for you.
+        <strong>Not just what's similar—what actually helped.</strong>
+        Say it worked. Say it didn't. The AI remembers. 100% private and local.
       </p>
 
       <!-- CTA buttons -->
@@ -1077,6 +1077,87 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
 
+      <!-- v0.2.7 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.2.7 - Architecture Refactoring
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released December 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Monolithic 4,746-line file refactored into 9 focused, testable modules. Facade pattern preserves API while enabling maintainability. 260 tests passing.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">9 Focused Services</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              ScoringService, SearchService, KnowledgeGraphService, RoutingService, PromotionService, OutcomeService, MemoryBankService, ContextService.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">39% Code Reduction</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              4,746 lines → ~2,880 lines through deduplication and cleaner abstractions. Each service is ~150-400 lines.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Zero API Changes</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              All existing integrations continue working unchanged. Facade maintains public API while delegating to services.
+            </p>
+          </div>
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">New Service Modules</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>scoring_service.py</strong> - Wilson score calculations, cross-encoder scoring</li>
+              <li><strong>knowledge_graph_service.py</strong> - Triple KG management (Action, Routing, Content)</li>
+              <li><strong>routing_service.py</strong> - Collection routing, concept extraction</li>
+              <li><strong>search_service.py</strong> - Vector search with reranking</li>
+              <li><strong>promotion_service.py</strong> - Memory lifecycle (working → history → patterns)</li>
+              <li><strong>outcome_service.py</strong> - Action outcome tracking</li>
+              <li><strong>memory_bank_service.py</strong> - User fact storage</li>
+              <li><strong>context_service.py</strong> - Cold-start context generation</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Testing</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>237 Unit Tests</strong> - Per-service unit tests with mock dependencies</li>
+              <li><strong>23 Characterization Tests</strong> - Captured original behavior as regression safety net</li>
+              <li><strong>100% Pass Rate</strong> - All tests green before and after refactoring</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            Download v0.2.7 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.7" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+
       <!-- v0.2.6 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1088,7 +1169,7 @@ elif outcome == "partial":
               Released December 2025
             </p>
           </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
