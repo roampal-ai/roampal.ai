@@ -777,3 +777,74 @@ td {
   color: var(--text-tertiary);
   margin-bottom: var(--space-2);
 }
+
+/* Nav Dropdown */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  cursor: pointer;
+}
+
+.nav-dropdown-trigger svg {
+  transition: transform var(--transition-fast);
+}
+
+.nav-dropdown:hover .nav-dropdown-trigger svg {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 160px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  margin-top: var(--space-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-dropdown-menu a {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.nav-dropdown-menu a:hover {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+/* GitHub icon in nav */
+.nav-github {
+  display: flex;
+  align-items: center;
+  padding: var(--space-1);
+}
+
+.nav-github svg {
+  fill: var(--text-secondary);
+  transition: fill var(--transition-fast);
+}
+
+.nav-github:hover svg {
+  fill: var(--text-primary);
+}

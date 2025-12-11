@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://roampal.ai/blog.html">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Roampal">
+  <meta name="description" content="Roampal Blog - Insights on AI memory, outcome learning, and building AI that actually remembers.">
+  <meta name="keywords" content="AI memory, outcome learning, RAG, vector search, personal AI, local AI">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://roampal.ai/blog.html">
+  <meta property="og:title" content="Roampal Blog - AI Memory Insights">
+  <meta property="og:description" content="Insights on AI memory, outcome learning, and building AI that actually remembers.">
+  <meta property="og:image" content="https://roampal.ai/assets/social-share.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://roampal.ai/blog.html">
+  <meta name="twitter:title" content="Roampal Blog - AI Memory Insights">
+  <meta name="twitter:description" content="Insights on AI memory, outcome learning, and building AI that actually remembers.">
+  <meta name="twitter:image" content="https://roampal.ai/assets/social-share.jpg">
+
+  <title>Blog | Roampal - AI That Grows With You</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sections.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+
+  <style>
+    .blog-index-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-6);
+      padding-top: 120px;
+    }
+
+    .blog-index-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .blog-index-title {
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-index-subtitle {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .blog-posts-grid {
+      display: grid;
+      gap: var(--space-8);
+    }
+
+    .blog-post-card {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: var(--space-6);
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all var(--transition-base);
+    }
+
+    .blog-post-card:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .blog-post-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .blog-post-content {
+      padding: var(--space-6);
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .blog-post-meta {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-2);
+    }
+
+    .blog-post-title {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-3);
+      line-height: var(--leading-tight);
+    }
+
+    .blog-post-excerpt {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-medium);
+      color: var(--accent-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .blog-post-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .blog-post-link svg {
+      transition: transform var(--transition-fast);
+    }
+
+    .blog-post-link:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .blog-post-card {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-post-image {
+        height: 200px;
+      }
+
+      .blog-post-content {
+        padding: var(--space-6);
+      }
+
+      .blog-index-title {
+        font-size: var(--text-3xl);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Roampal">
+        <span>Roampal</span>
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <a href="index.html#features" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="index.html#features">Features</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#mcp-setup">MCP Setup</a>
+          </div>
+        </div>
+        <a href="index.html#benchmarks">Benchmarks</a>
+        <a href="index.html#philosophy">Philosophy</a>
+        <a href="index.html#releases">Releases</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="blog.html" style="color: var(--text-primary);">Blog</a>
+        <a href="https://github.com/roampal-ai/roampal" class="nav-github" target="_blank" rel="noopener" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="blog-index-container">
+    <header class="blog-index-header">
+      <h1 class="blog-index-title">Blog</h1>
+      <p class="blog-index-subtitle">Insights on AI memory, outcome learning, and building AI that actually remembers.</p>
+    </header>
+
+    <div class="blog-posts-grid">
+      <!-- Post 1: Outcome Learning -->
+      <a href="blog-outcome-learning.html" class="blog-post-card">
+        <img src="assets/roboshake.jpg" alt="Human and AI hand reaching toward each other" class="blog-post-image">
+        <div class="blog-post-content">
+          <p class="blog-post-meta">December 2025</p>
+          <h2 class="blog-post-title">Your AI Keeps Forgetting What You Told It. Here's Why.</h2>
+          <p class="blog-post-excerpt">Most AI memory works like a filing cabinet. But the AI doesn't know if what it retrieved actually helped. Here's a different approach that learns from outcomes.</p>
+          <span class="blog-post-link">
+            Read more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Add more posts here as you write them -->
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: var(--space-8); color: var(--text-tertiary); font-size: var(--text-sm);">
+    <p>&copy; 2025 Roampal. Open source under Apache 2.0.</p>
+    <p style="margin-top: var(--space-2);">
+      <a href="privacy.html" style="color: var(--text-secondary);">Privacy</a> &bull;
+      <a href="terms.html" style="color: var(--text-secondary);">Terms</a> &bull;
+      <a href="https://github.com/roampal-ai/roampal" style="color: var(--text-secondary);">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>

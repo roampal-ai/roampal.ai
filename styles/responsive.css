@@ -121,11 +121,70 @@
   }
 }
 
+/* Mobile-specific fixes for inline grid styles */
+@media (max-width: 767px) {
+  /* MCP Setup Steps - stack vertically on mobile */
+  .mcp-step-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Restaurant example Memory A/B cards */
+  .memory-comparison-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Memory tier grid (Memory Bank / Books) */
+  .memory-tier-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Learning curve 3-column stats */
+  .stats-3col {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  /* Comparison table scroll on mobile */
+  .comparison-table {
+    overflow-x: auto;
+  }
+
+  .comparison-table table {
+    min-width: 500px;
+  }
+
+  /* Hero stats bar - stack on very small screens */
+  .hero-stats {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Tablet navigation - prevent overlap */
+@media (max-width: 900px) {
+  .nav-content {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .nav-links {
+    gap: var(--space-3);
+  }
+
+  .nav-links a:not(.btn-primary-small):not(.nav-github) {
+    display: none;
+  }
+
+  .nav-dropdown {
+    display: none;
+  }
+}
+
 /* Mobile navigation adjustments */
 @media (max-width: 639px) {
   .nav-links {
     gap: var(--space-2);
-    flex-wrap: wrap;
   }
 
   .nav-links a {
