@@ -1,0 +1,6 @@
+# Roampal robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://roampal.ai/sitemap.xml

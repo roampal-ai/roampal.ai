@@ -23,7 +23,49 @@
   <meta name="twitter:description" content="Insights on AI memory, outcome learning, and building AI that actually remembers.">
   <meta name="twitter:image" content="https://roampal.ai/assets/social-share.jpg">
 
-  <title>Blog | Roampal - AI That Grows With You</title>
+  <title>AI Memory Blog | Roampal - Outcome Learning, Privacy & Local-First AI</title>
+
+  <!-- Blog Index Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Roampal Blog",
+  "description": "Insights on AI memory, outcome learning, and building AI that actually remembers.",
+  "url": "https://roampal.ai/blog.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Roampal",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://roampal.ai/assets/logo.png"
+    }
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://roampal.ai/blog-privacy.html",
+        "name": "Your AI's Memory Shouldn't Belong to Someone Else"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "url": "https://roampal.ai/blog-ai-learns.html",
+        "name": "Your AI Remembers Everything. But Does It Learn?"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "url": "https://roampal.ai/blog-outcome-learning.html",
+        "name": "Your AI Keeps Forgetting What You Told It. Here's Why."
+      }
+    ]
+  }
+}
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -89,6 +131,7 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
+      object-position: center 55%;
     }
 
     .blog-post-content {
@@ -203,7 +246,23 @@
     </header>
 
     <div class="blog-posts-grid">
-            <!-- Post 2: AI Learns -->
+      <!-- Post 3: Privacy -->
+      <a href="blog-privacy.html" class="blog-post-card">
+        <img src="assets/privacy-hero.jpg" alt="Neural network contained inside a glowing glass cube" class="blog-post-image">
+        <div class="blog-post-content">
+          <p class="blog-post-meta">December 2025</p>
+          <h2 class="blog-post-title">Your AI's Memory Shouldn't Belong to Someone Else</h2>
+          <p class="blog-post-excerpt">Your AI assistant is building a map of your mind. Cloud providers see every question and correction. Here's why local-first matters.</p>
+          <span class="blog-post-link">
+            Read more
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Post 2: AI Learns -->
       <a href="blog-ai-learns.html" class="blog-post-card">
         <img src="assets/livingstorage.jpg" alt="A living creature emerging from a storage box" class="blog-post-image">
         <div class="blog-post-content">
