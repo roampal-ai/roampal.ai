@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="We gave AI memory. It still makes the same mistakes. Here's how outcome learning changes that - with benchmarks showing 60% accuracy vs 10% for standard RAG.">
+  <meta name="keywords" content="AI memory, outcome learning, RAG, vector search, AI that learns, Claude Code, MCP">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://roampal.ai/blog-ai-learns.html">
+  <meta property="og:title" content="Your AI Remembers Everything. But Does It Learn?">
+  <meta property="og:description" content="We gave AI memory. It still makes the same mistakes. Here's how outcome learning changes that.">
+  <meta property="og:image" content="https://roampal.ai/assets/livingstorage.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://roampal.ai/blog-ai-learns.html">
+  <meta name="twitter:title" content="Your AI Remembers Everything. But Does It Learn?">
+  <meta name="twitter:description" content="We gave AI memory. It still makes the same mistakes. Here's how outcome learning changes that.">
+  <meta name="twitter:image" content="https://roampal.ai/assets/livingstorage.jpg">
+
+  <title>Your AI Remembers Everything. But Does It Learn? | Roampal</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sections.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+
+  <style>
+    .blog-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-6);
+      padding-top: 120px;
+    }
+
+    .blog-header {
+      margin-bottom: var(--space-8);
+    }
+
+    .blog-title {
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--text-primary);
+      line-height: var(--leading-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-meta {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+
+    .blog-hero-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-8);
+    }
+
+    .blog-hero-caption {
+      font-size: var(--text-xs);
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-top: calc(-1 * var(--space-6));
+      margin-bottom: var(--space-8);
+      font-style: italic;
+    }
+
+    .blog-content h2 {
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-top: var(--space-10);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-content p {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-content strong {
+      color: var(--text-primary);
+    }
+
+    .blog-content ul, .blog-content ol {
+      margin-bottom: var(--space-4);
+      padding-left: var(--space-6);
+    }
+
+    .blog-content li {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-2);
+    }
+
+    .blog-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-6) 0;
+    }
+
+    .blog-content th,
+    .blog-content td {
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      border-bottom: 1px solid var(--bg-tertiary);
+    }
+
+    .blog-content th {
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    .blog-content td {
+      color: var(--text-secondary);
+    }
+
+    .blog-content img.inline-image {
+      width: 100%;
+      border-radius: var(--radius-lg);
+      margin: var(--space-6) 0;
+      border: 1px solid var(--bg-tertiary);
+    }
+
+    .blog-content .image-caption {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-top: calc(-1 * var(--space-4));
+      margin-bottom: var(--space-6);
+      font-style: italic;
+    }
+
+    .blog-content pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--bg-tertiary);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      overflow-x: auto;
+      margin: var(--space-4) 0;
+    }
+
+    .blog-content code {
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+      font-size: var(--text-base);
+      color: var(--accent-primary);
+    }
+
+    .blog-cta {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      margin-top: var(--space-10);
+      text-align: center;
+    }
+
+    .blog-cta h3 {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-cta p {
+      color: var(--text-secondary);
+      margin-bottom: var(--space-6);
+    }
+
+    .blog-cta pre {
+      background: var(--bg-primary);
+      text-align: left;
+      max-width: 300px;
+      margin: 0 auto var(--space-6);
+    }
+
+    .blog-cta-buttons {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .blog-footer {
+      margin-top: var(--space-10);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--bg-tertiary);
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-6);
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    @media (max-width: 768px) {
+      .blog-title {
+        font-size: var(--text-3xl);
+      }
+
+      .blog-content h2 {
+        font-size: var(--text-xl);
+      }
+
+      .blog-content p,
+      .blog-content li {
+        font-size: var(--text-base);
+      }
+    }
+  </style>
+
+  <!-- Article Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your AI Remembers Everything. But Does It Learn?",
+  "description": "We gave AI memory. It still makes the same mistakes. Here's how outcome learning changes that - with benchmarks showing 60% accuracy vs 10% for standard RAG.",
+  "image": "https://roampal.ai/assets/livingstorage.jpg",
+  "datePublished": "2025-12-16",
+  "dateModified": "2025-12-16",
+  "author": {
+    "@type": "Organization",
+    "name": "Roampal",
+    "url": "https://roampal.ai"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Roampal",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://roampal.ai/assets/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://roampal.ai/blog-ai-learns.html"
+  },
+  "keywords": "AI memory, outcome learning, RAG, vector search, Claude Code, MCP"
+}
+  </script>
+
+  <link rel="canonical" href="https://roampal.ai/blog-ai-learns.html">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Roampal">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Roampal">
+        <span>Roampal</span>
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <a href="index.html#features" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="index.html#features">Features</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#mcp-setup">MCP Setup</a>
+          </div>
+        </div>
+        <a href="index.html#benchmarks">Benchmarks</a>
+        <a href="index.html#philosophy">Philosophy</a>
+        <a href="index.html#releases">Releases</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="blog.html" style="color: var(--text-primary);">Blog</a>
+        <a href="https://github.com/roampal-ai/roampal-core" class="nav-github" target="_blank" rel="noopener" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <article class="blog-container">
+    <a href="blog.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Blog
+    </a>
+
+    <header class="blog-header">
+      <h1 class="blog-title">Your AI Remembers Everything. But Does It Learn?</h1>
+      <p class="blog-meta">December 2025 &bull; 4 min read</p>
+    </header>
+
+    <img src="assets/livingstorage.jpg" alt="A living creature emerging from a storage box - memory that grows" class="blog-hero-image">
+    <p class="blog-hero-caption">Image generated with Google Gemini</p>
+
+    <div class="blog-content">
+      <p>We gave AI memory. It still makes the same mistakes.</p>
+
+      <p>You can stuff a vector database with every conversation you've ever had. The AI will dutifully retrieve the most "similar" chunks when you ask a question. And then it will give you the same bad advice it gave you last month&mdash;the advice you explicitly told it was wrong.</p>
+
+      <p>This is the state of AI memory in 2025.</p>
+
+      <h2>The Retrieval Trap</h2>
+
+      <p>Here's a scenario: You're debugging a Python import error. Your AI assistant suggests reinstalling the package. You try it. Doesn't work. You tell it so. You eventually figure out it was a PATH issue.</p>
+
+      <p>Two weeks later, same error. The AI searches its memory, finds the previous conversation, and confidently suggests... reinstalling the package.</p>
+
+      <p>It remembered everything. It learned nothing.</p>
+
+      <p>The memory was there. The correction was there. But retrieval doesn't distinguish between "advice I gave" and "advice that actually helped."</p>
+
+      <h2>What Learning Actually Looks Like</h2>
+
+      <img src="assets/memory-result.png" alt="Memory result #1 told me exactly what to do" class="inline-image">
+      <p class="image-caption">Real screenshot: the first result told me exactly what to do&mdash;because it had worked before.</p>
+
+      <p>The difference isn't storage. It's feedback.</p>
+
+      <p>When I say "thanks, that worked," that memory gets promoted. When I say "no, that's wrong," it gets demoted. The AI reads my reaction and scores its own memories accordingly.</p>
+
+      <p>No manual tagging. No thumbs up buttons I'll forget to click. The AI just pays attention to what happens next.</p>
+
+      <h2>The Numbers</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RAG Baseline (similarity only)</td>
+            <td>10%</td>
+          </tr>
+          <tr>
+            <td>+ Reranker</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>+ Outcome Learning</td>
+            <td>60%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Outcome learning added 50 percentage points. The reranker&mdash;a common "improvement" to RAG&mdash;added 10.</p>
+
+      <p>The catch: learning takes time. At zero uses, all approaches perform the same. Around 3 uses, the gap opens.</p>
+
+      <h2>How It Works</h2>
+
+      <p>The system tracks three things:</p>
+
+      <ol>
+        <li>What advice was given</li>
+        <li>What the user said afterward</li>
+        <li>Whether the outcome was positive or negative</li>
+      </ol>
+
+      <p>Each memory gets a score. High-scoring memories surface first. Low-scoring memories sink.</p>
+
+      <p>It's not complicated. It's just... not how anyone builds memory systems.</p>
+
+      <h2>Why This Matters</h2>
+
+      <p>Every MCP memory server I've found stores conversations. Some add embeddings. Some add tagging. None of them score outcomes.</p>
+
+      <p>Storage without learning is a filing cabinet. You can find things, but you can't know which things are worth finding.</p>
+
+      <p>The AI that remembers your mistakes is useful. The AI that stops repeating them is better.</p>
+
+      <div class="blog-cta">
+        <h3>Try It</h3>
+        <pre><code>pip install roampal
+roampal init</code></pre>
+        <p>Restart Claude Code. Done.</p>
+        <div class="blog-cta-buttons">
+          <a href="https://github.com/roampal-ai/roampal-core" class="btn-secondary" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <p style="text-align: center; margin-top: var(--space-8); font-size: var(--text-base); color: var(--text-tertiary);">
+        Still early. Feedback shapes what comes next.
+      </p>
+
+    </div>
+
+    <footer class="blog-footer">
+      Written with AI assistance (using Roampal). Header image generated with Google Gemini.
+    </footer>
+  </article>
+
+  <!-- Simple Footer -->
+  <footer style="text-align: center; padding: var(--space-8); color: var(--text-tertiary); font-size: var(--text-sm);">
+    <p>&copy; 2025 Roampal. Open source under Apache 2.0.</p>
+    <p style="margin-top: var(--space-2);">
+      <a href="privacy.html" style="color: var(--text-secondary);">Privacy</a> &bull;
+      <a href="terms.html" style="color: var(--text-secondary);">Terms</a> &bull;
+      <a href="https://github.com/roampal-ai/roampal-core" style="color: var(--text-secondary);">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>
