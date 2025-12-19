@@ -198,3 +198,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
   console.log('Roampal website loaded successfully ✨');
 });
+
+  // Mobile navigation toggle
+  const hamburger = document.querySelector('.nav-hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const overlay = document.querySelector('.nav-mobile-overlay');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.contains('active');
+      
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      overlay?.classList.toggle('active');
+      document.body.classList.toggle('nav-open');
+      
+      // Update aria-expanded
+      hamburger.setAttribute('aria-expanded', !isOpen);
+    });
+
+    // Close menu when clicking overlay
+    overlay?.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.classList.remove('nav-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        overlay?.classList.remove('active');
+        document.body.classList.remove('nav-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Mobile dropdown toggle
+    const dropdownTrigger = document.querySelector('.nav-dropdown-trigger');
+    if (dropdownTrigger) {
+      dropdownTrigger.addEventListener('click', (e) => {
+        if (window.innerWidth <= 900) {
+          e.preventDefault();
+          dropdownTrigger.closest('.nav-dropdown').classList.toggle('open');
+        }
+      });
+    }
+  }
