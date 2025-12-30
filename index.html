@@ -1360,6 +1360,91 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
 
+      <!-- v0.2.9 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.2.9 - Ghost Registry + Timeout Protection + Performance
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released December 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Fixes book deletion ghost vectors, adds timeout protection for embeddings/ChromaDB, 3x faster startup, MCP temporal sorting, and outcome detection. Major stability release.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Ghost Registry</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Tracks deleted book chunk IDs to filter ghost vectors from search results. No more "[No content]" results after deleting books.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Timeout Protection</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Embedding model loading (120s) and ChromaDB upsert (60s) run in daemon threads with timeouts. No more infinite hangs.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">3x Faster Startup</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Memory fetch and model discovery parallelized. Knowledge graph lazy-loaded only when panel opens.
+            </p>
+          </div>
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Bug Fixes</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Ghost Registry</strong> - Deleted book chunks tracked in ghost_ids.json, filtered from search results</li>
+              <li><strong>Collection Nuke</strong> - "Clear Books" now deletes + recreates collection (no ghosts possible)</li>
+              <li><strong>Outcome Detection</strong> - Fixed missing detect_conversation_outcome() method in UMS facade</li>
+              <li><strong>PathSettings</strong> - Fixed data_path to data_dir in 3 locations (book delete, clear, search)</li>
+              <li><strong>Books Search</strong> - Fixed embedding_function=None in collection refresh (768d/384d mismatch)</li>
+              <li><strong>MCP Stale Cache</strong> - BM25 index invalidation when collection changes</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">MCP Enhancements</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>sort_by Parameter</strong> - search_memory supports "recency", "score", or default relevance. Auto-detects temporal queries.</li>
+              <li><strong>related Parameter</strong> - record_response supports positional indexing [1, 3] for selective scoring</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">UX Improvements</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><strong>Model Loading State</strong> - Shows spinner instead of "No Model" while discovering Ollama models</li>
+              <li><strong>Delete Button</strong> - Document processor shows "Deleting..." spinner, displays errors, modal stays open on failure</li>
+              <li><strong>Backend Reconnection</strong> - Ctrl+R refresh works seamlessly (checks if port already bound)</li>
+            </ul>
+
+            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            Download v0.2.9 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.9" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+
       <!-- v0.2.8 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1371,8 +1456,7 @@ elif outcome == "partial":
               Released December 2025
             </p>
           </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
-        </div>
+</div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
           MCP security hardening with parameter allowlisting, rate limiting, and audit logging. Full memory content returned everywhere (no more truncation). In-app update notifications. Exit button for clean shutdown.

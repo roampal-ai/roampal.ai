@@ -1,7 +1,7 @@
 {
-  "version": "0.2.8",
-  "notes": "MCP security hardening, no truncation policy, update notifications",
-  "pub_date": "2025-12-13T00:00:00Z",
+  "version": "0.2.9",
+  "notes": "Ghost Registry, Timeout Protection, Startup Performance, MCP sort_by/related parameters",
+  "pub_date": "2025-12-29T00:00:00Z",
   "download_url": "https://roampal.gumroad.com/l/mjxtfg",
   "min_version": "0.2.0"
 }
