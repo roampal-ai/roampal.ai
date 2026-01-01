@@ -196,9 +196,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  console.log('Roampal website loaded successfully ✨');
-});
-
   // Mobile navigation toggle
   const hamburger = document.querySelector('.nav-hamburger');
   const navLinks = document.querySelector('.nav-links');
@@ -252,3 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
+
+  console.log('Roampal website loaded successfully ✨');
+});
