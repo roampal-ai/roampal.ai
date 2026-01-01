@@ -356,8 +356,10 @@
   }
 
   .nav-dropdown-menu {
-    position: static;
-    display: none;
+    position: static !important;
+    display: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     background: transparent;
     box-shadow: none;
     padding-left: 8px;
@@ -366,7 +368,7 @@
   }
 
   .nav-dropdown.open .nav-dropdown-menu {
-    display: block;
+    display: block !important;
   }
 
   .nav-dropdown-menu a {

@@ -1188,6 +1188,71 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
 
+      <!-- v0.2.10 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.2.10 - ChromaDB 1.x + Query Timeouts + Ghost Entry Handling
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released December 2025
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Critical stability release. ChromaDB upgraded to 1.x for reliable delete persistence, query timeouts prevent UI freezes, ghost entry handling eliminates HNSW index errors.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">ChromaDB 1.x Upgrade</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              Upgraded from 0.4.18 to 1.x. Deletes now auto-persist to disk.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Query Timeout Protection</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              10s/15s timeouts. App stays responsive even if ChromaDB hangs.
+            </p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Ghost Entry Handling</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
+              HNSW ghost entries no longer cause crashes.
+            </p>
+          </div>
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li>Schema migration for ChromaDB topic columns</li>
+              <li>Memory promotion runs on startup</li>
+              <li>Fixed method name mismatches</li>
+              <li>Fixed start-backend.bat path</li>
+            </ul>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.10/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+            Download v0.2.10 - $9.99
+          </a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.10" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+
       <!-- v0.2.9 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
@@ -1199,7 +1264,6 @@ elif outcome == "partial":
               Released December 2025
             </p>
           </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
@@ -1352,7 +1416,7 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.7 and earlier)
+          View Previous Releases (v0.2.8 and earlier)
         </summary>
 
       <!-- v0.2.7 Release Card -->
