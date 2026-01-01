@@ -226,9 +226,13 @@ document.addEventListener('DOMContentLoaded', function() {
       hamburger.setAttribute('aria-expanded', 'false');
     });
 
-    // Close menu when clicking a link
+    // Close menu when clicking a link (except dropdown trigger on mobile)
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
+        // Don't close menu when clicking dropdown trigger on mobile - let dropdown handler manage it
+        if (window.innerWidth <= 900 && link.classList.contains('nav-dropdown-trigger')) {
+          return;
+        }
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
         overlay?.classList.remove('active');

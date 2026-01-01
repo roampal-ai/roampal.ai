@@ -801,9 +801,8 @@ td {
 .nav-dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 160px;
+  left: 0;
+  min-width: 180px;
   background: var(--bg-secondary);
   border: 1px solid var(--bg-tertiary);
   border-radius: var(--radius-md);
@@ -826,6 +825,7 @@ td {
   font-size: var(--text-sm);
   color: var(--text-secondary);
   transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
 .nav-dropdown-menu a:hover {
