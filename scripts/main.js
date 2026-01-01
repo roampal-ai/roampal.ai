@@ -221,6 +221,8 @@ document.addEventListener('DOMContentLoaded', function() {
       overlay.classList.remove('active');
       document.body.classList.remove('nav-open');
       hamburger.setAttribute('aria-expanded', 'false');
+      // Reset dropdown state
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
     });
 
     // Close menu when clicking a link (except dropdown trigger on mobile)
@@ -235,6 +237,8 @@ document.addEventListener('DOMContentLoaded', function() {
         overlay?.classList.remove('active');
         document.body.classList.remove('nav-open');
         hamburger.setAttribute('aria-expanded', 'false');
+        // Reset dropdown state so it's closed next time menu opens
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
       });
     });
 
