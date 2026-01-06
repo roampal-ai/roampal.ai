@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQFYTGH715"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TQFYTGH715');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://roampal.ai/blog-context-rot.html">
+  <meta name="description" content="Chroma's research proves bigger context windows don't fix the problem. Performance degrades regardless. Here's how we built memory that actually learns from outcomes.">
+  <meta name="keywords" content="context rot, AI memory, RAG, outcome-based learning, Claude Code, MCP, vector search, LLM context window">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://roampal.ai/blog-context-rot.html">
+  <meta property="og:title" content="Context Rot is Real. Here's How We Built Memory That Learns.">
+  <meta property="og:description" content="Chroma's research proves bigger context windows don't fix the problem. Here's how outcome-based learning changes that.">
+  <meta property="og:image" content="https://roampal.ai/assets/context-rot-hero.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://roampal.ai/blog-context-rot.html">
+  <meta name="twitter:title" content="Context Rot is Real. Here's How We Built Memory That Learns.">
+  <meta name="twitter:description" content="Chroma's research proves bigger context windows don't fix the problem. Here's how outcome-based learning changes that.">
+  <meta name="twitter:image" content="https://roampal.ai/assets/context-rot-hero.png">
+
+  <title>Context Rot is Real. Here's How We Built Memory That Learns. | Roampal</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sections.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+
+  <style>
+    .blog-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-6);
+      padding-top: 120px;
+    }
+
+    .blog-header {
+      margin-bottom: var(--space-8);
+    }
+
+    .blog-title {
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--text-primary);
+      line-height: var(--leading-tight);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-meta {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+
+    .blog-hero-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-8);
+    }
+
+    .blog-hero-caption {
+      font-size: var(--text-xs);
+      color: var(--text-tertiary);
+      text-align: center;
+      margin-top: calc(-1 * var(--space-6));
+      margin-bottom: var(--space-8);
+      font-style: italic;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--accent-primary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-6);
+    }
+
+    .back-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .blog-content h2 {
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-top: var(--space-10);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-content h3 {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-top: var(--space-8);
+      margin-bottom: var(--space-3);
+    }
+
+    .blog-content p {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-content ul, .blog-content ol {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-4);
+      padding-left: var(--space-6);
+    }
+
+    .blog-content li {
+      margin-bottom: var(--space-2);
+    }
+
+    .blog-content blockquote {
+      border-left: 3px solid var(--accent);
+      padding-left: var(--space-4);
+      margin: var(--space-6) 0;
+      font-style: italic;
+      color: var(--text-secondary);
+    }
+
+    .blog-content code {
+      background: var(--bg-secondary);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+
+    .blog-content pre {
+      background: var(--bg-secondary);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-content pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .blog-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-6) 0;
+    }
+
+    .blog-content th, .blog-content td {
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-content th {
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+    }
+
+    .callout-box {
+      background: var(--bg-secondary);
+      border-left: 3px solid var(--accent);
+      padding: var(--space-4);
+      margin: var(--space-6) 0;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    .outcome-scored-group {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin: var(--space-4) 0;
+    }
+
+    .outcome-scored-group .group-label {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin: 0 0 var(--space-2) 0;
+      font-style: italic;
+    }
+
+    .outcome-scored-group ul {
+      margin: 0;
+      padding-left: var(--space-5);
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin: var(--space-8) 0;
+      text-align: center;
+    }
+
+    .cta-box pre {
+      background: var(--bg-primary);
+      display: inline-block;
+      margin: var(--space-4) 0;
+    }
+
+    .blog-footer {
+      margin-top: var(--space-12);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--border);
+    }
+
+    .blog-footer-links {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .blog-footer-links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .blog-footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Context Rot is Real. Here's How We Built Memory That Learns.",
+    "description": "Chroma's research proves bigger context windows don't fix the problem. Performance degrades regardless. Here's how we built memory that actually learns from outcomes.",
+    "image": "https://roampal.ai/assets/context-rot-hero.png",
+    "datePublished": "2026-01-06",
+    "dateModified": "2026-01-06",
+    "author": {
+      "@type": "Person",
+      "name": "Logan"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Roampal",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://roampal.ai/assets/logo.png"
+      }
+    }
+  }
+  </script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Roampal">
+        <span>Roampal</span>
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <a href="index.html#features" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="index.html#features">Features</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#mcp-setup">MCP Setup</a>
+          </div>
+        </div>
+        <a href="index.html#benchmarks">Benchmarks</a>
+        <a href="index.html#philosophy">Philosophy</a>
+        <a href="index.html#releases">Releases</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="blog.html" style="color: var(--text-primary);">Blog</a>
+        <a href="https://github.com/roampal-ai" class="nav-github" target="_blank" rel="noopener" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="blog-container">
+    <a href="blog.html" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Back to Blog
+    </a>
+
+    <header class="blog-header">
+      <h1 class="blog-title">Context Rot is Real. Here's How We Built Memory That Learns.</h1>
+      <p class="blog-meta">January 2026 &bull; 8 min read</p>
+    </header>
+
+    <img src="assets/context-rot-hero.png" alt="Context window degradation visualization" class="blog-hero-image">
+    <p class="blog-hero-caption">Image generated with Google Gemini</p>
+
+    <article class="blog-content">
+      <p><a href="https://research.trychroma.com/context-rot" target="_blank">Chroma's research last July</a> confirms what we've been building around: <strong>bigger context windows don't solve the retrieval problem</strong>. They tested 18 LLMs including Claude, GPT-4.1, Gemini 2.5. Performance degrades regardless of how much you can fit in.</p>
+
+      <p>Here's the part nobody talks about.</p>
+
+      <p>Retrieval and generation are decoupled. The retriever finds "relevant" chunks. The generator uses them. But nothing connects what got retrieved to whether the answer actually helped.</p>
+
+      <p>Your AI pulls up a memory. Uses it. Gets it wrong. And then... nothing. That memory sits there, waiting to surface again. Same confidence. Same ranking. No feedback.</p>
+
+      <p>Where's the feedback loop?</p>
+
+      <h2>The Learning Gap</h2>
+
+      <p>Rerankers, query rewriting, hybrid search - they all try to fix retrieval quality at query time. But they can't learn from outcomes. They optimize for similarity, not success.</p>
+
+      <p>We built outcome-based learning. When you say "that worked" or "no, that's wrong," those signals attach to the memories themselves. Good memories surface more. Bad ones sink.</p>
+
+      <p>It's not complicated. It's just not how anyone else builds this.</p>
+
+      <h2>Three Problems We Had to Solve</h2>
+
+      <h3>Problem 1: Cold Start</h3>
+
+      <p>A new memory helps once. 1/1 = 100% success rate. A veteran memory has helped 90 times out of 100. 90/100 = 90%. Raw math says the new one is better. That's insane.</p>
+
+      <p>Wilson score fixes this by asking: how much do I actually trust this number? One data point? Could be luck. A hundred data points? That's a pattern. So 9/10 and 90/100 are both 90% raw, but Wilson scores them at ~60% and ~83% respectively. More evidence, higher floor. Memories have to prove themselves.</p>
+
+      <h3>Problem 2: When to Trust What</h3>
+
+      <p>New memories have no track record. You can't rank them by outcome because there's no outcome yet. But if you only trust embeddings, you're back to semantic similarity. No learning.</p>
+
+      <p>We use dynamic weighting. As memories get used and scored, the balance shifts:</p>
+
+      <svg viewBox="0 0 420 140" style="width: 100%; max-width: 520px; margin: var(--space-4) 0;">
+        <!-- Legend -->
+        <rect x="100" y="0" width="12" height="12" fill="#3b82f6" rx="2"/>
+        <text x="116" y="10" fill="var(--text-tertiary)" font-size="11">Embedding similarity</text>
+        <rect x="250" y="0" width="12" height="12" fill="#10b981" rx="2"/>
+        <text x="266" y="10" fill="var(--text-tertiary)" font-size="11">outcome-based learning</text>
+
+        <!-- New Memory -->
+        <text x="0" y="45" fill="var(--text-secondary)" font-size="13" font-weight="500">New</text>
+        <rect x="100" y="32" width="240" height="24" fill="#3b82f6" rx="4"/>
+        <rect x="340" y="32" width="60" height="24" fill="#10b981" rx="4"/>
+        <text x="220" y="48" fill="white" font-size="12" font-weight="500" text-anchor="middle">80%</text>
+        <text x="370" y="48" fill="white" font-size="12" font-weight="500" text-anchor="middle">20%</text>
+
+        <!-- Arrow with label -->
+        <path d="M200 65 L200 85 M195 80 L200 85 L205 80" stroke="var(--text-tertiary)" stroke-width="2" fill="none"/>
+        <text x="215" y="78" fill="var(--text-tertiary)" font-size="10">feedback</text>
+
+        <!-- Proven Memory -->
+        <text x="0" y="110" fill="var(--text-secondary)" font-size="13" font-weight="500">Proven</text>
+        <rect x="100" y="97" width="60" height="24" fill="#3b82f6" rx="4"/>
+        <rect x="160" y="97" width="240" height="24" fill="#10b981" rx="4"/>
+        <text x="130" y="113" fill="white" font-size="12" font-weight="500" text-anchor="middle">20%</text>
+        <text x="280" y="113" fill="white" font-size="12" font-weight="500" text-anchor="middle">80%</text>
+      </svg>
+
+      <p>Trust is earned, not assumed.</p>
+
+      <h3>Problem 3: Making Scoring Frictionless</h3>
+
+      <p>If the user has to click a thumbs up button, they won't. The feedback loop dies.</p>
+
+      <p>Here's how we solve it: the LLM does the work. After each exchange, we prompt the model to read your next message and infer whether its response actually helped:</p>
+
+      <ul>
+        <li>"Thanks, that worked!" &rarr; outcome = worked</li>
+        <li>"No, that's wrong" &rarr; outcome = failed</li>
+        <li>User moves to a new topic &rarr; outcome = worked (previous issue resolved)</li>
+        <li>User asks follow-up questions &rarr; outcome = partial or unknown</li>
+      </ul>
+
+      <p>No buttons. No friction. The AI reads your reaction and scores its own memories.</p>
+
+      <h2>The Results</h2>
+
+      <p>We ran 30 adversarial tests where semantic similarity points to the wrong answer. Example: "My code keeps crashing" might semantically match a memory about "the crash course I took" instead of "the buffer overflow fix that worked."</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ChromaDB baseline (similarity only)</td>
+            <td>0%</td>
+          </tr>
+          <tr>
+            <td>Roampal with outcome-based learning</td>
+            <td>60%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>60 percentage points. On queries where the semantically similar answer is wrong, outcome-based learning surfaces the answer that actually worked.</p>
+
+      <p>How the test works: we plant a trap. Two memories go in - one that worked, one that failed but sounds more like the query. "My code keeps crashing" matches "crash course" better than "null pointer fix." Pure vector search falls for it every time. outcome-based learning doesn't care about word similarity - it remembers what actually helped.</p>
+
+      <div class="callout-box">
+        <strong>Honest caveat:</strong> Learning takes time. At zero uses, both approaches perform identically. The gap opens around 3+ uses per memory. This isn't magic - it's compounding feedback.
+      </div>
+
+      <h2>Token Efficiency</h2>
+
+      <p>Context rot is partly a token problem. Standard RAG grabs everything that looks relevant and stuffs it into context. More tokens, worse performance, higher costs.</p>
+
+      <p>We tested a different approach: what if you retrieved less, but retrieved <em>better</em>?</p>
+
+      <p>The test: 100 scenarios where the query matches lots of memories semantically, but only a few actually helped before. Example - you ask "Why is my API slow?" Your memory contains discussions about API rate limits, authentication timeouts, that time you complained about slow coffee, and one memory about adding a database index that actually fixed a slow API last month.</p>
+
+      <p>Standard RAG pulls in everything with "slow" or "API" in it. Roampal checks which memories had good outcomes and prioritizes those.</p>
+
+      <p><strong>The metric:</strong> does the memory that actually helped appear in the top 3 results?</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Retrieved the helpful memory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Naive RAG (semantic similarity)</td>
+            <td>1%</td>
+          </tr>
+          <tr>
+            <td>Roampal with outcome-based learning</td>
+            <td>67%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>And because Roampal only retrieves 3-5 high-confidence memories instead of 50 "relevant" chunks, you use fewer tokens too.</p>
+
+      <div class="callout-box">
+        <strong>The numbers:</strong> ~19 tokens per retrieval vs 50-90 for typical RAG. At 1M queries/month, that's <strong>$18-37K/year saved</strong> on API costs - while getting better answers.
+      </div>
+
+      <h2>Where Memories Live</h2>
+
+      <p>Five collections, each with a purpose:</p>
+
+      <div class="outcome-scored-group">
+        <p class="group-label">↓ Outcome-scored (worked/failed feedback)</p>
+        <ul>
+          <li><strong>working</strong> - Live conversation. Auto-cleaned after 24 hours.</li>
+          <li><strong>history</strong> - Graduated from working. 30 day decay.</li>
+          <li><strong>patterns</strong> - Promoted solutions. Can demote.</li>
+        </ul>
+      </div>
+
+      <ul>
+        <li><strong>memory_bank</strong> - User facts, preferences. Ranked by importance × confidence. Updateable. Deletable.</li>
+        <li><strong>books</strong> - Uploaded docs. Permanent. Searchable.</li>
+      </ul>
+
+      <p>Wilson scoring ranks ALL results, but only the top three collections learn from feedback. Memory_bank and books don't update based on outcomes - they're static reference.</p>
+
+      <p>Memories flow up as they prove useful. Bad ones decay out. The system self-cleans.</p>
+
+      <h2>Learning How to Search</h2>
+
+      <p>Three knowledge graphs work together:</p>
+
+      <ul>
+        <li><strong>Routing KG</strong> - Which collection has the answer? Learns from outcomes.</li>
+        <li><strong>Content KG</strong> - How are concepts related? Tracks entity connections.</li>
+        <li><strong>Action KG</strong> - Which tools work when? Tracks success rates per context type.</li>
+      </ul>
+
+      <p>Zero hardcoded rules. The system learns YOUR patterns:</p>
+
+      <p>"Database timeout" → patterns (solutions that worked)</p>
+      <p>"How did we fix this last week" → history (past sessions)</p>
+      <p>"My logging style" → memory_bank (stored facts)</p>
+
+      <p>Start fresh, and it explores everything. After a few sessions, it knows where to look.</p>
+
+      <h2>Something Like Intuition</h2>
+
+      <p>After enough scored interactions, the system develops something like intuition. Not rules. Weights.</p>
+
+      <p>It knows which solutions actually helped you. It knows which advice you rejected. The database fix from last week? Scored highly now. The suggestion you rejected three times? Demoted.</p>
+
+      <p>None of this is magic. It's feedback, accumulated.</p>
+
+      <h2>Context Injection</h2>
+
+      <p>On session start, we inject high-confidence context automatically. Core facts from memory_bank. Recent patterns that worked.</p>
+
+      <p>And it continues. Every message, the KGs surface what worked before, what to avoid, where to look first. You don't ask for it.</p>
+
+      <p>Cold starts feel warm. And it stays that way.</p>
+
+      <h2>What We're Not</h2>
+
+      <p>Not funded. Side project that got traction. It breaks? Roampal and I fix it. Want features? Open an issue.</p>
+
+      <h2>The Bet</h2>
+
+      <p>Context windows will keep getting bigger. Retrieval will keep getting fancier. And none of it will matter if the system can't learn from whether the answer helped.</p>
+
+      <div class="cta-box">
+        <p><strong>Want to learn more?</strong> <a href="https://github.com/roampal-ai" target="_blank">github.com/roampal-ai</a> | <a href="https://github.com/roampal-ai/roampal/tree/master/dev/benchmarks" target="_blank">See the benchmarks</a></p>
+        <p><strong>Have Claude Code?</strong></p>
+        <pre><code>pip install roampal
+roampal init</code></pre>
+        <p>Restart Claude Code. Done.</p>
+        <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">Your memories stay local. Your learning stays yours.</p>
+      </div>
+
+      <p style="margin-top: var(--space-6); font-size: var(--text-sm); color: var(--text-tertiary); text-align: center;">
+        Written with AI assistance (using Roampal). References Chroma's context rot research.
+      </p>
+
+    </article>
+
+    <footer class="blog-footer">
+      <p class="blog-footer-links">
+        <a href="blog.html">&larr; Back to Blog</a>
+      </p>
+    </footer>
+  </main>
+
+  <!-- Simple Footer -->
+  <footer style="text-align: center; padding: var(--space-8); color: var(--text-tertiary); font-size: var(--text-sm);">
+    <p>&copy; 2025 Roampal. Open source under Apache 2.0.</p>
+    <p style="margin-top: var(--space-2);">
+      <a href="privacy.html" style="color: var(--text-secondary);">Privacy</a> &bull;
+      <a href="terms.html" style="color: var(--text-secondary);">Terms</a> &bull;
+      <a href="https://github.com/roampal-ai" style="color: var(--text-secondary);">GitHub</a>
+    </p>
+  </footer>
+</body>
+</html>
