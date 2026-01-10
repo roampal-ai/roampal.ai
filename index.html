@@ -1186,45 +1186,48 @@ elif outcome == "partial":
   <!-- Releases Section -->
   <section class="releases" id="releases" style="padding: 5rem 0; background: var(--bg-primary);">
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
-      <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Latest Release</h2>
+      <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Releases</h2>
 
-      <!-- v0.2.10 Release Card -->
+      <!-- Roampal Desktop Section -->
+      <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">Roampal Desktop</h3>
+
+      <!-- v0.2.11 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.10 - ChromaDB 1.x + Query Timeouts + Ghost Entry Handling
+              v0.2.11 - Critical Performance Fixes
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
+              Released January 2026
             </p>
           </div>
           <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Critical stability release. ChromaDB upgraded to 1.x for reliable delete persistence, query timeouts prevent UI freezes, ghost entry handling eliminates HNSW index errors.
+          Major performance release. Knowledge Graph loads 25x faster, chat virtualization eliminates lag in long conversations, and UI polish fixes.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">ChromaDB 1.x Upgrade</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Knowledge Graph 25x Faster</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Upgraded from 0.4.18 to 1.x. Deletes now auto-persist to disk.
+              Pre-indexed relationship counts eliminate O(n*m) bottleneck.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Query Timeout Protection</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Message Virtualization</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              10s/15s timeouts. App stays responsive even if ChromaDB hangs.
+              Only visible messages render. Smooth scrolling in long chats.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Ghost Entry Handling</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Store Subscription Fix</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              HNSW ghost entries no longer cause crashes.
+              Granular selectors prevent unnecessary re-renders.
             </p>
           </div>
         </div>
@@ -1233,179 +1236,20 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Schema migration for ChromaDB topic columns</li>
-              <li>Memory promotion runs on startup</li>
-              <li>Fixed method name mismatches</li>
-              <li>Fixed start-backend.bat path</li>
+              <li>KG entity counting optimized from O(n*m) to O(n+m)</li>
+              <li>Batch edge retrieval eliminates N+1 queries</li>
+              <li>Books search fix (embedding_function=None)</li>
+              <li>Scrollbar gap fix in chat panel</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.10/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.11/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            Download v0.2.10 - $9.99
+            Download v0.2.11 - $9.99
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.10" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-
-      <!-- v0.2.9 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.9 - Ghost Registry + Timeout Protection + Performance
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
-            </p>
-          </div>
-        </div>
-
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Fixes book deletion ghost vectors, adds timeout protection for embeddings/ChromaDB, 3x faster startup, MCP temporal sorting, and outcome detection. Major stability release.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Ghost Registry</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Tracks deleted book chunk IDs to filter ghost vectors from search results. No more "[No content]" results after deleting books.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Timeout Protection</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Embedding model loading (120s) and ChromaDB upsert (60s) run in daemon threads with timeouts. No more infinite hangs.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">3x Faster Startup</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Memory fetch and model discovery parallelized. Knowledge graph lazy-loaded only when panel opens.
-            </p>
-          </div>
-        </div>
-
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Bug Fixes</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Ghost Registry</strong> - Deleted book chunks tracked in ghost_ids.json, filtered from search results</li>
-              <li><strong>Collection Nuke</strong> - "Clear Books" now deletes + recreates collection (no ghosts possible)</li>
-              <li><strong>Outcome Detection</strong> - Fixed missing detect_conversation_outcome() method in UMS facade</li>
-              <li><strong>PathSettings</strong> - Fixed data_path to data_dir in 3 locations (book delete, clear, search)</li>
-              <li><strong>Books Search</strong> - Fixed embedding_function=None in collection refresh (768d/384d mismatch)</li>
-              <li><strong>MCP Stale Cache</strong> - BM25 index invalidation when collection changes</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">MCP Enhancements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>sort_by Parameter</strong> - search_memory supports "recency", "score", or default relevance. Auto-detects temporal queries.</li>
-              <li><strong>related Parameter</strong> - record_response supports positional indexing [1, 3] for selective scoring</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">UX Improvements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Model Loading State</strong> - Shows spinner instead of "No Model" while discovering Ollama models</li>
-              <li><strong>Delete Button</strong> - Document processor shows "Deleting..." spinner, displays errors, modal stays open on failure</li>
-              <li><strong>Backend Reconnection</strong> - Ctrl+R refresh works seamlessly (checks if port already bound)</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
-            </ul>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.9 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.9" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-
-      <!-- v0.2.8 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.8 - MCP Security + No Truncation + Update Notifications
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
-            </p>
-          </div>
-</div>
-
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          MCP security hardening with parameter allowlisting, rate limiting, and audit logging. Full memory content returned everywhere (no more truncation). In-app update notifications. Exit button for clean shutdown.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">MCP Security Hardening</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Parameter allowlisting blocks signature cloaking attacks. Rate limiting prevents runaway tool loops. Audit logging tracks all MCP tool executions.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">No Truncation Policy</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Full memory content returned everywhere. Removed all character limits from MCP search results, cold-start context, and internal guidance.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Update Notifications</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              In-app banner when new versions available. Downloads through Gumroad. Critical updates can force attention.
-            </p>
-          </div>
-        </div>
-
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">MCP Security</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Parameter Allowlisting</strong> - Filters arguments to only declared schema parameters, blocking hidden backdoor params</li>
-              <li><strong>Rate Limiting</strong> - 50 calls/minute per server prevents runaway LLM tool loops</li>
-              <li><strong>Audit Logging</strong> - Append-only JSONL log of all MCP tool executions</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">UX Improvements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Simplified Cold-Start</strong> - Just "KNOWN CONTEXT" with bullet list, removed verbose section labels</li>
-              <li><strong>Exit Button</strong> - Settings modal has Exit Roampal for clean shutdown, X button hides app (backend stays ready)</li>
-              <li><strong>MemoizedMarkdown</strong> - Performance optimization for message rendering</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.8/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
-            </ul>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.8 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.8" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.11" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1416,780 +1260,241 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.8 and earlier)
+          View Previous Releases (v0.2.10 and earlier)
         </summary>
 
-      <!-- v0.2.7 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.7 - Architecture Refactoring
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
-            </p>
-          </div>
-</div>
-
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Monolithic 4,746-line file refactored into 9 focused, testable modules. Facade pattern preserves API while enabling maintainability. 260 tests passing.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">9 Focused Services</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              ScoringService, SearchService, KnowledgeGraphService, RoutingService, PromotionService, OutcomeService, MemoryBankService, ContextService.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">39% Code Reduction</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              4,746 lines → ~2,880 lines through deduplication and cleaner abstractions. Each service is ~150-400 lines.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Zero API Changes</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              All existing integrations continue working unchanged. Facade maintains public API while delegating to services.
-            </p>
-          </div>
+        <!-- v0.2.10 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.10 - ChromaDB 1.x + Query Timeouts + Ghost Entry Handling</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - ChromaDB upgraded to 1.x, query timeouts prevent UI freezes, ghost entry handling</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.10/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
         </div>
 
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">New Service Modules</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>scoring_service.py</strong> - Wilson score calculations, smart sorting scoring</li>
-              <li><strong>knowledge_graph_service.py</strong> - Triple KG management (Action, Routing, Content)</li>
-              <li><strong>routing_service.py</strong> - Collection routing, concept extraction</li>
-              <li><strong>search_service.py</strong> - Vector search with reranking</li>
-              <li><strong>promotion_service.py</strong> - Memory lifecycle (working → history → patterns)</li>
-              <li><strong>outcome_service.py</strong> - Action outcome tracking</li>
-              <li><strong>memory_bank_service.py</strong> - User fact storage</li>
-              <li><strong>context_service.py</strong> - Cold-start context generation</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Testing</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>237 Unit Tests</strong> - Per-service unit tests with mock dependencies</li>
-              <li><strong>23 Characterization Tests</strong> - Captured original behavior as regression safety net</li>
-              <li><strong>100% Pass Rate</strong> - All tests green before and after refactoring</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
-            </ul>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.7 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.7" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
+        <!-- v0.2.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.9 - Ghost Registry + Timeout Protection + Performance</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixes book deletion ghost vectors, adds timeout protection, 3x faster startup</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
-      </div>
 
+        <!-- v0.2.8 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.8 - MCP Security + No Truncation + Update Notifications</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - MCP security hardening, full memory content returned, in-app update notifications</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
 
-      <details style="margin-top: 1rem;">
-        <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; border: 1px solid var(--border-color);">View Previous Releases</summary>
-        <div style="margin-top: 1rem;">
+        <!-- v0.2.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.7 - Architecture Refactoring</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Monolithic file refactored into 9 focused, testable modules. 260 tests passing</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.6 - Unified Learning + Directive Insights + Contextual Embeddings</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Internal LLM contributes to Action KG, actionable get_context_insights prompts, ~49% improved book retrieval</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.5 - MCP Client + Wilson Scoring + Multilingual Ranking</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Connect to external MCP tool servers, statistical confidence scoring, 14-language smart sorting</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.1 - Action-Effectiveness KG + Enhanced Retrieval + Benchmarks</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - 3rd Knowledge Graph learns tool effectiveness, state-of-the-art retrieval, 100% accuracy on benchmarks</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.1.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.0 - Learning-Based KG Routing + MCP Integration</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - Intelligent knowledge graph routing, enhanced MCP with semantic learning storage</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.0.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.6 - Hotfix Release</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - Critical fixes for collection-specific search and KG success rate accuracy</p>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.6" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.5 - Multi-Provider Support</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">October 2025 - Persistent memory bank, document upload (Books), 100% local with Ollama integration</p>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.5" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+      </details><!-- End Previous Releases -->
+
+      <!-- roampal-core Section -->
+      <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
+
       <!-- v0.2.6 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.6 - Unified Learning + Directive Insights + Contextual Embeddings
+              v0.2.6 - Identity Prompt + Profile-Only Cold Start
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
+              Released January 2026
             </p>
           </div>
-
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Internal LLM now contributes to Action KG (unified learning across all interfaces). get_context_insights outputs actionable prompts. Contextual book embeddings improve retrieval by ~49%.
+          Adds user identity detection with onboarding prompts, cleaner cold start (profile only, no auto-injected context), recency sort fix, and code quality improvements.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Unified Action KG</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Identity Detection</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Internal LLM and MCP clients now both contribute to Action-Effectiveness KG. Tracks ANY tool—built-in and external MCP tools.
+              Asks for user's name when no identity-tagged facts exist.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Directive Insights</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Profile-Only Cold Start</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              get_context_insights now outputs actionable prompts with workflow guidance. Model-agnostic descriptions work across all LLMs.
+              Clean slate on new window. LLM can search if context needed.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Contextual Book Embeddings</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Recency Sort Fix</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Book chunks now embedded with "Book: {title}, Section: {section}" prefix. ~49% improved retrieval for ambiguous queries.
+              sort_by="recency" now actually works in search().
             </p>
           </div>
         </div>
 
         <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Six Parts Summary</h4>
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Part 1:</strong> Internal Action KG - Internal LLM now contributes to Action KG</li>
-              <li><strong>Part 2:</strong> Document-Level Insights - Aggregate doc success from Action KG examples</li>
-              <li><strong>Part 3:</strong> Directive Insights - get_context_insights outputs actionable prompts</li>
-              <li><strong>Part 4:</strong> Model-Agnostic Prompts - Workflow-based descriptions for all LLMs</li>
-              <li><strong>Part 5:</strong> Contextual Book Embeddings - ~49% improved retrieval</li>
-              <li><strong>Part 6:</strong> Action KG Cleanup - Prevent stale doc_ids on book deletion</li>
+              <li>Books excluded from auto-injection (opt-in only)</li>
+              <li>--force flag fix for Cursor MCP config</li>
+              <li>Removed 8 dead config fields</li>
+              <li>Silent exceptions now logged properly</li>
             </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Technical Details</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Tracks ANY Tool:</strong> Action KG now tracks built-in tools AND external MCP tools (e.g., mcp__github__create_issue)</li>
-              <li><strong>MCP Unified:</strong> Both internal and MCP now cache all doc_ids for Action KG tracking</li>
-              <li><strong>Backward Compatible:</strong> No migrations, existing data preserved</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><a href="https://github.com/roampal-ai/roampal/blob/master/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color);">Release Notes</a></li>
-            </ul>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.6 - $9.99
+          <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+            pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.6" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.2.6" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
       </div>
 
-      <!-- v0.2.5 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.5 - MCP Client + Wilson Scoring + Multilingual Ranking
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
-            </p>
-          </div>
+      <!-- Previous roampal-core Releases -->
+      <details style="margin-top: 2rem;">
+        <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
+          View Previous Releases (v0.2.5 and earlier)
+        </summary>
+
+        <!-- v0.2.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.5 - MCP Config Location Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Critical fix: roampal init now writes to ~/.claude.json instead of invalid ~/.claude/.mcp.json</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Roampal can now connect to external MCP tool servers (Blender, filesystem, GitHub, databases). Wilson score ranking ensures proven memories outrank "lucky" new ones. Multilingual smart sorting supports 14 languages.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">MCP Client Integration</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Connect to external tool servers like Blender, filesystem, GitHub, SQLite, Brave Search. Your local LLM can now use any MCP-compatible tool.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Wilson Score Ranking</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Statistical confidence intervals favor proven track records. A memory with 90/100 success now correctly outranks "lucky" 1/1 success.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Multilingual Reranking</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              14-language smart sorting for international users. English, Spanish, German, French, Chinese, Japanese, Korean, Arabic, and more.
-            </p>
-          </div>
-
+        <!-- v0.2.4 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.4 - Scoring Reliability Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Fixed related parameter handling in score_response fallback path</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.4/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">MCP Client Architecture</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>External Tools:</strong> Blender, filesystem, GitHub, SQLite, Brave Search, Puppeteer</li>
-              <li><strong>Connection Manager:</strong> Spawns and manages stdio connections to MCP servers</li>
-              <li><strong>Tool Discovery:</strong> Auto-discovers available tools from connected servers</li>
-              <li><strong>Graceful Degradation:</strong> Internal Roampal tools continue if external servers fail</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Memory Ranking Improvements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Wilson Score:</strong> Statistical lower bounds favor proven memories over lucky new ones</li>
-              <li><strong>Balanced Weighting:</strong> Proven high-value (80% learned), Failing patterns (30% learned)</li>
-              <li><strong>Uses Counter Fix:</strong> All outcomes (worked, failed, partial) now increment uses correctly</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">New Models Added</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Llama 4 Scout:</strong> MoE 109B (17B active), 10M context, native tool calling</li>
-              <li><strong>Llama 4 Maverick:</strong> MoE 401B (17B active), 128 experts, best reasoning</li>
-              <li><strong>Qwen3:32b:</strong> Dense 32B with native Hermes tools</li>
-              <li><strong>Qwen3-coder:30b:</strong> MoE 30B for coding tasks</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">UI Improvements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Memory Bank:</strong> Virtualized list rendering (60fps with 500+ memories)</li>
-              <li><strong>Thinking Filter:</strong> LLM thinking tags filtered during streaming (no flash)</li>
-              <li><strong>Chronological:</strong> True text/tool interleaving in message display</li>
-              <li><strong>Error Handling:</strong> Better model download and context length error messages</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Release notes: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.5.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.5.md</a></li>
-            </ul>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.5 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- v0.2.3 Release Card (includes v0.2.2 features) -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.3 - Multi-Format Documents + Smart Model Selection + 100% Benchmark Accuracy
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released December 2025
-            </p>
-          </div>
+        <!-- v0.2.3 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.3 - Outcome Scoring Speed</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Critical performance fix: score_response latency 10s → <500ms</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Upload PDFs, Word docs, Excel spreadsheets, and more. VRAM-aware model selection recommends optimal quality for your GPU. 100% accuracy on 100 adversarial finance scenarios (vs 0% for regular AI search).
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">8 Document Formats</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              PDF, DOCX, Excel, CSV, HTML, RTF + existing TXT/MD. Automatic metadata extraction. Semantic search over tabular data.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Smart Quantization</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              GPU auto-detection recommends optimal model quality for your VRAM. 6 levels from Q2_K to Q8_0. Prevents VRAM overflow.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">100% vs 0% Accuracy</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              100 adversarial personal finance scenarios. Roampal: 100% correct. Regular AI: 0%. 63% fewer tokens per query.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">MCP Enhancements</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Enriched search results (score, uses, age). Auto-scores retrieved memories based on user outcome. Better LLM integration.
-            </p>
-          </div>
+        <!-- v0.2.2 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.2 - Cursor IDE Support</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Cursor MCP support, always-inject identity, ghost registry, roampal doctor command</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Multi-Format Document Support</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>PDF:</strong> Text extraction via PyMuPDF with automatic metadata (title, author)</li>
-              <li><strong>Word (.docx):</strong> Preserves heading structure, extracts document properties</li>
-              <li><strong>Excel (.xlsx, .xls):</strong> Row-based chunking with column headers, 50 rows per chunk</li>
-              <li><strong>CSV/TSV:</strong> Auto-detects delimiters and encoding, semantic search over tabular data</li>
-              <li><strong>HTML:</strong> BeautifulSoup parsing for web page ingestion</li>
-              <li><strong>RTF:</strong> Legacy document support via striprtf</li>
-              <li><strong>Limitations:</strong> No OCR (text-based PDFs only), no password-protected files</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">VRAM-Aware Quantization Selection</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>GPU Detection:</strong> Detects NVIDIA GPUs via nvidia-smi, queries available VRAM</li>
-              <li><strong>Smart Recommendations:</strong> Pre-selects highest quality that fits in detected VRAM</li>
-              <li><strong>6 Quantization Levels:</strong> Q2_K (minimal) → Q8_0 (maximum quality)</li>
-              <li><strong>9 Models:</strong> Qwen2.5 (3b/7b/14b/32b/72b), Llama3.2:3b, Llama3.1:8b, Llama3.3:70b, Mixtral:8x7b</li>
-              <li><strong>Visual Indicators:</strong> Green checkmark for safe options, red warning for oversized models</li>
-              <li><strong>Provider Protection:</strong> Install buttons disabled when Ollama/LM Studio offline</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Token Efficiency Benchmark (100 Scenarios)</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Domain:</strong> Personal finance - where bad advice sounds better than good advice</li>
-              <li><strong>Design:</strong> Adversarial queries semantically match the WRONG answer</li>
-              <li><strong>Results:</strong> Roampal 100/100 correct, Regular AI 0/100 correct</li>
-              <li><strong>Token Efficiency:</strong> Roampal 20 tokens/query vs RAG-5 93 tokens/query (4.7x more)</li>
-              <li><strong>Categories:</strong> Investing, Retirement, Debt, Insurance, Tax, Real Estate, Behavioral Finance, Common Myths</li>
-              <li><strong>Research Sources:</strong> S&P SPIVA, Schwab, DALBAR, Vanguard</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">MCP Tool Improvements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Enriched Results:</strong> [collection] (score:0.75, uses:3, last:worked, age:2d) [id:abc123]</li>
-              <li><strong>Auto-Scoring:</strong> record_response scores all memories from last search with same outcome</li>
-              <li><strong>Better Integration:</strong> Claude Code, Cursor see more actionable metadata</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Bug Fixes</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Backend Cleanup:</strong> Python process properly terminates on window close (no more orphans)</li>
-              <li><strong>Data Path:</strong> PROD builds correctly use AppData/Roampal/data</li>
-              <li><strong>LM Studio 404:</strong> Quantized model names now resolve to HuggingFace downloads</li>
-              <li><strong>Provider Check:</strong> Quant modal Install button disabled when provider offline</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Release notes: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.3.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.3.md</a></li>
-              <li>Benchmark release: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.2.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.2.md</a></li>
-              <li>100 finance scenarios: benchmarks/comprehensive_test/test_token_efficiency.py</li>
-            </ul>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.5 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- v0.2.1 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.1 - Action-Effectiveness KG + Enhanced Retrieval + Benchmarks
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released November 27, 2025
-            </p>
-          </div>
+        <!-- v0.2.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.1 - MCP Tool Loading Hotfix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Emergency fix for fresh installs failing to load MCP tools</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Major intelligence upgrade: 3rd Knowledge Graph learns which tools work in which contexts, state-of-the-art retrieval pipeline (contextual + hybrid + reranking), and comprehensive production validation (40/40 tests, 93% accuracy, sub-100ms).
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">3rd Knowledge Graph</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Action-Effectiveness KG learns which tools work in which contexts. Auto-warns LLM after 3+ uses when patterns emerge.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Enhanced Retrieval</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Contextual retrieval + Hybrid search (BM25+Vector) + Smarter sorting. Based on state-of-the-art research techniques.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Statistically Proven</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              100% vs 0-3% accuracy on 130 adversarial scenarios (p&lt;0.001). 63% fewer tokens per query. Learning improves 58%→93% over time. Sub-100ms latency.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Quality-Based Ranking</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Content KG ranks entities by quality (importance x confidence), not just mentions. Authoritative facts surface first.
-            </p>
-          </div>
-
+        <!-- v0.2.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.0 - Action KG Sync Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed critical "reading your own writes" bug in knowledge graph</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Action-Effectiveness Knowledge Graph (3rd KG)</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Tracks:</strong> (context_type, action_type, collection) → outcome mappings</li>
-              <li><strong>Learns patterns:</strong> Builds success rates per tool per context over time</li>
-              <li><strong>Auto-warns LLM:</strong> Injects guidance after 3+ uses to prevent bad patterns</li>
-              <li><strong>Context-aware:</strong> create_memory great for teaching, catastrophic for quizzes</li>
-              <li><strong>Production ready:</strong> Integrated in agent_chat.py (production) and main.py (MCP)</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Enhanced Retrieval Pipeline</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Contextual Retrieval:</strong> LLM adds context before embedding (Anthropic Sep 2024 technique)</li>
-              <li><strong>Hybrid Search:</strong> BM25 (lexical) + Vector (semantic) + RRF fusion</li>
-              <li><strong>Cross-Encoder Reranking:</strong> BERT reranks top candidates for precision</li>
-              <li><strong>Graceful degradation:</strong> Falls back to vector-only if BM25/smart sorting unavailable</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Comprehensive Benchmark Suite</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Roampal vs Vector DB:</strong> 100% vs 0-3% on 130 adversarial scenarios (coding + finance)</li>
-              <li><strong>Token Efficiency:</strong> 63% fewer tokens per query (~20 vs 55-93) with better accuracy</li>
-              <li><strong>Learning Curve:</strong> 58% → 93% accuracy as memory accumulates (p=0.005, d=13.4)</li>
-              <li><strong>Statistical Rigor:</strong> Coding p=0.001, d=7.49 • Finance p&lt;0.001, χ²=98</li>
-              <li><strong>All 5 Memory Tiers:</strong> books, working, history, patterns, memory_bank</li>
-              <li><strong>Learns Your Patterns:</strong> Routing KG, Content KG, Action-Effectiveness KG</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Torture Test Suite (10 tests)</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>High Volume Stress:</strong> 1000 rapid stores, all doc_ids unique, zero corruption (58.5s)</li>
-              <li><strong>Adversarial Deduplication:</strong> 50 similar memories, kept highest quality (5.8s)</li>
-              <li><strong>Score Boundary Stress:</strong> 50 oscillations, scores stayed [0.0, 1.0] (0.9s)</li>
-              <li><strong>Capacity Enforcement:</strong> 500-item cap enforced correctly (37.1s)</li>
-              <li><strong>Concurrent Access:</strong> 5 conversations x 10 stores, zero collisions (1.3s)</li>
-              <li><strong>KG Integrity:</strong> Content KG survives memory deletions (1.5s)</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Latency Benchmark</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Results @ 100 memories:</strong> p50=64.60ms, p95=77ms, p99=87.71ms</li>
-              <li><strong>Token Efficiency:</strong> 112 tokens average per query</li>
-              <li><strong>p95 Latency:</strong> 77ms (validated on 100 memories)</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Quality-Based Entity Ranking</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Formula:</strong> quality = importance x confidence (per entity)</li>
-              <li><strong>Impact:</strong> Authoritative facts beat noise (quality 0.855 vs 0.15 x 10 mentions)</li>
-              <li><strong>Search boost:</strong> memory_bank searches boost docs with high-quality entities (up to 50%)</li>
-              <li><strong>Backward compatible:</strong> Old entities default to 0.0, no migration required</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Organic Memory Recall</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>Auto-surfaces patterns:</strong> Checks KG before every LLM response</li>
-              <li><strong>Merged with action-effectiveness:</strong> Combined guidance (Content KG + Action KG)</li>
-              <li><strong>Token savings:</strong> Reduces need for explicit searches</li>
-              <li><strong>Cross-conversation learning:</strong> Patterns from one conversation help future ones</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Memory Bank Philosophy</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><strong>3 layers:</strong> User Context (who you are) + System Mastery (how to be effective) + Agent Growth (self-improvement)</li>
-              <li><strong>Problem solved:</strong> LLMs were spamming create_memory (236 calls in 120 turns)</li>
-              <li><strong>Solution:</strong> Explicit selectivity guidelines in all prompts and tool descriptions</li>
-              <li><strong>Impact:</strong> Reduced noise (236 to ~90 calls), better curation</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Documentation</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Comprehensive documentation: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/BENCHMARKS.md" style="color: var(--accent-color);">BENCHMARKS.md</a></li>
-              <li>Release notes: <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.1.md" style="color: var(--accent-color);">RELEASE_NOTES_0.2.1.md</a></li>
-              <li>Test source: benchmarks/comprehensive_test/ (test_comprehensive.py, test_torture_suite.py, test_latency_benchmark.py)</li>
-              <li>All tests reproducible with mock services (no LLM required)</li>
-            </ul>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.5 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- v0.2.0 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.0 - Learning-Based KG Routing + MCP Integration
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released November 5, 2025
-            </p>
-          
-        </div>
+        <!-- v0.1.10 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.10 - Update Notifications in MCP</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Claude Code users now see update notifications via MCP hook</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.10/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Major release featuring intelligent knowledge graph routing that learns which memory collections answer which queries, plus enhanced MCP integration with semantic learning storage.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Learning-Based KG Routing</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              System learns which collections answer which queries. Measurable routing improvement through outcome-based feedback.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Enhanced MCP Integration</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Semantic learning storage with outcome-based scoring. External LLMs (Claude, Cursor) get intelligent routing.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Dual Knowledge Graphs</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Routing KG (blue) learns query patterns, Content KG (green) extracts entities. Visualize memory relationships.
-            </p>
-          </div>
-
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Bundled Embedding Model</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              All users use paraphrase-multilingual-mpnet-base-v2. Works offline, no Ollama required for embeddings.
-            </p>
-          </div>
-
+        <!-- v0.1.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.9 - ChromaDB Collection Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed critical bug where MCP connected to wrong ChromaDB collection</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Changelog</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Learning-Based KG Routing</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Zero hardcoded keywords - learns entirely from query outcomes</li>
-              <li>N-gram concept extraction (unigrams, bigrams, trigrams)</li>
-              <li>Confidence formula: tier_score = success_rate × confidence</li>
-              <li>Three phases: Exploration (all tiers) → Medium (2-3 tiers) → High (1-2 tiers)</li>
-              <li>Safety fallback expands search if <3 results found</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">MCP Integration</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>record_response now stores semantic summaries (not verbatim transcripts)</li>
-              <li>External LLM judges previous response quality (worked/failed/partial)</li>
-              <li>Dual function: stores current learning + scores previous learning</li>
-              <li>Fixed collections=["all"] bug - now triggers KG routing properly</li>
-              <li>Enhanced outcome detection prompt with edge case handling</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">Dual Knowledge Graph System</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Routing KG: Learns query patterns → collection routing (blue nodes)</li>
-              <li>Content KG: Extracts entity relationships from memory_bank (green nodes)</li>
-              <li>Purple nodes represent concepts shared between both graphs</li>
-              <li>Automatic cleanup on memory deletion prevents stale data</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem; margin-top: 1rem;">UI Enhancements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Time-based filtering: All Time, Today, This Week, This Session</li>
-              <li>Sort options: Importance, Recent, Oldest</li>
-              <li>Dynamic header reflects active filters</li>
-              <li>Fixed success rate calculation (successes / (successes + failures))</li>
-              <li>Smooth panel resizing with debounced updates</li>
-            </ul>
-
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.2.0 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- v0.1.6 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.1.6 - Hotfix Release
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released November 3, 2025
-            </p>
-          </div>
+        <!-- v0.1.8 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.8 - Delete Memory (Hard Delete)</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Renamed archive_memory → delete_memory, now actually removes memories</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Critical fixes for collection-specific memory search and knowledge graph success rate accuracy.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Collection Search Fixed</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              AI can now properly target specific memory collections.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Accurate Success Rates</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Knowledge graph now shows true success rates.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Enhanced UI</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Clearer labels in knowledge graph concept details.
-            </p>
-          </div>
+        <!-- v0.1.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.7 - Working Memory Cleanup</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed cleanup of old memories, added update notifications, archive_memory fix</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.6" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-
-      <!-- v0.1.5 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.1.5 - Multi-Provider Support
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released October 31, 2025
-            </p>
-          </div>
+        <!-- v0.1.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.6 - Score Response Fallback</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed score_response returning "0 memories updated", book management initialization</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Major update adding support for both Ollama and LM Studio providers, enhanced model management, and critical performance fixes.
-        </p>
-
-        <!-- Key Features Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Multi-Provider Support</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Use both Ollama and LM Studio. Auto-detects providers and seamlessly switches between them.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Enhanced Model Library</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Browse and download models from both providers with unified management interface.
-            </p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Provider Status</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Settings show which providers are running and how many models each has installed.
-            </p>
-          </div>
+        <!-- v0.1.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.5 - DEV/PROD Isolation</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Run dev and prod instances simultaneously without collision</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
         </div>
 
-        <!-- What's New Details -->
-        <details style="margin-bottom: 1rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; margin-bottom: 0.5rem;">View Full Changelog</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Multi-Provider Support</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
-              <li><strong>LM Studio Support:</strong> Use LM Studio alongside or instead of Ollama</li>
-              <li><strong>Provider Auto-Detection:</strong> Automatically detects which providers are running</li>
-              <li><strong>Provider Switching:</strong> Switch between Ollama and LM Studio without losing chat context</li>
-              <li><strong>Unified Model Library:</strong> Browse and download models from both providers in one interface</li>
-              <li><strong>Provider Status:</strong> Settings show active providers and model counts</li>
-              <li><strong>Model Dropdown Filtering:</strong> Only shows models for the currently selected provider</li>
-            </ul>
+      </details><!-- End Previous roampal-core Releases -->
 
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Performance & Reliability Improvements</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
-              <li><strong>Fixed Redundant Memory Searches:</strong> AI was searching memory 3 times for the same query - now searches once and reuses results</li>
-              <li><strong>Collection-Specific Memory Search:</strong> AI can now target specific memory collections (books, history, patterns) instead of always searching everything</li>
-              <li><strong>Fixed Cancel Button:</strong> Cancel button now properly stops generation and cleans up backend tasks</li>
-            </ul>
-
-            <h4 style="color: var(--text-primary); font-size: 0.95rem; margin-bottom: 0.75rem;">Technical Details</h4>
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem;">
-              <li>Multi-provider architecture with auto-detection</li>
-              <li>New API endpoints for provider detection and management</li>
-              <li>Enhanced error handling and logging throughout backend</li>
-              <li>Performance optimizations for memory search operations</li>
-            </ul>
-          </div>
-        </details>
-
-        <!-- Download CTA -->
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            Download v0.1.5 - $9.99
-          </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600; transition: transform 0.2s;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- v0.1.0 Alpha Release Card -->
-      <div class="release-card" data-animate style="opacity: 0.85;" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; opacity: 0.85;">
-        <div style="margin-bottom: 1rem;">
-          <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-            v0.1.0 - Alpha Release
-          </h3>
-          <p style="color: var(--text-secondary); font-size: 0.875rem;">
-            Initial public release
-          </p>
-        </div>
-
-        <p style="color: var(--text-primary); margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem;">
-          First public alpha featuring 5-tier memory system, outcome learning, knowledge graph, and persistent memory bank.
-        </p>
-
-        <details style="margin-bottom: 1rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 0.95rem;">Key Features</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.8; margin-left: 1.5rem;">
-              <li>5-tier memory system (Working, History, Patterns, Memory Bank, Books)</li>
-              <li>Outcome tracking and learning from success/failure</li>
-              <li>Knowledge graph with pattern recognition</li>
-              <li>Persistent memory bank for user preferences</li>
-              <li>Document upload (Books) for reference knowledge</li>
-              <li>Cross-conversation memory with ChromaDB</li>
-              <li>Tool-based LLM interaction with memory search</li>
-              <li>100% local - Ollama integration</li>
-            </ul>
-          </div>
-        </details>
-      </div>
-      </details><!-- End Previous Releases -->
     </div>
 </section>
 
