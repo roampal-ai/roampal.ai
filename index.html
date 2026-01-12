@@ -1347,12 +1347,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.2.7 Release Card -->
+      <!-- v0.2.8 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.7 - Cold Start Fix + Identity Injection
+              v0.2.8 - Per-Memory Scoring
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released January 2026
@@ -1362,22 +1362,22 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Critical fixes for identity injection and cold start bloat. LLM now sees user name in context, cold start reduced from 3000+ chars to ~600 chars, smarter outcome scoring.
+          Bug fixes plus per-memory scoring. Wilson score accuracy restored, FastAPI lifecycle properly managed, and granular feedback for each memory.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">User Identity Injection</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">LLM now sees "User: [name]" in KNOWN CONTEXT on every message.
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Per-Memory Scoring</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Score each memory individually - worked, partial, unknown, or failed. More accurate learning.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Lean Cold Start</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">6 facts max (one per tag category), first-sentence truncated (~600 chars vs 3000+).
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Scoring Reliability</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Fixed an edge case affecting long-term memory accuracy.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Smarter Scoring</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Guidance to not penalize helpful memories on failed outcomes.
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">FastAPI Lifecycle</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Hook server now dies with MCP - no more zombie processes after restart.
             </p>
           </div>
         </div>
@@ -1386,9 +1386,9 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Tag-based fact selection: one best fact per category (identity, preference, goal, project, system_mastery, agent_growth)</li><li>First-sentence truncation: ~300 chars per fact instead of full content</li><li>KNOWN CONTEXT restored to cold start (was removed in v0.2.6)</li><li>Size guidance in add_to_memory_bank tool description</li><li>Graceful KG error handling: corrupted knowledge_graph.json no longer crashes</li>
+              <li>Per-memory scoring: Score each cached memory individually with memory_scores dict</li><li>Wilson score: Fixed edge case in long-term memory scoring</li><li>FastAPI lifecycle: Three-layer defense (atexit + STARTUPINFO + parent monitor)</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.8/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1396,7 +1396,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.2.7" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.2.8" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1406,8 +1406,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.6 and earlier)
+          View Previous Releases (v0.2.7 and earlier)
         </summary>
+
+        <!-- v0.2.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.7 - Cold Start Fix + Identity Injection</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Critical fixes for identity injection and cold start bloat.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
 
         <!-- v0.2.6 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
