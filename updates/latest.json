@@ -1,7 +1,7 @@
 {
-  "version": "0.2.12",
-  "notes": "Memory Attribution Scoring - Virtualization fix, LLM memory attribution for causal scoring, all memory sources participate in outcome scoring",
-  "pub_date": "2026-01-11T00:00:00Z",
+  "version": "0.3.0",
+  "notes": "Performance & Polish - TanStack Virtual migration, streaming fixes, message virtualization, 50+ bug fixes",
+  "pub_date": "2026-01-16T00:00:00Z",
   "download_url": "https://roampal.gumroad.com/l/mjxtfg",
   "min_version": "0.2.0"
 }

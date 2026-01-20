@@ -138,7 +138,7 @@
     "price": "9.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.2.8",
+  "softwareVersion": "0.3.0",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -1191,12 +1191,12 @@ elif outcome == "partial":
       <!-- Roampal Desktop Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">Roampal Desktop</h3>
 
-      <!-- v0.2.12 Release Card -->
+      <!-- v0.3.0 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.12 - Memory Attribution Scoring
+              v0.3.0 - Performance & Polish
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released January 2026
@@ -1206,28 +1206,28 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Critical hotfix release. Fixes message virtualization overlap bug, adds LLM memory attribution for accurate causal scoring, and enables all memory sources to participate in selective outcome scoring.
+          TanStack Virtual migration for smoother scrolling, streaming fixes, message virtualization, and 50+ bug fixes. Security hardened with ZIP traversal, XSS, and query logging fixes.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Virtualization Fix</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">TanStack Virtual</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Messages no longer overlap. Streaming content measures correctly.
+              Smooth scrolling for conversations with 5000+ messages. No more lag or jank.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Memory Attribution</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Streaming Fixes</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              LLM marks which memories helped or hurt. Causal scoring, not guessing.
+              Reliable token-by-token display. Fixed tool chaining and reconnection issues.
             </p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Selective Scoring Parity</h4>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">50+ Bug Fixes</h4>
             <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Organic recall, cold start, and search all participate in outcome scoring.
+              Security hardened: ZIP traversal, XSS, query logging. Plus message virtualization and scrollbar fixes.
             </p>
           </div>
         </div>
@@ -1236,22 +1236,25 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Fixed message virtualization overlap from v0.2.11</li>
-              <li>Update notification dismiss now persists across restarts</li>
-              <li>System prompt corrected about outcome scoring mechanism</li>
-              <li>All memory sources cached for scoring (not just search)</li>
-              <li>OutcomeDetector identifies which memories were actually used</li>
-              <li>LLM marks memories with attribution annotations</li>
+              <li>TanStack Virtual migration - smooth scrolling for 5000+ messages</li>
+              <li>Streaming fixes - text overlap, thinking icon, loading indicator</li>
+              <li>Tool interleaving - text and tools now display in correct order</li>
+              <li>Cancel button fix - actually stops generation now</li>
+              <li>Surfaced memories display - see what memories were used</li>
+              <li>Context overflow detection - warns before model barfs</li>
+              <li>Model switch race condition fixed</li>
+              <li>Security: ZIP path traversal, XSS in citations, query logging fixed</li>
+              <li>876 tests passing (509 frontend, 367 backend)</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.12/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            Download v0.2.12 - $9.99
+            Download v0.3.0 - $9.99
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.2.12" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.3.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1262,8 +1265,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.11 and earlier)
+          View Previous Releases (v0.2.12 and earlier)
         </summary>
+
+        <!-- v0.2.12 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.12 - Memory Attribution Scoring</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - LLM memory attribution, virtualization fix, selective scoring parity</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.12/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
+        </div>
 
         <!-- v0.2.11 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
