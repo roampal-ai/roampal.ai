@@ -209,8 +209,6 @@
   <!-- Hero Section -->
   <section class="hero" id="home">
     <div class="hero-content" data-animate>
-      <!-- Eyebrow -->
-      <span class="eyebrow">Open Source • Benchmarked • 100% Local</span>
 
       <!-- Main headline -->
       <h1 class="hero-title">
@@ -219,51 +217,69 @@
 
       <!-- Subheadline -->
       <p class="hero-subtitle">
-        <strong>Not just what's similar—what actually helped.</strong>
-        Say it worked. Say it didn't. The AI remembers. 100% private and local.
+        Your AI sees what helped before. Automatically.<br>
+        <span style="color: var(--text-secondary);">Not just similarity—what actually worked. All stored locally on your machine.</span>
       </p>
 
-      <!-- CTA buttons -->
-      <div class="hero-cta">
-        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary" target="_blank" rel="noopener">
-          Desktop App - $9.99
-          <span class="btn-icon">→</span>
-        </a>
-        <a href="https://github.com/roampal-ai" class="btn-secondary" target="_blank" rel="noopener">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          View on GitHub
-        </a>
+      <!-- Terminal Install Block -->
+      <div style="max-width: 340px; margin: 1.5rem auto;">
+        <div style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem; text-align: center;">
+          For Claude Code <span style="color: #8b949e;">• More platforms coming soon</span>
+        </div>
+        <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 1.25rem 1.5rem; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; text-align: left;">
+          <div style="color: #8b949e; font-size: 0.9rem;">
+            <span style="color: #7ee787;">$</span> <span style="color: #e6edf3;">pip install roampal</span>
+          </div>
+          <div style="color: #8b949e; font-size: 0.9rem; margin-top: 0.5rem;">
+            <span style="color: #7ee787;">$</span> <span style="color: #e6edf3;">roampal init</span>
+          </div>
+          <div style="margin-top: 0.75rem; display: flex; justify-content: center;">
+            <img src="https://img.shields.io/pypi/dm/roampal?label=downloads&color=blue&style=flat-square" alt="PyPI Downloads" style="height: 20px;">
+          </div>
+        </div>
       </div>
 
-      <!-- Free CLI option -->
-      <p style="margin-top: 1.25rem; margin-bottom: 1.25rem; font-size: 0.9rem;">
-        <a href="#claude-code" style="color: var(--accent-primary); text-decoration: none;">
-          Or try <strong>roampal-core</strong> free for Claude Code →
-        </a>
-      </p>
+      <!-- Clean CTA section -->
+      <div style="margin: 2rem auto; text-align: center;">
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://github.com/roampal-ai/roampal-core" class="btn-primary" target="_blank" rel="noopener" style="padding: 0.875rem 1.75rem;">
+            Get Core (Free)
+            <span class="btn-icon">→</span>
+          </a>
+          <a href="https://github.com/roampal-ai/roampal" class="btn-secondary" target="_blank" rel="noopener" style="padding: 0.875rem 1.75rem;">
+            Desktop App
+          </a>
+        </div>
+        <p style="color: #8b949e; font-size: 0.85rem; margin-top: 1rem; line-height: 1.6;">
+          <strong style="color: #e6edf3;">Core:</strong> Hooks for Claude Code. Memories stored locally.<br>
+          <strong style="color: #e6edf3;">Desktop:</strong> 100% local with Ollama/LM Studio. GUI app + MCP tools. <a href="https://roampal.gumroad.com/l/mjxtfg" target="_blank" rel="noopener" style="color: #58a6ff;">Buy on Gumroad</a>
+        </p>
+      </div>
 
-      <!-- Trust badges -->
-      <div class="trust-badges">
-        <div class="badge">
-          <svg class="badge-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" />
-          </svg>
-          <span class="badge-text">100% Local</span>
+      <!-- Hook Injection Demo -->
+      <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 1.5rem; max-width: 600px; margin: 2.5rem auto 0; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; text-align: left;">
+        <div style="color: #8b949e; margin-bottom: 0.75rem;">You type:</div>
+        <div style="color: #e6edf3; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid #30363d;">fix the auth bug</div>
+
+        <div style="color: #8b949e; margin-bottom: 0.75rem;">LLM sees:</div>
+        <div style="padding-left: 1rem; border-left: 2px solid #7ee787;">
+          <div style="color: #7ee787;">═══ KNOWN CONTEXT ═══</div>
+          <div style="color: #e6edf3; margin: 0.5rem 0;">
+            <span style="color: #a5d6ff;">[patterns]</span> <span style="color: #8b949e;">(3d, s:0.9, [YYY])</span> JWT refresh pattern fixed auth loop<br>
+            <span style="color: #a5d6ff;">[memory_bank]</span> User prefers: never stage git changes
+          </div>
+          <div style="color: #7ee787;">═══ END CONTEXT ═══</div>
+          <div style="color: #e6edf3; margin-top: 0.5rem;">fix the auth bug</div>
         </div>
-        <div class="badge">
-          <svg class="badge-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          <span class="badge-text">Open Source</span>
-        </div>
-        <div class="badge">
-          <svg class="badge-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M3 3a2 2 0 012-2h10a2 2 0 012 2v14l-8-4-8 4V3z"/>
-          </svg>
-          <span class="badge-text">Benchmarked</span>
-        </div>
+      </div>
+
+      <!-- Minimal trust indicators -->
+      <div style="margin-top: 2rem; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+        <a href="https://github.com/roampal-ai/roampal-core" target="_blank" rel="noopener" style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center; gap: 6px; font-size: 0.9rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          Open Source (Apache 2.0)
+        </a>
+        <span style="color: var(--text-secondary); font-size: 0.9rem;">Works with Claude Code</span>
       </div>
     </div>
 
@@ -1357,12 +1373,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.2.9 Release Card -->
+      <!-- v0.3.0 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.2.9 - Natural Selection for Memory
+              v0.3.0 - Resilience
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released January 2026
@@ -1372,23 +1388,23 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Memory cleanup release. Wilson scoring now applies to memory_bank - useful facts rise, noise fades. Stricter promotion requirements. Archive bloat removed.
+          Fixes silent hook server crashes that left users without context injection. Server now auto-restarts when embeddings corrupt.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Wilson Scoring for Facts</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Memory_bank now learns which facts are useful. Noise memories drift down over time.
-            </p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Health Check Tests Embeddings</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">/api/health now tests embedding functionality. Returns 503 if broken instead of silent failure.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Stricter Promotion</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Memories must prove usefulness with 5+ worked outcomes to become permanent patterns.
-            </p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Auto-Restart on Corruption</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Server health checked before all MCP tools. Unhealthy server auto-restarts on next tool call.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Archive Cleanup</h4><p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Removes legacy archived memories on startup. No more ghost vectors cluttering your database.
-            </p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Visible Hook Errors</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Hooks exit non-zero on failure. Users see clear error messages instead of silent context loss.</p>
           </div>
         </div>
 
@@ -1396,9 +1412,12 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Wilson scoring for memory_bank: 80% quality + 20% Wilson influence after 3 uses</li><li>Unknown = 0.25 success for all collections (weak negative signal for natural selection)</li><li>Reset counters on history promotion - memories must prove themselves fresh</li><li>Require success_count >= 5 for patterns eligibility</li><li>Retrieval/display alignment: 5 to 3 memories</li>
+              <li>Health endpoint tests embeddings - calls embed_text("health check") and returns 503 if it fails</li>
+              <li>_ensure_server_running() called at start of call_tool() handler</li>
+              <li>Hook exits 1 on errors with clear message for 503 (embedding corruption)</li>
+              <li>Fixes PyTorch state corruption when Claude Code restarts (common on Windows)</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1406,7 +1425,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.2.9" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1416,8 +1435,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.8 and earlier)
+          View Previous Releases (v0.2.9 and earlier)
         </summary>
+
+        <!-- v0.2.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.9 - Natural Selection for Memory</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">Wilson scoring for memory_bank, stricter promotion requirements, archive cleanup.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
 
         <!-- v0.2.8 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
