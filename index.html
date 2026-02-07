@@ -14,21 +14,21 @@
   <link rel="canonical" href="https://roampal.ai/">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Roampal">
-  <meta name="description" content="Local AI memory that learns what works. Unlike regular AI that just stores facts, Roampal tracks which advice actually helped. Works with Claude Code, Cursor. 100% private, open source.">
-  <meta name="keywords" content="AI chatbot, local AI, privacy, persistent memory, outcome learning, pattern learning, personal AI, Ollama, memory bank, knowledge base, Claude Code, Claude Code memory, MCP memory, Claude Code persistent context">
+  <meta name="description" content="Local AI memory that learns what works. Unlike regular AI that just stores facts, Roampal tracks which advice actually helped. Works with Claude Code, OpenCode. 100% private, open source.">
+  <meta name="keywords" content="AI chatbot, local AI, privacy, persistent memory, outcome learning, pattern learning, personal AI, Ollama, memory bank, knowledge base, Claude Code, Claude Code memory, MCP memory, Claude Code persistent context, OpenCode, OpenCode memory, OpenCode plugin">
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://roampal.ai/">
   <meta property="og:title" content="Roampal (Alpha) - AI That Grows With You">
-  <meta property="og:description" content="Local AI memory that learns what works. Tracks which advice actually helped, not just what sounds similar. Works with Claude Code & Cursor. 100% private.">
+  <meta property="og:description" content="Local AI memory that learns what works. Tracks which advice actually helped, not just what sounds similar. Works with Claude Code & OpenCode. 100% private.">
   <meta property="og:image" content="https://roampal.ai/assets/social-share.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://roampal.ai/">
   <meta name="twitter:title" content="Roampal (Alpha) - AI That Grows With You">
-  <meta name="twitter:description" content="Local AI memory that learns what works. Tracks which advice actually helped. Works with Claude Code & Cursor. 100% private, open source.">
+  <meta name="twitter:description" content="Local AI memory that learns what works. Tracks which advice actually helped. Works with Claude Code & OpenCode. 100% private, open source.">
   <meta name="twitter:image" content="https://roampal.ai/assets/social-share.jpg">
 
   <title>Roampal (Alpha) - AI That Grows With You</title>
@@ -111,7 +111,7 @@
       "name": "What are the MCP tools and what do they do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "When you connect Roampal to Claude Code, Cursor, or other MCP-compatible tools, they get access to memory tools: search_memory (finds relevant memories), get_context_insights (quick topic lookup), record_response (records outcomes - how Roampal learns), add_to_memory_bank (stores permanent facts), update_memory (corrects existing memories), and archive_memory (removes outdated info). Your AI uses these automatically during conversation."
+        "text": "When you connect Roampal to Claude Code, OpenCode, Cursor, or other MCP-compatible tools, they get access to memory tools: search_memory (finds relevant memories), get_context_insights (quick topic lookup), record_response (records outcomes - how Roampal learns), add_to_memory_bank (stores permanent facts), update_memory (corrects existing memories), delete_memory (removes outdated info), and score_response (scores previous exchange outcomes). Your AI uses these automatically during conversation."
       }
     },
     {
@@ -138,7 +138,7 @@
     "price": "9.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.3.0",
+  "softwareVersion": "0.3.2",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -188,7 +188,7 @@
           <a href="#how-it-works" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
           <div class="nav-dropdown-menu">
             <a href="#how-it-works">How It Works</a>
-            <a href="#claude-code">Claude Code</a>
+            <a href="#claude-code">Claude Code & OpenCode</a>
             <a href="#mcp-setup">MCP Setup (Desktop)</a>
           </div>
         </div>
@@ -222,9 +222,9 @@
       </p>
 
       <!-- Terminal Install Block -->
-      <div style="max-width: 340px; margin: 1.5rem auto;">
+      <div style="max-width: 380px; margin: 1.5rem auto;">
         <div style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 0.5rem; text-align: center;">
-          For Claude Code <span style="color: #8b949e;">• More platforms coming soon</span>
+          For Claude Code & OpenCode
         </div>
         <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 1.25rem 1.5rem; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; text-align: left;">
           <div style="color: #8b949e; font-size: 0.9rem;">
@@ -236,6 +236,9 @@
           <div style="margin-top: 0.75rem; display: flex; justify-content: center;">
             <img src="https://img.shields.io/pypi/dm/roampal?label=downloads&color=blue&style=flat-square" alt="PyPI Downloads" style="height: 20px;">
           </div>
+        </div>
+        <div style="color: #8b949e; font-size: 0.7rem; margin-top: 0.5rem; text-align: center;">
+          Auto-detects tools. Or target one: <code style="font-size: 0.7rem; color: #e6edf3;">--claude-code</code> <code style="font-size: 0.7rem; color: #e6edf3;">--opencode</code>
         </div>
       </div>
 
@@ -251,7 +254,7 @@
           </a>
         </div>
         <p style="color: #8b949e; font-size: 0.85rem; margin-top: 1rem; line-height: 1.6;">
-          <strong style="color: #e6edf3;">Core:</strong> Hooks for Claude Code. Memories stored locally.<br>
+          <strong style="color: #e6edf3;">Core:</strong> Works with Claude Code & OpenCode. Memories stored locally.<br>
           <strong style="color: #e6edf3;">Desktop:</strong> 100% local with Ollama/LM Studio. GUI app + MCP tools. <a href="https://roampal.gumroad.com/l/mjxtfg" target="_blank" rel="noopener" style="color: #58a6ff;">Buy on Gumroad</a>
         </p>
       </div>
@@ -279,7 +282,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           Open Source (Apache 2.0)
         </a>
-        <span style="color: var(--text-secondary); font-size: 0.9rem;">Works with Claude Code</span>
+        <span style="color: var(--text-secondary); font-size: 0.9rem;">Works with Claude Code & OpenCode</span>
       </div>
     </div>
 
@@ -418,6 +421,29 @@
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0;">
           <strong style="color: white;">Better answers with less noise.</strong> Roampal only retrieves what's proven helpful, not everything that sounds related.
           That means lower API costs, faster responses, and more accurate answers.
+        </p>
+      </div>
+
+      <!-- Quality vs noise - RAG comparison -->
+      <div data-animate style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
+        <h4 style="color: #f59e0b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Every result is proven</h4>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">RAG returns what sounds similar. Roampal returns what actually worked.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+          <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);">
+            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">1%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">RAG top-5 accuracy</p>
+            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">5 results, hoping one is right</p>
+          </div>
+          <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
+            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">96%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Roampal top pick accuracy</p>
+            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">1 result, knowing it works</p>
+          </div>
+        </div>
+
+        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: center;">
+          100 adversarial scenarios with real embeddings. Roampal injects 4 outcome-scored memories per prompt &mdash; each selected by what actually helped, not just what sounds similar.
         </p>
       </div>
 
@@ -909,27 +935,30 @@ elif outcome == "partial":
     <div class="container">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem;">
-          Claude Code Memory That Learns
+          Persistent Memory for AI Coding Tools
         </h2>
         <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
-          Persistent context that improves over time. No desktop app required.
+          Two commands. Your AI coding assistant gets persistent memory. Works with Claude Code and OpenCode.
         </p>
       </div>
 
       <!-- Two-step install -->
-      <div style="max-width: 600px; margin: 0 auto 3rem;">
-        <div style="background: var(--bg-secondary); border-radius: 8px; padding: 2rem; border: 1px solid var(--border-color);">
-          <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">Get Started in 30 Seconds</h3>
-          <div style="font-family: monospace; background: #1a1a2e; color: #e0e0e0; padding: 1.5rem; border-radius: 6px; font-size: 0.95rem;">
-            <div style="margin-bottom: 0.75rem;">
+      <div style="max-width: 500px; margin: 0 auto 3rem;">
+        <div style="background: var(--bg-secondary); border-radius: 8px; padding: 1.5rem; border: 1px solid var(--border-color);">
+          <h3 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 1rem; text-align: center;">Works with Claude Code &amp; OpenCode</h3>
+          <div style="font-family: monospace; background: #1a1a2e; color: #e0e0e0; padding: 1.25rem; border-radius: 6px; font-size: 0.9rem;">
+            <div style="margin-bottom: 0.5rem;">
               <span style="color: #888;">$</span> <span style="color: #7dd3fc;">pip install roampal</span>
             </div>
             <div>
               <span style="color: #888;">$</span> <span style="color: #7dd3fc;">roampal init</span>
             </div>
           </div>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem; text-align: center;">
-            Restart Claude Code. That's it.
+          <p style="color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.75rem; text-align: center;">
+            Auto-detects installed tools. Restart your editor and start chatting.
+          </p>
+          <p style="color: var(--text-tertiary); font-size: 0.75rem; margin-top: 0.5rem; text-align: center;">
+            Target a specific tool: <code style="font-size: 0.75rem;">roampal init --claude-code</code> or <code style="font-size: 0.75rem;">roampal init --opencode</code>
           </p>
         </div>
       </div>
@@ -938,7 +967,7 @@ elif outcome == "partial":
       <div style="max-width: 900px; margin: 0 auto 3rem;">
         <div style="background: var(--bg-secondary); border-radius: 8px; padding: 2rem; border: 1px solid var(--border-color);">
           <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">
-            Why Hooks Matter
+            Automatic Context Injection
           </h3>
           <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
             Other memory tools wait for you to ask. Roampal injects context automatically &mdash; before every prompt, after every response. No manual calls. No workflow changes.
@@ -947,13 +976,13 @@ elif outcome == "partial":
             <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border-left: 3px solid var(--accent-color);">
               <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Before You Prompt</h4>
               <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
-                The <code style="background: var(--bg-secondary); padding: 0.15rem 0.4rem; border-radius: 3px;">UserPromptSubmit</code> hook auto-injects relevant context. Claude sees what worked before.
+                Context injected automatically. Claude Code uses hooks, OpenCode uses a plugin &mdash; same result. Your AI sees what worked before.
               </p>
             </div>
             <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border-left: 3px solid var(--accent-color);">
               <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">After Each Response</h4>
               <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
-                The <code style="background: var(--bg-secondary); padding: 0.15rem 0.4rem; border-radius: 3px;">Stop</code> hook captures the exchange. Scoring is enforced &mdash; not optional.
+                The exchange is captured and scoring is enforced &mdash; not optional. Both Claude Code hooks and OpenCode plugin handle this automatically.
               </p>
             </div>
           </div>
@@ -975,28 +1004,28 @@ elif outcome == "partial":
           <code style="padding: 0.5rem 1rem; background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; border-radius: 6px; font-size: 0.875rem;">score_response</code>
         </div>
         <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem; text-align: center;">
-          <code style="background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_response</code> is unique to Claude Code &mdash; hooks enforce scoring on every exchange.
+          <code style="background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_response</code> is enforced automatically &mdash; hooks (Claude Code) and plugin (OpenCode) ensure scoring on every exchange.
         </p>
       </div>
 
       <!-- Comparison Table -->
       <div style="max-width: 700px; margin: 0 auto;">
         <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">
-          Claude Code vs Desktop MCP
+          Core (Claude Code &amp; OpenCode) vs Desktop MCP
         </h3>
         <div style="overflow-x: auto;">
           <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
             <thead>
               <tr style="border-bottom: 2px solid var(--border-color);">
                 <th style="padding: 1rem; text-align: left; color: var(--text-primary);"></th>
-                <th style="padding: 1rem; text-align: center; color: var(--text-primary);">Claude Code</th>
+                <th style="padding: 1rem; text-align: center; color: var(--text-primary);">Core</th>
                 <th style="padding: 1rem; text-align: center; color: var(--text-primary);">Desktop MCP</th>
               </tr>
             </thead>
             <tbody>
               <tr style="border-bottom: 1px solid var(--border-color);">
                 <td style="padding: 1rem; color: var(--text-secondary);">Context injection</td>
-                <td style="padding: 1rem; text-align: center; color: var(--accent-color);">Automatic (hooks)</td>
+                <td style="padding: 1rem; text-align: center; color: var(--accent-color);">Automatic (hooks &amp; plugin)</td>
                 <td style="padding: 1rem; text-align: center; color: var(--text-secondary);">Manual (prompt LLM)</td>
               </tr>
               <tr style="border-bottom: 1px solid var(--border-color);">
@@ -1029,7 +1058,7 @@ elif outcome == "partial":
           <li>Remind mid-conversation: <em>"Check memory for what we discussed about X"</em></li>
           <li>Record outcomes: <em>"Record in Roampal - this worked"</em> or <em>"...failed"</em></li>
         </ul>
-        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; font-style: italic;">With Claude Code hooks, this happens automatically — the hooks inject context so the AI knows to use memory tools.</p>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; font-style: italic;">With roampal-core (Claude Code &amp; OpenCode), this happens automatically &mdash; hooks and plugin inject context so the AI knows to use memory tools.</p>
       </div>
 
       <!-- Learn More -->
@@ -1060,7 +1089,7 @@ elif outcome == "partial":
           🔗 Connect Any MCP-Compatible Tool
         </h2>
         <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
-          Give any MCP-compatible AI tool access to Roampal's persistent memory. Works with Claude Code, Cursor, Cline, Continue.dev, and any tool supporting the Model Context Protocol.
+          Give any MCP-compatible AI tool access to Roampal's persistent memory. Works with Claude Code, OpenCode, Cursor, Cline, Continue.dev, and any tool supporting the Model Context Protocol.
         </p>
       </div>
 
@@ -1097,7 +1126,7 @@ elif outcome == "partial":
               Go to the <strong>Integrations</strong> tab. Roampal automatically detects MCP-compatible tools installed on your system.
             </p>
             <p style="color: var(--text-secondary); font-size: 0.875rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; border-left: 3px solid var(--accent-color);">
-              <strong>Works with:</strong> Any tool with an MCP config file (Claude Code, Cursor, Cline, Continue.dev, etc.)
+              <strong>Works with:</strong> Any tool with an MCP config file (Claude Code, OpenCode, Cursor, Cline, Continue.dev, etc.)
             </p>
           </div>
         </div>
@@ -1373,38 +1402,38 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.3.0 Release Card -->
+      <!-- v0.3.2 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.0 - Resilience
+              v0.3.2 - Multi-Client Support
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released January 2026
+              Released February 2026
             </p>
           </div>
           <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Fixes silent hook server crashes that left users without context injection. Server now auto-restarts when embeddings corrupt.
+          Works with Claude Code and OpenCode through a shared single-writer server. 4-slot context injection ensures history memories always surface for scoring. Self-healing hooks auto-restart the server on failure.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Health Check Tests Embeddings</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">/api/health now tests embedding functionality. Returns 503 if broken instead of silent failure.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">OpenCode Support</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">TypeScript plugin with split delivery &mdash; scoring in system prompt, context injected invisibly. <code style="font-size: 0.8rem;">roampal init --opencode</code></p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Auto-Restart on Corruption</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Server health checked before all MCP tools. Unhealthy server auto-restarts on next tool call.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Self-Healing Hooks</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Hooks and plugin auto-restart the server on 503 or connection failure. Cross-platform (Windows + Unix).</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Visible Hook Errors</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Hooks exit non-zero on failure. Users see clear error messages instead of silent context loss.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Single-Writer Architecture</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">All clients share one FastAPI server &mdash; no ChromaDB conflicts. MCP is now a lightweight HTTP client.</p>
           </div>
         </div>
 
@@ -1412,12 +1441,15 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Health endpoint tests embeddings - calls embed_text("health check") and returns 503 if it fails</li>
-              <li>_ensure_server_running() called at start of call_tool() handler</li>
-              <li>Hook exits 1 on errors with clear message for 503 (embedding corruption)</li>
-              <li>Fixes PyTorch state corruption when Claude Code restarts (common on Windows)</li>
+              <li>OpenCode plugin: split delivery via system.unshift/push, exchange capture, session lifecycle</li>
+              <li>Shared server: all 7 MCP tools proxy via HTTP to FastAPI &mdash; no ChromaDB/PyTorch in MCP process</li>
+              <li>Self-healing in Python hooks and TypeScript plugin: kill stale process, spawn fresh, poll health, retry</li>
+              <li>CLI: <code>roampal init --opencode</code>, <code>roampal stop</code>, auto-detection</li>
+              <li>4-slot context injection: 1 working + 1 history (reserved) + 2 best matches &mdash; breaks history scoring feedback loop</li>
+              <li>Cursor integration ready (waiting on upstream Cursor bug fix)</li>
+              <li>432 automated tests across 6 test files</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.2/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1425,7 +1457,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.2" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1435,8 +1467,22 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.9 and earlier)
+          View Previous Releases (v0.3.1 and earlier)
         </summary>
+
+        <!-- v0.3.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.1 - Reserved Working Memory Slot</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Guarantees recent session context always surfaces in automatic injection. 1 reserved working slot + 2 from other collections.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.3.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.0 - Resilience</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Fixes silent hook server crashes, health check tests embeddings, auto-restart on corruption</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
 
         <!-- v0.2.9 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
@@ -1641,14 +1687,15 @@ elif outcome == "partial":
         <details class="faq-item" data-animate>
           <summary>What are the MCP tools and what do they do?</summary>
           <div class="faq-answer">
-            <p>When you connect Roampal to Claude Code, Cursor, or other MCP-compatible tools, they get access to these memory tools:</p>
+            <p>When you connect Roampal to Claude Code, OpenCode, Cursor, or other MCP-compatible tools, they get access to these memory tools:</p>
             <ul>
               <li><strong>search_memory</strong> - Finds relevant memories based on what you're discussing</li>
               <li><strong>get_context_insights</strong> - Quick lookup of what Roampal knows about a topic</li>
               <li><strong>record_response</strong> - Records whether something worked or didn't (this is how Roampal learns)</li>
               <li><strong>add_to_memory_bank</strong> - Stores permanent facts about you (preferences, identity, goals)</li>
               <li><strong>update_memory</strong> - Corrects or updates existing memories</li>
-              <li><strong>archive_memory</strong> - Removes outdated information</li>
+              <li><strong>delete_memory</strong> - Removes outdated information</li>
+              <li><strong>score_response</strong> - Scores the previous exchange outcome (enforced automatically in Claude Code &amp; OpenCode)</li>
             </ul>
             <p>Your AI uses these automatically during conversation. You don't need to do anything special.</p>
           </div>
@@ -1809,7 +1856,7 @@ elif outcome == "partial":
       </div>
 
       <div class="footer-bottom">
-        <p>© 2025 Roampal. All rights reserved.</p>
+        <p>© 2026 Roampal. All rights reserved.</p>
       </div>
     </div>
   </footer>
