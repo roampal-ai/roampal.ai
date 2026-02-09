@@ -225,12 +225,11 @@ details.tech-accordion[open] summary {
 
 /* Fade in animation */
 [data-animate] {
-  opacity: 0.3;
+  opacity: 1;
   transform: translateY(10px);
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 [data-animate].visible {
-  opacity: 1;
   transform: translateY(0);
 }

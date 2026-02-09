@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQFYTGH715"></script>
   <script>
@@ -9,29 +10,30 @@
     gtag('js', new Date());
     gtag('config', 'G-TQFYTGH715');
   </script>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://roampal.ai/">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Roampal">
-  <meta name="description" content="Local AI memory that learns what works. Unlike regular AI that just stores facts, Roampal tracks which advice actually helped. Works with Claude Code, OpenCode. 100% private, open source.">
-  <meta name="keywords" content="AI chatbot, local AI, privacy, persistent memory, outcome learning, pattern learning, personal AI, Ollama, memory bank, knowledge base, Claude Code, Claude Code memory, MCP memory, Claude Code persistent context, OpenCode, OpenCode memory, OpenCode plugin">
+  <meta name="description" content="Outcome-based memory for AI coding tools. Tracks which advice actually helped and learns from results. Works with Claude Code and OpenCode. 100% local, open source.">
+  <meta name="keywords" content="outcome based memory, outcome learning, AI coding tools, persistent memory, Claude Code memory, OpenCode memory, OpenCode plugin, Cursor memory, Cline memory, MCP memory, Claude Code persistent context, AI memory, local AI, privacy, Wilson scoring, memory lifecycle, context window">
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://roampal.ai/">
-  <meta property="og:title" content="Roampal (Alpha) - AI That Grows With You">
-  <meta property="og:description" content="Local AI memory that learns what works. Tracks which advice actually helped, not just what sounds similar. Works with Claude Code & OpenCode. 100% private.">
+  <meta property="og:site_name" content="Roampal">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Roampal - Persistent Memory for AI Coding Tools">
+  <meta property="og:description" content="Outcome-based memory for AI coding tools. Tracks which advice actually helped and learns from results. Works with Claude Code and OpenCode. 100% local, open source.">
   <meta property="og:image" content="https://roampal.ai/assets/social-share.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://roampal.ai/">
-  <meta name="twitter:title" content="Roampal (Alpha) - AI That Grows With You">
-  <meta name="twitter:description" content="Local AI memory that learns what works. Tracks which advice actually helped. Works with Claude Code & OpenCode. 100% private, open source.">
+  <meta name="twitter:title" content="Roampal - Persistent Memory for AI Coding Tools">
+  <meta name="twitter:description" content="Outcome-based memory for AI coding tools. Tracks which advice actually helped and learns from results. Works with Claude Code and OpenCode. 100% local, open source.">
   <meta name="twitter:image" content="https://roampal.ai/assets/social-share.jpg">
 
-  <title>Roampal (Alpha) - AI That Grows With You</title>
+  <title>Roampal - Persistent Memory for AI Coding Tools</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -63,7 +65,7 @@
       "name": "What models does it support?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Works with many popular AI models including Llama (Meta's free models), Qwen (great for many languages), and Mixtral (fast and efficient). Pick the one that works best on your computer and install from Settings."
+        "text": "roampal-core works with whatever model your AI tool already uses (Claude, GPT, etc.) - memory and scoring are model-agnostic. Roampal Desktop supports local models via Ollama or LM Studio including Llama, Qwen, and Mixtral."
       }
     },
     {
@@ -71,7 +73,7 @@
       "name": "Does it work offline?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes! After downloading models, Roampal works completely offline. No internet required."
+        "text": "roampal-core stores and retrieves memory fully locally. Your AI tool (Claude Code, OpenCode) still connects to its own API provider as usual. Roampal Desktop works fully offline after downloading models."
       }
     },
     {
@@ -79,7 +81,7 @@
       "name": "What are the system requirements?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Minimum: 8GB RAM, 10GB free disk space. Recommended: 16GB RAM and a decent graphics card for faster responses."
+        "text": "roampal-core requires Python 3.10+ and minimal disk space - runs on anything that runs Python. Roampal Desktop requires minimum 8GB RAM, 10GB free disk space, with 16GB RAM and a GPU recommended for faster local model responses."
       }
     },
     {
@@ -87,7 +89,7 @@
       "name": "How do I export my data?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Easy way: Go to Settings \u2192 Export. Pick what you want to backup and download a zip file. Manual: All your data is stored in regular files on your computer. Just copy the data folder to backup."
+        "text": "roampal-core stores all data locally in your data directory (e.g. %APPDATA%/Roampal/data on Windows) - copy the folder to backup. Roampal Desktop has a Settings → Export option to download a zip file."
       }
     },
     {
@@ -95,7 +97,7 @@
       "name": "Why charge if it's open source?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The code is free on GitHub. The $9.99 gets you: pre-packaged executable (no Python setup required), bundled dependencies, tested build (guaranteed to work), and lifetime updates (all future releases included). Technical users can View on GitHub for free."
+        "text": "roampal-core is 100% free - install with pip install roampal and use it forever. Roampal Desktop ($9.99 one-time) gives you a pre-packaged executable with bundled dependencies, tested build, and lifetime updates. You can also support Core development with an optional subscription."
       }
     },
     {
@@ -111,7 +113,7 @@
       "name": "What are the MCP tools and what do they do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "When you connect Roampal to Claude Code, OpenCode, Cursor, or other MCP-compatible tools, they get access to memory tools: search_memory (finds relevant memories), get_context_insights (quick topic lookup), record_response (records outcomes - how Roampal learns), add_to_memory_bank (stores permanent facts), update_memory (corrects existing memories), delete_memory (removes outdated info), and score_response (scores previous exchange outcomes). Your AI uses these automatically during conversation."
+        "text": "roampal-core (Claude Code and OpenCode) provides 7 MCP tools: get_context_insights, search_memory, add_to_memory_bank, update_memory, delete_memory, score_response, and record_response. Roampal Desktop provides 6 MCP tools with slight differences: archive_memory instead of delete_memory, and a combined record_response that includes scoring. With roampal-core, context injection and scoring happen automatically via hooks."
       }
     },
     {
@@ -130,7 +132,7 @@
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Roampal",
-  "description": "Local AI memory that learns what works. Unlike regular AI that just stores facts, Roampal tracks which advice actually helped.",
+  "description": "Outcome-based memory for AI coding tools. Tracks which advice actually helped and learns from results. Works with Claude Code and OpenCode.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Windows, macOS, Linux",
   "offers": {
@@ -138,7 +140,7 @@
     "price": "9.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.3.2",
+  "softwareVersion": "0.3.5",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -146,7 +148,7 @@
   },
   "license": "https://opensource.org/licenses/Apache-2.0",
   "downloadUrl": "https://roampal.gumroad.com/l/mjxtfg",
-  "codeRepository": "https://github.com/roampal-ai/roampal"
+  "codeRepository": "https://github.com/roampal-ai/roampal-core"
 }
   </script>
   <script type="application/ld+json">
@@ -205,6 +207,8 @@
       </div>
     </div>
   </nav>
+
+  <main>
 
   <!-- Hero Section -->
   <section class="hero" id="home">
@@ -268,8 +272,8 @@
         <div style="padding-left: 1rem; border-left: 2px solid #7ee787;">
           <div style="color: #7ee787;">═══ KNOWN CONTEXT ═══</div>
           <div style="color: #e6edf3; margin: 0.5rem 0;">
-            <span style="color: #a5d6ff;">[patterns]</span> <span style="color: #8b949e;">(3d, s:0.9, [YYY])</span> JWT refresh pattern fixed auth loop<br>
-            <span style="color: #a5d6ff;">[memory_bank]</span> User prefers: never stage git changes
+            &bull; JWT refresh pattern fixed auth loop <span style="color: #8b949e;">[id:patterns_a1b2]</span> <span style="color: #8b949e;">(3d, 90% proven, patterns)</span><br>
+            &bull; User prefers: never stage git changes <span style="color: #8b949e;">[id:mb_c3d4]</span> <span style="color: #8b949e;">(memory_bank)</span>
           </div>
           <div style="color: #7ee787;">═══ END CONTEXT ═══</div>
           <div style="color: #e6edf3; margin-top: 0.5rem;">fix the auth bug</div>
@@ -315,7 +319,7 @@
 
       <!-- The problem illustrated -->
       <div data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto 2.5rem auto;">
-        <h4 style="color: #60a5fa; margin: 0 0 1.5rem 0; font-size: 1.1rem;">Here's an example:</h4>
+        <h3 style="color: #60a5fa; margin: 0 0 1.5rem 0; font-size: 1.1rem;">Here's an example:</h3>
 
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0 0 1.5rem 0;">
           You ask your AI: <strong style="color: white;">"What's a good restaurant for a date night?"</strong>
@@ -357,7 +361,7 @@
 
       <!-- 4-Way Comparison - THE PROOF -->
       <div data-animate style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto;">
-        <h4 style="color: #a78bfa; margin: 0 0 0.5rem 0; font-size: 1.1rem;">We tested this:</h4>
+        <h3 style="color: #a78bfa; margin: 0 0 0.5rem 0; font-size: 1.1rem;">We tested this:</h3>
         <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">Questions designed to trick the AI into giving the wrong answer.</p>
         <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
           <thead>
@@ -379,20 +383,20 @@
               <td style="padding: 0.75rem; color: #60a5fa; text-align: center;">+10 pts</td>
             </tr>
             <tr>
-              <td style="padding: 0.75rem; color: #10b981; font-weight: 600;">+ Learning from outcomes</td>
-              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">50%</td>
-              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">+40 pts</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600;">Roampal (ranking + outcomes)</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">60% at maturity</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">+50 pts</td>
             </tr>
           </tbody>
         </table>
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin: 0; text-align: center;">
-          Smarter ranking helps a little. <strong style="color: #a78bfa;">Outcome tracking helps 4× more.</strong>
+          Smarter ranking helps a little. <strong style="color: #a78bfa;">At maturity, outcome tracking helps 5× more</strong> (+50 pts vs +10 pts).
         </p>
       </div>
 
       <!-- Learning curve test -->
       <div data-animate style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
-        <h4 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 1.1rem;">It gets better the more you use it</h4>
+        <h3 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 1.1rem;">It gets better the more you use it</h3>
         <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">We measured how well it finds the right answer over time.</p>
 
         <div class="stats-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0;">
@@ -401,11 +405,11 @@
             <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Cold start (0 uses)</p>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">100%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">As you use it</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">60%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">At maturity (20 uses)</p>
           </div>
           <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">4×</div>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">5×</div>
             <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Better than ranking alone</p>
           </div>
         </div>
@@ -417,33 +421,33 @@
 
       <!-- Why this matters -->
       <div data-animate style="background: rgba(96, 165, 250, 0.05); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
-        <h4 style="color: #60a5fa; margin: 0 0 1rem 0; font-size: 1.1rem;">Why this matters:</h4>
+        <h3 style="color: #60a5fa; margin: 0 0 1rem 0; font-size: 1.1rem;">Why this matters:</h3>
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0;">
           <strong style="color: white;">Better answers with less noise.</strong> Roampal only retrieves what's proven helpful, not everything that sounds related.
           That means lower API costs, faster responses, and more accurate answers.
         </p>
       </div>
 
-      <!-- Quality vs noise - RAG comparison -->
+      <!-- Roampal vs Vector DB -->
       <div data-animate style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
-        <h4 style="color: #f59e0b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Every result is proven</h4>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">RAG returns what sounds similar. Roampal returns what actually worked.</p>
+        <h3 style="color: #f59e0b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Roampal vs pure vector search</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">30 adversarial scenarios designed to trick similarity search. Real embeddings (all-mpnet-base-v2).</p>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
           <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">1%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">RAG top-5 accuracy</p>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">5 results, hoping one is right</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">0%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Vector DB accuracy</p>
+            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">0/30 correct on adversarial queries</p>
           </div>
           <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">96%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Roampal top pick accuracy</p>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">1 result, knowing it works</p>
+            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">40%</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Roampal accuracy</p>
+            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">12/30 correct &mdash; p=0.000135</p>
           </div>
         </div>
 
         <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: center;">
-          100 adversarial scenarios with real embeddings. Roampal injects 4 outcome-scored memories per prompt &mdash; each selected by what actually helped, not just what sounds similar.
+          When the semantically similar answer is wrong and the right answer doesn't sound related, vector search fails every time. Outcome learning finds what actually worked.
         </p>
       </div>
 
@@ -451,8 +455,8 @@
       <details data-animate style="text-align: center; margin-top: 2rem; color: #64748b;">
         <summary style="cursor: pointer; font-size: 0.9rem; color: #60a5fa;">Technical details for researchers</summary>
         <p style="font-size: 0.85rem; margin-top: 1rem;">
-          Coding (30): p=0.001, d=7.49 • Finance (100): p&lt;0.001, χ²=98 • Learning: p=0.005, d=13.4<br>
-          <a href="https://github.com/roampal-ai/roampal/tree/master/dev/benchmarks" target="_blank" style="color: #60a5fa;">Full methodology & reproducible benchmarks</a>
+          4-way comparison: 200 tests (10 scenarios × 5 levels × 4 conditions) • Learning curve: 50 tests • Token efficiency: 100 adversarial scenarios<br>
+          <a href="https://github.com/roampal-ai/roampal-core/tree/main/dev/benchmarks" target="_blank" style="color: #60a5fa;">Full methodology & reproducible benchmarks</a>
         </p>
       </details>
 
@@ -539,10 +543,10 @@
             <h3 style="color: #60a5fa; margin: 0; font-size: 1.1rem;">Instant Responses</h3>
           </div>
           <div style="font-size: 2rem; font-weight: bold; color: #10b981; margin-bottom: 0.5rem;">
-            &lt;100ms
+            Fast
           </div>
           <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            Searches your memories in milliseconds. All on your machine.
+            Local search — no round-trip to a cloud server. All on your machine.
           </p>
         </div>
 
@@ -558,7 +562,7 @@
             Local
           </div>
           <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            Everything stays on your machine. No cloud. No tracking. Works offline.
+            All memory data stays on your machine. No cloud. No tracking. Your AI tool connects to its own API as usual.
           </p>
         </div>
 
@@ -578,7 +582,7 @@
               </svg>
               Handles Confusing Situations
             </div>
-            <div style="color: #94a3b8;">Even when there's lots of similar-sounding info, <strong style="color: #10b981;">still finds the right answer 80% of the time</strong> because it prioritizes what actually helped.</div>
+            <div style="color: #94a3b8;">Even when there's lots of similar-sounding info, <strong style="color: #10b981;">outcome scoring surfaces what actually worked</strong> instead of just what sounds similar.</div>
           </div>
           <div>
             <div style="color: #60a5fa; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
@@ -611,7 +615,7 @@
           All of this is tested and verified. Want to see the details?
         </p>
 
-        <a href="https://github.com/roampal-ai/roampal/tree/master/dev/benchmarks" class="btn-secondary" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;">
+        <a href="https://github.com/roampal-ai/roampal-core/tree/main/dev/benchmarks" class="btn-secondary" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
           </svg>
@@ -881,11 +885,12 @@ elif outcome == "partial":
             <p>All data stored locally:</p>
             <ul>
               <li>Vector DB: ChromaDB (local files)</li>
-              <li>Outcomes: SQLite database</li>
+              <li>Outcomes: stored as vector metadata in ChromaDB</li>
               <li>Knowledge graph: JSON file</li>
-              <li>LLM: Ollama or LM Studio (local inference)</li>
+              <li>Desktop: Ollama or LM Studio (local inference)</li>
+              <li>Core: uses your existing AI tool's LLM (Claude, etc.)</li>
             </ul>
-            <p><strong>Zero network calls. Zero telemetry.</strong></p>
+            <p><strong>Zero telemetry. Your data never leaves your machine.</strong> Minimal network: PyPI version check on startup, embedding model download on first run.</p>
           </div>
         </details>
       </div>
@@ -991,9 +996,10 @@ elif outcome == "partial":
 
       <!-- 7 MCP Tools -->
       <div style="max-width: 900px; margin: 0 auto 3rem;">
-        <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; text-align: center;">
-          7 Memory Tools
+        <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; text-align: center;">
+          Memory Tools via MCP
         </h3>
+        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; text-align: center;">Core: 7 tools &nbsp;|&nbsp; Desktop: 6 tools</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">get_context_insights</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">search_memory</code>
@@ -1005,6 +1011,9 @@ elif outcome == "partial":
         </div>
         <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem; text-align: center;">
           <code style="background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_response</code> is enforced automatically &mdash; hooks (Claude Code) and plugin (OpenCode) ensure scoring on every exchange.
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
+          Desktop uses <code style="font-size: 0.75rem;">archive_memory</code> instead of <code style="font-size: 0.75rem;">delete_memory</code>, and combines scoring into <code style="font-size: 0.75rem;">record_response</code>.
         </p>
       </div>
 
@@ -1077,6 +1086,9 @@ elif outcome == "partial":
           GitHub Docs
         </a>
       </div>
+      <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-size: 0.85rem;">
+        roampal-core is free and open source. <a href="https://roampal.gumroad.com/l/aagzxv" target="_blank" rel="noopener" style="color: var(--accent-color);">Support development →</a>
+      </p>
 
     </div>
   </section>
@@ -1086,10 +1098,10 @@ elif outcome == "partial":
     <div class="container">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem;">
-          🔗 Connect Any MCP-Compatible Tool
+          Connect via Roampal Desktop
         </h2>
         <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
-          Give any MCP-compatible AI tool access to Roampal's persistent memory. Works with Claude Code, OpenCode, Cursor, Cline, Continue.dev, and any tool supporting the Model Context Protocol.
+          Roampal Desktop can connect to any MCP-compatible AI tool via its Settings panel. Note: Desktop MCP provides memory tools but does not include hooks-based context injection or automatic scoring &mdash; for that, use <a href="#claude-code" style="color: var(--accent-color);">roampal-core</a> with Claude Code or OpenCode.
         </p>
       </div>
 
@@ -1126,7 +1138,7 @@ elif outcome == "partial":
               Go to the <strong>Integrations</strong> tab. Roampal automatically detects MCP-compatible tools installed on your system.
             </p>
             <p style="color: var(--text-secondary); font-size: 0.875rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 6px; border-left: 3px solid var(--accent-color);">
-              <strong>Works with:</strong> Any tool with an MCP config file (Claude Code, OpenCode, Cursor, Cline, Continue.dev, etc.)
+              <strong>Auto-detects:</strong> Any tool with an MCP config file (Claude Code, OpenCode, Cline, and more)
             </p>
           </div>
         </div>
@@ -1154,12 +1166,12 @@ elif outcome == "partial":
           <div style="text-align: center; padding: 2rem; background: var(--bg-secondary); border-radius: 8px;">
             <div style="font-size: 3rem; margin-bottom: 1rem;">🔌</div>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              <strong>Memory Tools Available:</strong><br>
+              <strong>Desktop Memory Tools (6):</strong><br>
+              <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">get_context_insights</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">search_memory</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">add_to_memory_bank</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">update_memory</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">archive_memory</code>
-              <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">get_context_insights</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">record_response</code>
             </p>
           </div>
@@ -1233,15 +1245,238 @@ elif outcome == "partial":
     <div class="container" style="max-width: 1000px; margin: 0 auto;">
       <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 2rem;">Releases</h2>
 
+      <!-- roampal-core Section -->
+      <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
+
+      <!-- v0.3.5 Release Card -->
+      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+              v0.3.5 - Precision Scoring &amp; Security
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.875rem;">
+              Released February 2026
+            </p>
+          </div>
+          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
+        </div>
+
+        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
+          Lean scoring prompts cut token waste by ~60K over 30 turns. Rewritten tool descriptions teach the LLM memory hygiene, verification discipline, and active failure scoring. Security hardening across CORS, input validation, and process management.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Lean Scoring Prompts</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Memory IDs only in scoring prompt &mdash; content stays in SCORING REFERENCE block. Eliminates duplicate tokens every scored turn.</p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">System Mastery Prompting</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Rewritten tool descriptions with memory hygiene, verification workflow, storage discipline, and active failure scoring instructions.</p>
+          </div>
+
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Security Hardening</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">CORS locked to localhost, PID validation on process kill, Pydantic field constraints, 10MB ingest limit, transcript TTL cleanup.</p>
+          </div>
+        </div>
+
+        <details style="margin-bottom: 1.5rem;">
+          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
+          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
+            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
+              <li>Scoring prompt: IDs only + SCORING REFERENCE block in system prompt &mdash; saves ~60K tokens over 30 turns</li>
+              <li>Tool descriptions rewritten: memory hygiene, verification use, storage discipline, active failure scoring</li>
+              <li>Metadata filter fix: <code>_search_all()</code> no longer silently discards non-date ChromaDB filters</li>
+              <li>Promotion criteria tightened: score &ge;0.9 + uses &ge;3 + 5 proven successes required</li>
+              <li>Null-safe metadata handling with float safety on score/wilson/importance/confidence</li>
+              <li>CORS: <code>allow_origins=[]</code> (localhost-only tool needs no cross-origin access)</li>
+              <li>PID numeric validation before <code>taskkill</code>/<code>kill</code> in hooks and plugin</li>
+              <li>Pydantic Field constraints on SearchRequest (max_length, ge/le bounds, regex)</li>
+              <li>10MB ingest size limit at API layer</li>
+              <li>7-day transcript cleanup + 1MB debug log rotation</li>
+            </ul>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.5/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+          </div>
+        </details>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+            pip install roampal
+          </a>
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Previous roampal-core Releases -->
+      <details style="margin-top: 2rem;">
+        <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
+          View Previous Releases (v0.3.4 and earlier)
+        </summary>
+
+        <!-- v0.3.4 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.4 - OpenCode Scoring Fixes</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026 - Deep-clone fix for garbled UI, deferred sidecar scoring to prevent double-scoring, scoring prompt now asks for both exchange outcome and per-memory scores.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.4/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.3.3 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.3 - OpenCode Plugin Packaging</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026 - Fixes OpenCode packaging bug, smart email collection marker, memory awareness preamble, robust tool detection for fresh installs, relative timestamps in KNOWN CONTEXT.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.3.2 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.2 - Multi-Client Support</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026 - Claude Code + OpenCode via shared single-writer server. 4-slot context injection, self-healing hooks, OpenCode TypeScript plugin.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.3.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.1 - Reserved Working Memory Slot</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Guarantees recent session context always surfaces in automatic injection. 1 reserved working slot + 2 from other collections.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.3.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.0 - Resilience</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Fixes silent hook server crashes, health check tests embeddings, auto-restart on corruption</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.9 - Natural Selection for Memory</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">Wilson scoring for memory_bank, stricter promotion requirements, archive cleanup.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.8 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.8 - Per-Memory Scoring</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Score each cached memory individually. Wilson score fix, FastAPI lifecycle management.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.7 - Cold Start Fix + Identity Injection</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Critical fixes for identity injection and cold start bloat.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.6 - Identity Prompt + Profile-Only Cold Start</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Identity detection prompts, profile-only cold start, recency sort fix</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.5 - MCP Config Location Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Critical fix: roampal init now writes to ~/.claude.json instead of invalid ~/.claude/.mcp.json</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.4 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.4 - Scoring Reliability Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Fixed related parameter handling in score_response fallback path</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.4/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.3 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.3 - Outcome Scoring Speed</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Critical performance fix: score_response latency 10s → <500ms</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.2 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.2 - Cursor IDE Support (currently broken due to Cursor bug)</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Cursor MCP support (non-functional due to Cursor-side bug), always-inject identity, ghost registry, roampal doctor command</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.1 - MCP Tool Loading Hotfix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Emergency fix for fresh installs failing to load MCP tools</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.2.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.0 - Action KG Sync Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed critical "reading your own writes" bug in knowledge graph</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.2.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.10 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.10 - Update Notifications in MCP</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Claude Code users now see update notifications via MCP hook</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.1.10/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.9 - ChromaDB Collection Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed critical bug where MCP connected to wrong ChromaDB collection</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.1.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.8 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.8 - Delete Memory (Hard Delete)</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Renamed archive_memory → delete_memory, now actually removes memories</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.1.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.7 - Working Memory Cleanup</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed cleanup of old memories, added update notifications, archive_memory fix</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.1.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.6 - Score Response Fallback</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed score_response returning "0 memories updated", book management initialization</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.1.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+        <!-- v0.1.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.5 - DEV/PROD Isolation</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Run dev and prod instances simultaneously without collision</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.1.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+        </div>
+
+      </details><!-- End Previous roampal-core Releases -->
+
       <!-- Roampal Desktop Section -->
-      <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">Roampal Desktop</h3>
+      <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">Roampal Desktop</h3>
 
       <!-- v0.3.0 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.0 - Performance & Polish
+              v0.3.0 - Performance &amp; Polish
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released January 2026
@@ -1257,23 +1492,17 @@ elif outcome == "partial":
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
             <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">TanStack Virtual</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Smooth scrolling for conversations with 5000+ messages. No more lag or jank.
-            </p>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Smooth scrolling for conversations with 5000+ messages. No more lag or jank.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
             <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Streaming Fixes</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Reliable token-by-token display. Fixed tool chaining and reconnection issues.
-            </p>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Reliable token-by-token display. Fixed tool chaining and reconnection issues.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
             <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">50+ Bug Fixes</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">
-              Security hardened: ZIP traversal, XSS, query logging. Plus message virtualization and scrollbar fixes.
-            </p>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Security hardened: ZIP traversal, XSS, query logging. Plus message virtualization and scrollbar fixes.</p>
           </div>
         </div>
 
@@ -1291,7 +1520,7 @@ elif outcome == "partial":
               <li>Security: ZIP path traversal, XSS in citations, query logging fixed</li>
               <li>876 tests passing (509 frontend, 367 backend)</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1305,8 +1534,7 @@ elif outcome == "partial":
         </div>
       </div>
 
-
-      <!-- Previous Releases (Collapsed) -->
+      <!-- Previous Desktop Releases (Collapsed) -->
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
@@ -1317,286 +1545,87 @@ elif outcome == "partial":
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.12 - Memory Attribution Scoring</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - LLM memory attribution, virtualization fix, selective scoring parity</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.12/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.12/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
         </div>
 
         <!-- v0.2.11 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.11 - Critical Performance Fixes</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - KG 25x faster, message virtualization, store subscription fix</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.11/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.11/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
         </div>
 
         <!-- v0.2.10 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.10 - ChromaDB 1.x + Query Timeouts + Ghost Entry Handling</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - ChromaDB upgraded to 1.x, query timeouts prevent UI freezes, ghost entry handling</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.10/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.10/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes</a>
         </div>
 
         <!-- v0.2.9 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.9 - Ghost Registry + Timeout Protection + Performance</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixes book deletion ghost vectors, adds timeout protection, 3x faster startup</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.8 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.8 - MCP Security + No Truncation + Update Notifications</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - MCP security hardening, full memory content returned, in-app update notifications</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.7 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.7 - Architecture Refactoring</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Monolithic file refactored into 9 focused, testable modules. 260 tests passing</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.6 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.6 - Unified Learning + Directive Insights + Contextual Embeddings</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Internal LLM contributes to Action KG, actionable get_context_insights prompts, ~49% improved book retrieval</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.5 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.5 - MCP Client + Wilson Scoring + Multilingual Ranking</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Connect to external MCP tool servers, statistical confidence scoring, 14-language smart sorting</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/dev/docs/releases/v0.2.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.1 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.1 - Action-Effectiveness KG + Enhanced Retrieval + Benchmarks</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - 3rd Knowledge Graph learns tool effectiveness, state-of-the-art retrieval, 100% accuracy on benchmarks</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.1.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - 3rd Knowledge Graph learns tool effectiveness, enhanced retrieval pipeline</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/docs/RELEASE_NOTES_0.2.1.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.0 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.0 - Learning-Based KG Routing + MCP Integration</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - Intelligent knowledge graph routing, enhanced MCP with semantic learning storage</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/master/docs/RELEASE_NOTES_0.2.0.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/docs/RELEASE_NOTES_0.2.0.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.1.6 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.6 - Hotfix Release</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - Critical fixes for collection-specific search and KG success rate accuracy</p>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.6" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.6" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.1.5 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.5 - Multi-Provider Support</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">October 2025 - Persistent memory bank, document upload (Books), 100% local with Ollama integration</p>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.5" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.1.5" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
-      </details><!-- End Previous Releases -->
-
-      <!-- roampal-core Section -->
-      <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
-
-      <!-- v0.3.2 Release Card -->
-      <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.2 - Multi-Client Support
-            </h3>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released February 2026
-            </p>
-          </div>
-          <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
-        </div>
-
-        <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Works with Claude Code and OpenCode through a shared single-writer server. 4-slot context injection ensures history memories always surface for scoring. Self-healing hooks auto-restart the server on failure.
-        </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">OpenCode Support</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">TypeScript plugin with split delivery &mdash; scoring in system prompt, context injected invisibly. <code style="font-size: 0.8rem;">roampal init --opencode</code></p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Self-Healing Hooks</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Hooks and plugin auto-restart the server on 503 or connection failure. Cross-platform (Windows + Unix).</p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Single-Writer Architecture</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">All clients share one FastAPI server &mdash; no ChromaDB conflicts. MCP is now a lightweight HTTP client.</p>
-          </div>
-        </div>
-
-        <details style="margin-bottom: 1.5rem;">
-          <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
-          <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
-            <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>OpenCode plugin: split delivery via system.unshift/push, exchange capture, session lifecycle</li>
-              <li>Shared server: all 7 MCP tools proxy via HTTP to FastAPI &mdash; no ChromaDB/PyTorch in MCP process</li>
-              <li>Self-healing in Python hooks and TypeScript plugin: kill stale process, spawn fresh, poll health, retry</li>
-              <li>CLI: <code>roampal init --opencode</code>, <code>roampal stop</code>, auto-detection</li>
-              <li>4-slot context injection: 1 working + 1 history (reserved) + 2 best matches &mdash; breaks history scoring feedback loop</li>
-              <li>Cursor integration ready (waiting on upstream Cursor bug fix)</li>
-              <li>432 automated tests across 6 test files</li>
-            </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.2/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
-          </div>
-        </details>
-
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            pip install roampal
-          </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.2" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            View on GitHub
-          </a>
-        </div>
-      </div>
-
-      <!-- Previous roampal-core Releases -->
-      <details style="margin-top: 2rem;">
-        <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.3.1 and earlier)
-        </summary>
-
-        <!-- v0.3.1 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.1 - Reserved Working Memory Slot</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Guarantees recent session context always surfaces in automatic injection. 1 reserved working slot + 2 from other collections.</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.3.0 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.0 - Resilience</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Fixes silent hook server crashes, health check tests embeddings, auto-restart on corruption</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.9 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
-          <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.9 - Natural Selection for Memory</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">Wilson scoring for memory_bank, stricter promotion requirements, archive cleanup.</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.8 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.8 - Per-Memory Scoring</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Score each cached memory individually. Wilson score fix, FastAPI lifecycle management.</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.7 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.7 - Cold Start Fix + Identity Injection</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.5rem;">Critical fixes for identity injection and cold start bloat.</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.6 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.6 - Identity Prompt + Profile-Only Cold Start</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Identity detection prompts, profile-only cold start, recency sort fix</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.5 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.5 - MCP Config Location Fix</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Critical fix: roampal init now writes to ~/.claude.json instead of invalid ~/.claude/.mcp.json</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.4 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.4 - Scoring Reliability Fix</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Fixed related parameter handling in score_response fallback path</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.4/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.3 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.3 - Outcome Scoring Speed</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - Critical performance fix: score_response latency 10s → <500ms</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.2 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.2 - Cursor IDE Support</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Cursor MCP support, always-inject identity, ghost registry, roampal doctor command</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.1 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.1 - MCP Tool Loading Hotfix</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Emergency fix for fresh installs failing to load MCP tools</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.2.0 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.0 - Action KG Sync Fix</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed critical "reading your own writes" bug in knowledge graph</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.2.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.1.10 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.10 - Update Notifications in MCP</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Claude Code users now see update notifications via MCP hook</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.10/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.1.9 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.9 - ChromaDB Collection Fix</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed critical bug where MCP connected to wrong ChromaDB collection</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.1.8 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.8 - Delete Memory (Hard Delete)</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Renamed archive_memory → delete_memory, now actually removes memories</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.1.7 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.7 - Working Memory Cleanup</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed cleanup of old memories, added update notifications, archive_memory fix</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.1.6 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.6 - Score Response Fallback</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Fixed score_response returning "0 memories updated", book management initialization</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-        <!-- v0.1.5 -->
-        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.1.5 - DEV/PROD Isolation</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">December 2025 - Run dev and prod instances simultaneously without collision</p>
-          <a href="https://github.com/roampal-ai/roampal-core/blob/master/dev/docs/releases/v0.1.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes →</a>
-        </div>
-
-      </details><!-- End Previous roampal-core Releases -->
+      </details><!-- End Previous Desktop Releases -->
 
     </div>
 </section>
@@ -1614,8 +1643,8 @@ elif outcome == "partial":
             <p>Three key differences:</p>
             <ol>
               <li><strong>It learns from results:</strong> When something helps you, Roampal remembers. When it doesn't work, it learns from that too. Regular AI just stores what you said.</li>
-              <li><strong>Local-first privacy:</strong> Your data stays on your machine. No cloud servers, no recurring subscriptions ($9.99 one-time payment).</li>
-              <li><strong>True ownership:</strong> You own your data, your models, your memory. Export everything anytime. No vendor lock-in.</li>
+              <li><strong>Local-first privacy:</strong> Your data stays on your machine. No cloud servers, no recurring subscriptions. roampal-core is free and open source. Desktop is a one-time $9.99 purchase.</li>
+              <li><strong>True ownership:</strong> You own your data and your memory. Export everything anytime. No vendor lock-in.</li>
             </ol>
           </div>
         </details>
@@ -1623,51 +1652,53 @@ elif outcome == "partial":
         <details class="faq-item" data-animate>
           <summary>What models does it support?</summary>
           <div class="faq-answer">
-            <p>Works with many popular AI models:</p>
+            <p><strong>roampal-core:</strong> Works with whatever model your AI tool already uses (Claude, GPT, etc.). Memory and scoring are model-agnostic &mdash; just <code>pip install roampal</code>.</p>
+            <p><strong>Roampal Desktop:</strong> Supports local models via Ollama or LM Studio:</p>
             <ul>
               <li><strong>Llama</strong> - Meta's free models</li>
               <li><strong>Qwen</strong> - Great for many languages</li>
               <li><strong>Mixtral</strong> - Fast and efficient</li>
             </ul>
-            <p>Pick the one that works best on your computer. Install from Settings.</p>
+            <p>Install from Desktop Settings.</p>
           </div>
         </details>
 
         <details class="faq-item" data-animate>
           <summary>Does it work offline?</summary>
           <div class="faq-answer">
-            <p>Yes! After downloading models, Roampal works completely offline.
-            No internet required.</p>
+            <p><strong>roampal-core:</strong> Memory storage and retrieval is fully local. Your AI tool (Claude Code, OpenCode) still connects to its own API provider as usual.</p>
+            <p><strong>Roampal Desktop:</strong> Fully offline after downloading models. No internet required.</p>
           </div>
         </details>
 
         <details class="faq-item" data-animate>
           <summary>What are the system requirements?</summary>
           <div class="faq-answer">
-            <p><strong>Minimum:</strong> 8GB RAM, 10GB free disk space.</p>
-            <p><strong>Recommended:</strong> 16GB RAM and a decent graphics card for faster responses.</p>
+            <p><strong>roampal-core:</strong> Python 3.10+, minimal disk space. Runs on anything that runs Python.</p>
+            <p><strong>Roampal Desktop:</strong> Minimum 8GB RAM, 10GB free disk space. Recommended: 16GB RAM and a GPU for faster local model responses.</p>
           </div>
         </details>
 
         <details class="faq-item" data-animate>
           <summary>How do I export my data?</summary>
           <div class="faq-answer">
-            <p><strong>Easy way:</strong> Go to Settings → Export. Pick what you want to backup and download a zip file.</p>
-            <p><strong>Manual:</strong> All your data is stored in regular files on your computer. Just copy the data folder to backup.</p>
+            <p><strong>roampal-core:</strong> All data is stored locally in your data directory (e.g. <code>%APPDATA%/Roampal/data</code> on Windows). Copy the folder to backup.</p>
+            <p><strong>Roampal Desktop:</strong> Go to Settings → Export. Pick what you want to backup and download a zip file.</p>
           </div>
         </details>
 
         <details class="faq-item" data-animate>
           <summary>Why charge if it's open source?</summary>
           <div class="faq-answer">
-            <p>The code is <strong>free on GitHub</strong>. The $9.99 gets you:</p>
+            <p><strong>roampal-core is 100% free.</strong> Install with <code>pip install roampal</code> and use it forever.</p>
+            <p><strong>Roampal Desktop</strong> ($9.99 one-time) gets you:</p>
             <ul>
               <li><strong>Pre-packaged executable</strong> - No Python setup required</li>
               <li><strong>Bundled dependencies</strong> - Everything included</li>
-              <li><strong>Tested build</strong> - Guaranteed to work</li>
+              <li><strong>Tested build</strong> - Ready to run out of the box</li>
               <li><strong>Lifetime updates</strong> - All future releases included</li>
             </ul>
-            <p>Technical users can View on GitHub for free. The $9.99 is for convenience.</p>
+            <p>You can also <a href="https://roampal.gumroad.com/l/aagzxv" target="_blank" rel="noopener" style="color: var(--accent-color);">support Core development</a> with an optional subscription.</p>
           </div>
         </details>
 
@@ -1687,17 +1718,23 @@ elif outcome == "partial":
         <details class="faq-item" data-animate>
           <summary>What are the MCP tools and what do they do?</summary>
           <div class="faq-answer">
-            <p>When you connect Roampal to Claude Code, OpenCode, Cursor, or other MCP-compatible tools, they get access to these memory tools:</p>
+            <p><strong>roampal-core</strong> (Claude Code &amp; OpenCode) provides 7 MCP tools:</p>
             <ul>
-              <li><strong>search_memory</strong> - Finds relevant memories based on what you're discussing</li>
               <li><strong>get_context_insights</strong> - Quick lookup of what Roampal knows about a topic</li>
-              <li><strong>record_response</strong> - Records whether something worked or didn't (this is how Roampal learns)</li>
+              <li><strong>search_memory</strong> - Finds relevant memories based on what you're discussing</li>
               <li><strong>add_to_memory_bank</strong> - Stores permanent facts about you (preferences, identity, goals)</li>
               <li><strong>update_memory</strong> - Corrects or updates existing memories</li>
               <li><strong>delete_memory</strong> - Removes outdated information</li>
-              <li><strong>score_response</strong> - Scores the previous exchange outcome (enforced automatically in Claude Code &amp; OpenCode)</li>
+              <li><strong>score_response</strong> - Scores the previous exchange outcome (enforced automatically via hooks)</li>
+              <li><strong>record_response</strong> - Stores key takeaways from significant exchanges</li>
             </ul>
-            <p>Your AI uses these automatically during conversation. You don't need to do anything special.</p>
+            <p><strong>Roampal Desktop</strong> provides 6 MCP tools:</p>
+            <ul>
+              <li><strong>get_context_insights</strong>, <strong>search_memory</strong>, <strong>add_to_memory_bank</strong>, <strong>update_memory</strong> - Same as Core</li>
+              <li><strong>archive_memory</strong> - Soft-deletes outdated information (vs Core's hard delete)</li>
+              <li><strong>record_response</strong> - Combined outcome scoring + key takeaways in one tool</li>
+            </ul>
+            <p>With roampal-core, context injection and scoring happen automatically via hooks. With Desktop MCP, you may need to prompt the AI to use memory tools.</p>
           </div>
         </details>
 
@@ -1773,28 +1810,24 @@ elif outcome == "partial":
         </h2>
 
         <p class="cta-subtitle">
-          AI that grows with you. Learns from outcomes. Tracks what actually works. 100% local.
+          AI that grows with you. Learns from outcomes. Tracks what actually works. All data stays on your machine.
         </p>
 
-        <div class="cta-buttons">
-          <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-large" target="_blank" rel="noopener">
-            <svg class="btn-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z" />
-              <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-            </svg>
-            <span>Download Pre-built - $9.99</span>
-            <span class="btn-note">Ready to run • No setup required • Lifetime updates</span>
+        <div class="cta-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="https://github.com/roampal-ai/roampal-core" class="btn-primary-large" target="_blank" rel="noopener" style="background: var(--accent-color);">
+            <span>Get Core (Free)</span>
+            <span class="btn-note">pip install roampal • Claude Code & OpenCode • Open source</span>
           </a>
-
-          </div>
-
-        <div class="cta-requirements">
-          <p>Pre-built version: Just download and run • Or build yourself for free from the source code</p>
-          
+          <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-large" target="_blank" rel="noopener" style="background: transparent; border: 2px solid var(--border-color);">
+            <span>Desktop App - $9.99</span>
+            <span class="btn-note">Pre-built • Local models • MCP for any tool</span>
+          </a>
         </div>
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
