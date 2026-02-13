@@ -113,7 +113,7 @@
       "name": "What are the MCP tools and what do they do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "roampal-core (Claude Code and OpenCode) provides 7 MCP tools: get_context_insights, search_memory, add_to_memory_bank, update_memory, delete_memory, score_response, and record_response. Roampal Desktop provides 6 MCP tools with slight differences: archive_memory instead of delete_memory, and a combined record_response that includes scoring. With roampal-core, context injection and scoring happen automatically via hooks."
+        "text": "roampal-core (Claude Code and OpenCode) provides 6 MCP tools: search_memory, add_to_memory_bank, update_memory, delete_memory, score_memories, and record_response. Roampal Desktop provides 6 MCP tools: get_context_insights, search_memory, add_to_memory_bank, update_memory, archive_memory, and record_response. Desktop includes get_context_insights for manual context retrieval and archive_memory for soft-deletes, while Core automates context injection via hooks and uses delete_memory for hard removal. Core's score_memories is a separate tool enforced by hooks; Desktop bundles scoring into record_response."
       }
     },
     {
@@ -140,7 +140,7 @@
     "price": "9.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.3.5",
+  "softwareVersion": "0.3.0",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -994,26 +994,25 @@ elif outcome == "partial":
         </div>
       </div>
 
-      <!-- 7 MCP Tools -->
+      <!-- 6 MCP Tools -->
       <div style="max-width: 900px; margin: 0 auto 3rem;">
         <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; text-align: center;">
           Memory Tools via MCP
         </h3>
-        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; text-align: center;">Core: 7 tools &nbsp;|&nbsp; Desktop: 6 tools</p>
+        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; text-align: center;">Core: 6 tools &nbsp;|&nbsp; Desktop: 6 tools</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
-          <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">get_context_insights</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">search_memory</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">add_to_memory_bank</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">update_memory</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">delete_memory</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">record_response</code>
-          <code style="padding: 0.5rem 1rem; background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; border-radius: 6px; font-size: 0.875rem;">score_response</code>
+          <code style="padding: 0.5rem 1rem; background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; border-radius: 6px; font-size: 0.875rem;">score_memories</code>
         </div>
         <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem; text-align: center;">
-          <code style="background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_response</code> is enforced automatically &mdash; hooks (Claude Code) and plugin (OpenCode) ensure scoring on every exchange.
+          <code style="background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_memories</code> is enforced automatically &mdash; hooks (Claude Code) and plugin (OpenCode) ensure scoring on every exchange.
         </p>
         <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
-          Desktop uses <code style="font-size: 0.75rem;">archive_memory</code> instead of <code style="font-size: 0.75rem;">delete_memory</code>, and combines scoring into <code style="font-size: 0.75rem;">record_response</code>.
+          Desktop uses <code style="font-size: 0.75rem;">get_context_insights</code> + <code style="font-size: 0.75rem;">archive_memory</code> instead of Core's <code style="font-size: 0.75rem;">delete_memory</code> + <code style="font-size: 0.75rem;">score_memories</code>, and bundles scoring into <code style="font-size: 0.75rem;">record_response</code>.
         </p>
       </div>
 
@@ -1248,12 +1247,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.3.5 Release Card -->
+      <!-- v0.3.6 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.5 - Precision Scoring &amp; Security
+              v0.3.6 - Retrieval Fairness &amp; Token Optimization
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released February 2026
@@ -1263,23 +1262,23 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Lean scoring prompts cut token waste by ~60K over 30 turns. Rewritten tool descriptions teach the LLM memory hygiene, verification discipline, and active failure scoring. Security hardening across CORS, input validation, and process management.
+          78% token reduction via exchange summarization. Retrieval rebalanced so memory_bank no longer dominates open slots. Wilson scores carry through promotion instead of resetting to zero. Platform-split scoring architecture &mdash; main LLM handles everything in Claude Code, sidecar stays for OpenCode.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Lean Scoring Prompts</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Memory IDs only in scoring prompt &mdash; content stays in SCORING REFERENCE block. Eliminates duplicate tokens every scored turn.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Exchange Summarization</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Memories store ~300 char summaries instead of full exchanges. Context injection drops from 56K to 12K tokens over 30 turns &mdash; 78% reduction.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">System Mastery Prompting</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Rewritten tool descriptions with memory hygiene, verification workflow, storage discipline, and active failure scoring instructions.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Retrieval Fairness</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">memory_bank Wilson blend moved to 50/50, base multiplier halved to 0.4, entity boost extended to all collections. Working and history can now compete in open slots.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Security Hardening</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">CORS locked to localhost, PID validation on process kill, Pydantic field constraints, 10MB ingest limit, transcript TTL cleanup.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Sidecar Scoring for OpenCode</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">OpenCode now uses sidecar free models for per-memory relevance scoring and exchange summaries, keeping the main LLM focused on responses. Claude Code continues using its main LLM for all memory operations.</p>
           </div>
         </div>
 
@@ -1287,18 +1286,22 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Scoring prompt: IDs only + SCORING REFERENCE block in system prompt &mdash; saves ~60K tokens over 30 turns</li>
-              <li>Tool descriptions rewritten: memory hygiene, verification use, storage discipline, active failure scoring</li>
-              <li>Metadata filter fix: <code>_search_all()</code> no longer silently discards non-date ChromaDB filters</li>
-              <li>Promotion criteria tightened: score &ge;0.9 + uses &ge;3 + 5 proven successes required</li>
-              <li>Null-safe metadata handling with float safety on score/wilson/importance/confidence</li>
-              <li>CORS: <code>allow_origins=[]</code> (localhost-only tool needs no cross-origin access)</li>
-              <li>PID numeric validation before <code>taskkill</code>/<code>kill</code> in hooks and plugin</li>
-              <li>Pydantic Field constraints on SearchRequest (max_length, ge/le bounds, regex)</li>
-              <li>10MB ingest size limit at API layer</li>
-              <li>7-day transcript cleanup + 1MB debug log rotation</li>
+              <li>Exchange summarization: main LLM (Claude Code) or sidecar (OpenCode) writes ~300 char summaries &mdash; 78% token reduction</li>
+              <li>Auto-summarization: 1 old memory cleaned up per exchange, zero config required</li>
+              <li>memory_bank Wilson blend: 80/20 &rarr; 50/50 (outcomes matter more after 3 uses)</li>
+              <li>memory_bank base multiplier: 0.8 &rarr; 0.4 (still boosted, not dominant)</li>
+              <li>Wilson scores carry through promotion &mdash; no more reset to zero on tier change</li>
+              <li>Entity boost extended to all collections (was memory_bank only)</li>
+              <li>Unknown outcome penalty: <code>-0.05</code> raw score (unused memories drift toward cleanup)</li>
+              <li><code>get_context_insights</code> tool removed &mdash; context injection fully automatic via hooks/plugin</li>
+              <li>Per-memory sidecar scoring with 7-rule relevance heuristic (OpenCode)</li>
+              <li>Compaction recovery: last 4 exchange summaries injected on cold start and after compaction</li>
+              <li>Platform-aware <code>score_memories</code> tool: full schema for Claude Code, lean for OpenCode</li>
+              <li>New CLI commands: <code>roampal summarize</code>, <code>roampal score</code>, <code>roampal context</code></li>
+              <li>Sidecar backend chain: Custom &rarr; Haiku API &rarr; Zen &rarr; Ollama &rarr; <code>claude -p</code></li>
+              <li>Time-weighted score deltas removed &mdash; all scores are flat values regardless of memory age</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.5/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.6/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1306,7 +1309,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.6" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1316,8 +1319,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.3.4 and earlier)
+          View Previous Releases (v0.3.5 and earlier)
         </summary>
+
+        <!-- v0.3.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.5 - Precision Scoring &amp; Security</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026 - Lean scoring prompts save ~60K tokens over 30 turns. Rewritten tool descriptions with memory hygiene and verification discipline. Security hardening: CORS, input validation, process management.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.3.4 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
@@ -1515,7 +1525,7 @@ elif outcome == "partial":
               <li>Tool interleaving - text and tools now display in correct order</li>
               <li>Cancel button fix - actually stops generation now</li>
               <li>Surfaced memories display - see what memories were used</li>
-              <li>Context overflow detection - warns before model barfs</li>
+              <li>Context overflow detection - warns before context limit is exceeded</li>
               <li>Model switch race condition fixed</li>
               <li>Security: ZIP path traversal, XSS in citations, query logging fixed</li>
               <li>876 tests passing (509 frontend, 367 backend)</li>
@@ -1718,23 +1728,23 @@ elif outcome == "partial":
         <details class="faq-item" data-animate>
           <summary>What are the MCP tools and what do they do?</summary>
           <div class="faq-answer">
-            <p><strong>roampal-core</strong> (Claude Code &amp; OpenCode) provides 7 MCP tools:</p>
+            <p><strong>roampal-core</strong> (Claude Code &amp; OpenCode) provides 6 MCP tools:</p>
             <ul>
-              <li><strong>get_context_insights</strong> - Quick lookup of what Roampal knows about a topic</li>
               <li><strong>search_memory</strong> - Finds relevant memories based on what you're discussing</li>
               <li><strong>add_to_memory_bank</strong> - Stores permanent facts about you (preferences, identity, goals)</li>
               <li><strong>update_memory</strong> - Corrects or updates existing memories</li>
               <li><strong>delete_memory</strong> - Removes outdated information</li>
-              <li><strong>score_response</strong> - Scores the previous exchange outcome (enforced automatically via hooks)</li>
+              <li><strong>score_memories</strong> - Scores cached memories from previous context (enforced automatically via hooks)</li>
               <li><strong>record_response</strong> - Stores key takeaways from significant exchanges</li>
             </ul>
             <p><strong>Roampal Desktop</strong> provides 6 MCP tools:</p>
             <ul>
-              <li><strong>get_context_insights</strong>, <strong>search_memory</strong>, <strong>add_to_memory_bank</strong>, <strong>update_memory</strong> - Same as Core</li>
+              <li><strong>get_context_insights</strong> - Returns context about the user (Core handles this automatically via hooks)</li>
+              <li><strong>search_memory</strong>, <strong>add_to_memory_bank</strong>, <strong>update_memory</strong> - Same as Core</li>
               <li><strong>archive_memory</strong> - Soft-deletes outdated information (vs Core's hard delete)</li>
               <li><strong>record_response</strong> - Combined outcome scoring + key takeaways in one tool</li>
             </ul>
-            <p>With roampal-core, context injection and scoring happen automatically via hooks. With Desktop MCP, you may need to prompt the AI to use memory tools.</p>
+            <p>With roampal-core, context injection and scoring happen automatically via hooks. With Desktop, you may need to prompt the AI to use memory tools.</p>
           </div>
         </details>
 
