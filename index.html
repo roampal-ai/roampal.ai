@@ -1247,12 +1247,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.3.6 Release Card -->
+      <!-- v0.3.7 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.6 - Retrieval Fairness &amp; Token Optimization
+              v0.3.7 - Sidecar Setup &amp; Cold Start Recovery
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released February 2026
@@ -1262,23 +1262,23 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          78% token reduction via exchange summarization. Retrieval rebalanced so memory_bank no longer dominates open slots. Wilson scores carry through promotion instead of resetting to zero. Platform-split scoring architecture &mdash; main LLM handles everything in Claude Code, sidecar stays for OpenCode.
+          Sidecar scoring becomes the sole scorer for OpenCode with a one-command setup. <code>roampal init</code> now auto-detects local models (Ollama, LM Studio, etc.) and lets you choose a scoring model. Cold start injects recent exchanges so the AI knows where you left off. ~280 MB of unnecessary dependencies removed. Security audit applied.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Exchange Summarization</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Memories store ~300 char summaries instead of full exchanges. Context injection drops from 56K to 12K tokens over 30 turns &mdash; 78% reduction.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Sidecar-Only Scoring</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">OpenCode scoring moved entirely to the sidecar &mdash; your main LLM never sees scoring prompts. Auto-detects 8 local inference servers. One command: <code>roampal sidecar setup</code>.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Retrieval Fairness</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">memory_bank Wilson blend moved to 50/50, base multiplier halved to 0.4, entity boost extended to all collections. Working and history can now compete in open slots.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Cold Start Recovery</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">New sessions and post-compaction turns inject the last 4 exchange summaries. Your AI knows where you left off without you repeating context.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Sidecar Scoring for OpenCode</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">OpenCode now uses sidecar free models for per-memory relevance scoring and exchange summaries, keeping the main LLM focused on responses. Claude Code continues using its main LLM for all memory operations.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Lighter &amp; More Secure</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Removed scipy and nltk (~280 MB). Fixed bare excepts, added cache TTL eviction, Windows hook path compatibility with Claude Code 2.1.x.</p>
           </div>
         </div>
 
@@ -1286,22 +1286,22 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Exchange summarization: main LLM (Claude Code) or sidecar (OpenCode) writes ~300 char summaries &mdash; 78% token reduction</li>
-              <li>Auto-summarization: 1 old memory cleaned up per exchange, zero config required</li>
-              <li>memory_bank Wilson blend: 80/20 &rarr; 50/50 (outcomes matter more after 3 uses)</li>
-              <li>memory_bank base multiplier: 0.8 &rarr; 0.4 (still boosted, not dominant)</li>
-              <li>Wilson scores carry through promotion &mdash; no more reset to zero on tier change</li>
-              <li>Entity boost extended to all collections (was memory_bank only)</li>
-              <li>Unknown outcome penalty: <code>-0.05</code> raw score (unused memories drift toward cleanup)</li>
-              <li><code>get_context_insights</code> tool removed &mdash; context injection fully automatic via hooks/plugin</li>
-              <li>Per-memory sidecar scoring with 7-rule relevance heuristic (OpenCode)</li>
-              <li>Compaction recovery: last 4 exchange summaries injected on cold start and after compaction</li>
-              <li>Platform-aware <code>score_memories</code> tool: full schema for Claude Code, lean for OpenCode</li>
-              <li>New CLI commands: <code>roampal summarize</code>, <code>roampal score</code>, <code>roampal context</code></li>
-              <li>Sidecar backend chain: Custom &rarr; Haiku API &rarr; Zen &rarr; Ollama &rarr; <code>claude -p</code></li>
-              <li>Time-weighted score deltas removed &mdash; all scores are flat values regardless of memory age</li>
+              <li>Sidecar is sole scorer for OpenCode &mdash; model never sees scoring prompt unless sidecar is broken</li>
+              <li>NEW: <code>roampal sidecar setup/status/disable</code> CLI commands for one-command scorer configuration</li>
+              <li>Init-time sidecar prompt: auto-detects Ollama, LM Studio, LocalAI, Jan.ai, vLLM, GPT4All, KoboldCpp (8 ports)</li>
+              <li>Custom endpoint support: bring your own URL + API key + model name</li>
+              <li>Circuit breaker: dead models auto-skipped for 5 minutes after timeout/500</li>
+              <li>Separate scoring budgets: Zen 15s, custom model 25s &mdash; dead Zen can&rsquo;t starve your local model</li>
+              <li>Cold start recent exchanges: last 4 summaries injected into system prompt on new session</li>
+              <li>Post-compaction recovery: same injection after context window compaction</li>
+              <li>Removed scipy (~120 MB) and nltk (~160 MB) &mdash; z-score math inline, BM25 optional</li>
+              <li>Fixed bare excepts across server, added TTL eviction for search cache and injection map</li>
+              <li>Windows hook paths use forward slashes for Claude Code 2.1.x compatibility</li>
+              <li>Ghost terminal fix: <code>pythonw.exe</code> used for server spawn, <code>windowsHide: true</code> on all exec calls</li>
+              <li>CLI UX: <code>--no-input</code> mode, <code>--json</code> output, <code>NO_COLOR</code> support, grouped help, getpass for API keys</li>
+              <li>Wilson-only ranking for memory_bank after 3+ scored uses</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.6/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.7/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1309,7 +1309,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.6" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.3.7" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1319,8 +1319,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.3.5 and earlier)
+          View Previous Releases (v0.3.6 and earlier)
         </summary>
+
+        <!-- v0.3.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.6 - Retrieval Fairness &amp; Token Optimization</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026 - 78% token reduction via exchange summarization. Retrieval rebalanced so memory_bank no longer dominates. Wilson scores carry through promotion. Platform-split scoring &mdash; main LLM for Claude Code, sidecar for OpenCode.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.3.5 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
