@@ -140,7 +140,7 @@
     "price": "9.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.4.1",
+  "softwareVersion": "0.4.4",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -1247,12 +1247,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.4.1 Release Card -->
+      <!-- v0.4.4 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.4.1 - Linux Stability, Performance &amp; Sidecar-Only Scoring
+              v0.4.4 - Async Parallelization
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released March 2026
@@ -1262,23 +1262,18 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Linux reliability and runtime stability fixes driven by real user feedback. Fixes the root cause of &ldquo;not responding&rdquo; errors, OOM kills, and wrong memory ages. OpenCode scoring is now fully sidecar-only &mdash; the model never sees scoring prompts or tools.
+          Performance release &mdash; all independent operations now run concurrently via <code>asyncio.gather</code>. Same behavior, same results, measurably faster. Memory metadata now fully visible to the LLM for informed decisions.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Event Loop Unblocking</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Embedding encode moved to <code>asyncio.to_thread()</code>. Health checks no longer time out during CPU-bound operations, eliminating cascading restart loops.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Parallel Everything</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Collection searches, context injection, per-memory scoring, background KG updates, adapter initialization, and startup cleanup all run concurrently. Saves 100&ndash;200ms per search call.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Performance Caps</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Search capped at 1,000 results per collection. BM25 index rebuilds capped at 2,000 documents. Prevents OOM on memory-constrained systems.</p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Sidecar-Only on OpenCode</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;"><code>score_memories</code> hidden from MCP on OpenCode. No scoring prompt, no fallback. Sidecar scores silently; if unavailable, a warning prompts setup.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Full Memory Metadata</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">KNOWN CONTEXT now shows <code>wilson:N%</code> reliability, <code>used:Nx</code> retrieval count, and <code>last:outcome</code> for every scored memory. The LLM can make informed decisions about memory trustworthiness.</p>
           </div>
         </div>
 
@@ -1286,20 +1281,15 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li><code>embed_text()</code> wrapped in <code>asyncio.to_thread()</code> for CPU-bound encode</li>
-              <li>MCP server restart timeout bumped 3s &rarr; 15s with return value check</li>
-              <li><code>_search_all</code> capped at 1,000 per collection</li>
-              <li>Graceful <code>sentence-transformers</code> import failure with clear error message</li>
-              <li>Server <code>lifespan()</code> error handling with &ldquo;what failed + how to fix&rdquo; guidance</li>
-              <li>BM25 index rebuild capped at 2,000 documents</li>
-              <li><code>XDG_DATA_HOME</code> respected on Linux in all path resolution sites</li>
-              <li>Atomic <code>_completion_state.json</code> writes via <code>os.replace()</code></li>
-              <li>Removed <code>ChromaDBAdapter.__del__()</code>, explicit cleanup on shutdown</li>
-              <li>Fixed <code>_humanize_age()</code> timezone offset on non-UTC systems</li>
-              <li>Removed dead cross-encoder reranking code (~80 lines)</li>
-              <li>OpenCode: <code>score_memories</code> hidden from MCP, no scoring prompt injection, no fallback</li>
+              <li>Parallel collection searches via <code>asyncio.gather</code> with per-collection exception handling</li>
+              <li>Context injection: 3 sequential searches &rarr; 1 concurrent gather</li>
+              <li>Parallel collection adapter initialization (3&ndash;5x faster cold start)</li>
+              <li>Parallel per-memory scoring and background KG updates</li>
+              <li>Parallel startup cleanup (working memory + history cleanup run concurrently)</li>
+              <li>Added negative example to <code>record_response</code> tool description to prevent misuse</li>
+              <li>Updated ARCHITECTURE.md: dependencies, ONNX embedding docs, version reference</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.1/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.4/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1307,7 +1297,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.4.1" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.4.4" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1317,8 +1307,35 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.4.0 and earlier)
+          View Previous Releases (v0.4.3 and earlier)
         </summary>
+
+        <!-- v0.4.3 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.3 - Lightweight Install: Drop PyTorch, Go Pure ONNX</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
+            March 2026 &mdash; Replaces PyTorch + sentence-transformers with direct ONNX Runtime inference. Install drops from ~2.5GB to ~200MB.
+          </p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.4.2 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.2 - Hook Reliability, Embedding Performance &amp; OpenCode Plugin Fixes</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
+            March 2026 &mdash; Embedding cache fixes hook timeouts, OpenCode scoring fixes, ONNX groundwork.
+          </p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.4.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.1 - Linux Stability, Performance &amp; Sidecar-Only Scoring</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
+            March 2026 &mdash; Linux reliability fixes, event loop unblocking, performance caps, sidecar-only scoring on OpenCode.
+          </p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.4.0 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
