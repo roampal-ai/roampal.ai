@@ -140,7 +140,7 @@
     "price": "9.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.4.5",
+  "softwareVersion": "0.4.8",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -1247,12 +1247,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.4.5 Release Card -->
+      <!-- v0.4.8 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.4.5 - TagCascade Retrieval
+              v0.4.8 - Sidecar Reliability + Benchmark Alignment
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released April 2026
@@ -1262,18 +1262,18 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Benchmark-validated retrieval architecture &mdash; 85.8% on LoCoMo, +23 points over raw ingestion. Tags-first cascade with cross-encoder reranking. Two-lane retrieval: 4 summaries + 4 atomic facts per query. Knowledge graph replaced entirely.
+          Mirrors the benchmark&rsquo;s proven sidecar architecture. Removes autoSummarize (eliminated Ollama contention), splits sidecar into 2 focused LLM calls, restores noun_tags on facts for TagCascade retrieval. Net &minus;274 lines.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">TagCascade Retrieval</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Tags-first cascade fills a 40-candidate pool from highest overlap tier down, cosine distance tiebreaker within each tier. Cross-encoder reranks with raw CE score. No Wilson in retrieval &mdash; metadata only.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">2-Call Sidecar Split</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Matches benchmark: scoreExchange (summary + outcome + memory_scores) then extractFacts (atomic facts). Focused prompts improve quality from small models. Tags extracted server-side at store time.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Atomic Facts + Two-Lane</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Every exchange produces summaries AND atomic facts. Two-lane retrieval: 4 summaries + 4 facts = 8 memories per context injection. Both lanes through full TagCascade pipeline.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Contention Eliminated</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">autoSummarize removed &mdash; was competing with scoring for the single inference slot on local models (Ollama, LM Studio), causing 20% scoring failures. Sequential calls with no background tasks means clean queueing.</p>
           </div>
         </div>
 
@@ -1281,16 +1281,15 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Knowledge graph removed (&minus;1,603 lines), replaced by tag-based routing</li>
-              <li>Cross-encoder via ONNX: multilingual mmarco-mMiniLMv2, CPU-only, no PyTorch</li>
-              <li>Noun tags extracted by LLM via MCP tool parameters</li>
-              <li>Tag migration: one-time regex backfill for existing memories on upgrade</li>
-              <li>Promotion resets success_count &mdash; memories re-prove in each tier</li>
-              <li><code>roampal sidecar test</code> validates scoring model response format</li>
-              <li><code>roampal summarize</code> now extracts facts + noun_tags</li>
-              <li>466 tests passing (43 new)</li>
+              <li>autoSummarize removed &mdash; eliminated local model contention (Ollama, LM Studio) causing 20% scoring failures</li>
+              <li>storeExchange removed &mdash; sidecar failure = nothing stored, no transcript pollution</li>
+              <li>noun_tags restored on facts &mdash; enables TagCascade retrieval for atomic facts</li>
+              <li>Sidecar split into 2 sequential LLM calls matching benchmark architecture</li>
+              <li>Tags handled server-side at store time, not in plugin LLM calls</li>
+              <li>Re-tag migration for facts with empty noun_tags on upgrade</li>
+              <li>500 tests passing</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.5/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.8/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1298,7 +1297,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.4.5" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.4.8" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1308,8 +1307,29 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.4.4 and earlier)
+          View Previous Releases (v0.4.7 and earlier)
         </summary>
+
+        <!-- v0.4.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.7 - Compaction Recovery, Sidecar Resilience, Recency Metadata</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">Generation counter prevents premature flag clearing. Circuit breaker reduced to 2 min. Recency metadata on all search paths. Unified memory formatting.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.4.6 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.6 - Context Quality</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">Improved facts framing in context injection. Removed low-signal tag/fact extraction from book ingestion. MCP tool descriptions improved for Glama quality score.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.4.5 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.5 - TagCascade Retrieval</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">Benchmark-validated retrieval: 85.8% on LoCoMo, +23 points. Tags-first cascade with cross-encoder reranking. Two-lane retrieval: 4 summaries + 4 facts. Knowledge graph removed.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.5/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.4.4 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
