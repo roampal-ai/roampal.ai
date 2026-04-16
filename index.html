@@ -54,10 +54,10 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How is this different from cloud AI memory (ChatGPT, Claude, etc.)?",
+      "name": "How is this different from ChatGPT memory, CLAUDE.md, or agent-managed markdown?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cloud AI stores what you say. Roampal learns what works. Three key differences: 1) It learns from results - when something helps you, Roampal remembers. When it doesn't work, it learns from that too. 2) Local-first privacy - your data stays on your machine. No cloud servers, no recurring subscriptions. 3) True ownership - you own your data, your models, your memory. Export everything anytime."
+        "text": "ChatGPT Memory stores content on OpenAI's servers and only works inside ChatGPT clients — it's not available via the OpenAI API, so it does nothing for you in Claude Code, Cursor, or OpenCode. CLAUDE.md is a static Markdown file you write and commit by hand; its full contents get injected every session, it doesn't update itself, and it doesn't track which parts actually helped. Agent-managed markdown memory (OpenClaw, Hermes Agent) uses MD files too, but the agent reads and writes them as part of its own workflow — memory maintenance becomes part of the agent's job, spending tokens every turn. Roampal handles summarization, fact extraction, tagging, and lifecycle in a background sidecar the agent never sees. Context is injected before each prompt (not requested in-workflow), and every memory carries metadata (age, usage, outcome score) directly in the LLM's context. Data lives in a local ChromaDB and works with any MCP-compatible tool."
       }
     },
     {
@@ -81,7 +81,7 @@
       "name": "What are the system requirements?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "roampal-core requires Python 3.10+ and minimal disk space - runs on anything that runs Python. Roampal Desktop requires minimum 8GB RAM, 10GB free disk space, with 16GB RAM and a GPU recommended for faster local model responses."
+        "text": "roampal-core requires Python 3.10+ and minimal disk space - runs on anything that runs Python. Roampal Desktop requires Windows 10/11 (64-bit) with 8GB RAM minimum (16GB recommended)."
       }
     },
     {
@@ -97,15 +97,7 @@
       "name": "Why charge if it's open source?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "roampal-core is 100% free - install with pip install roampal and use it forever. Roampal Desktop ($9.99 one-time) gives you a pre-packaged executable with bundled dependencies, tested build, and lifetime updates. You can also support Core development with an optional subscription."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is Roampal's advice always reliable?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Roampal uses AI models that can generate incorrect information, hallucinate facts, or reflect training biases. Always verify critical information from authoritative sources. Do not rely on AI-generated content for medical, legal, or financial advice, safety-critical systems, or production code without thorough review."
+        "text": "roampal-core is 100% free - install with pip install roampal and use it forever. Roampal Desktop ($19.99 one-time) gives you a pre-packaged executable with bundled dependencies, tested build, and lifetime updates. You can also support Core development with an optional subscription."
       }
     },
     {
@@ -113,7 +105,7 @@
       "name": "What are the MCP tools and what do they do?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "roampal-core (Claude Code and OpenCode) provides 6 MCP tools: search_memory, add_to_memory_bank, update_memory, delete_memory, score_memories, and record_response. Roampal Desktop provides 6 MCP tools: get_context_insights, search_memory, add_to_memory_bank, update_memory, archive_memory, and record_response. Desktop includes get_context_insights for manual context retrieval and archive_memory for soft-deletes, while Core automates context injection via hooks and uses delete_memory for hard removal. Core's score_memories is a separate tool enforced by hooks; Desktop bundles scoring into record_response."
+        "text": "roampal-core (Claude Code and OpenCode) provides 6 MCP tools: search_memory, add_to_memory_bank, update_memory, delete_memory, score_memories, and record_response. Roampal Desktop provides 7 MCP tools: get_context_insights, search_memory, add_to_memory_bank, update_memory, archive_memory, record_response, and score_memories. Desktop includes get_context_insights for manual context retrieval and archive_memory for soft-deletes, while Core automates context injection via hooks and uses delete_memory for hard removal. In Core, score_memories is enforced automatically by hooks; in Desktop, the tool is available but called manually."
       }
     },
     {
@@ -134,13 +126,13 @@
   "name": "Roampal",
   "description": "Outcome-based memory for AI coding tools. Tracks which advice actually helped and learns from results. Works with Claude Code and OpenCode.",
   "applicationCategory": "DeveloperApplication",
-  "operatingSystem": "Windows, macOS, Linux",
+  "operatingSystem": "Windows 10/11 (64-bit)",
   "offers": {
     "@type": "Offer",
-    "price": "9.99",
+    "price": "19.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.4.8",
+  "softwareVersion": "0.5.0",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -187,19 +179,18 @@
 
       <div class="nav-links">
         <div class="nav-dropdown">
-          <a href="#how-it-works" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <a href="#claude-code" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
           <div class="nav-dropdown-menu">
-            <a href="#how-it-works">How It Works</a>
+            <a href="#technical">How Memories Are Organized</a>
             <a href="#claude-code">Claude Code & OpenCode</a>
             <a href="#mcp-setup">MCP Setup (Desktop)</a>
           </div>
         </div>
         
-        <a href="#benchmarks">Benchmarks</a>
-        
+        <a href="#performance">Benchmarks</a>
+
         <a href="#releases">Releases</a>
-        
-        <a href="#philosophy">Philosophy</a>
+
         <a href="#faq">FAQ</a>
         <a href="blog.html">Blog</a>
         <a href="https://github.com/roampal-ai" class="nav-github" target="_blank" rel="noopener" title="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
@@ -221,13 +212,28 @@
 
       <!-- Subheadline -->
       <p class="hero-subtitle">
-        Your AI sees what helped before. Automatically.<br>
-        <span style="color: var(--text-secondary);">Not just similarity—what actually worked. All stored locally on your machine.</span>
+        Say it worked. Say it didn't. The AI remembers.
       </p>
 
       <p data-animate style="color: var(--text-muted); font-size: 0.9rem; max-width: 600px; margin: 1rem auto 0 auto; text-align: center; font-style: italic;">
-        "Built this because I wanted my AI to actually be mine — to learn from me, run on my terms, and keep my data where it belongs."
+        "Built this because I wanted my AI to actually be mine: to learn from me, run on my terms, and keep my data where it belongs."
       </p>
+
+      <!-- Hero stat strip -->
+      <div data-animate style="display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin: 1.75rem auto 0; padding: 1rem 1.5rem; max-width: 720px; background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 10px;">
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: bold; color: #60a5fa; line-height: 1;">85.8%</div>
+          <p style="color: #94a3b8; font-size: 0.75rem; margin: 0.25rem 0 0 0;">LoCoMo accuracy (non-adversarial)</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: bold; color: #10b981; line-height: 1;">+23 pts</div>
+          <p style="color: #94a3b8; font-size: 0.75rem; margin: 0.25rem 0 0 0;">over raw RAG</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: bold; color: #f59e0b; line-height: 1;">Poison resilient</div>
+          <p style="color: #94a3b8; font-size: 0.75rem; margin: 0.25rem 0 0 0;">only 2.6&ndash;4.2 pts lost vs 1,135 poisoned memories (semantic match + spoofed trust)</p>
+        </div>
+      </div>
 
       <!-- Terminal Install Block -->
       <div style="max-width: 380px; margin: 1.5rem auto;">
@@ -268,7 +274,7 @@
       </div>
 
       <!-- Hook Injection Demo -->
-      <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 1.5rem; max-width: 600px; margin: 2.5rem auto 0; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; text-align: left;">
+      <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 1.5rem; max-width: 640px; margin: 2.5rem auto 0; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.85rem; text-align: left;">
         <div style="color: #8b949e; margin-bottom: 0.75rem;">You type:</div>
         <div style="color: #e6edf3; margin-bottom: 1rem; padding-left: 1rem; border-left: 2px solid #30363d;">fix the auth bug</div>
 
@@ -276,12 +282,20 @@
         <div style="padding-left: 1rem; border-left: 2px solid #7ee787;">
           <div style="color: #7ee787;">═══ KNOWN CONTEXT ═══</div>
           <div style="color: #e6edf3; margin: 0.5rem 0;">
-            &bull; JWT refresh pattern fixed auth loop <span style="color: #8b949e;">[id:patterns_a1b2]</span> <span style="color: #8b949e;">(3d, 90% proven, patterns)</span><br>
-            &bull; User prefers: never stage git changes <span style="color: #8b949e;">[id:mb_c3d4]</span> <span style="color: #8b949e;">(memory_bank)</span>
+            <span style="color: #8b949e;">Summaries (retrieved via TagCascade + cross-encoder):</span><br>
+            &bull; JWT refresh pattern fixed the auth loop last week <span style="color: #8b949e;">[id:patterns_a1b2]</span> <span style="color: #8b949e;">(3d, patterns, wilson:90%, used:12x, last:worked)</span><br>
+            &bull; User prefers: never stage git changes <span style="color: #8b949e;">[id:memory_bank_c3d4]</span> <span style="color: #8b949e;">(memory_bank, wilson:85%, used:3x, last:worked)</span>
+          </div>
+          <div style="color: #e6edf3; margin: 0.5rem 0;">
+            <span style="color: #8b949e;">Facts (auto-extracted from conversation. Use for direction, not authority):</span><br>
+            &bull; User prefers tabs over spaces <span style="color: #8b949e;">[id:working_f7e8d2]</span> <span style="color: #8b949e;">(2d, working, wilson:80%, used:4x, last:worked)</span>
           </div>
           <div style="color: #7ee787;">═══ END CONTEXT ═══</div>
           <div style="color: #e6edf3; margin-top: 0.5rem;">fix the auth bug</div>
         </div>
+        <p style="color: #8b949e; font-size: 0.75rem; margin-top: 1rem; text-align: center;">
+          Two-lane retrieval: 4 summaries + 4 facts per turn. <code style="color: #e6edf3;">wilson:N%</code> = reliability from past scoring, <code style="color: #e6edf3;">used:Nx</code> = retrievals, <code style="color: #e6edf3;">last:worked</code> = helpful last time.
+        </p>
       </div>
 
       <!-- Minimal trust indicators -->
@@ -294,18 +308,9 @@
       </div>
     </div>
 
-    <!-- Demo video -->
+    <!-- Product screenshot -->
     <div class="hero-video" id="demo" data-animate>
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/bgL35eJVh8w?rel=0&modestbranding=1"
-          title="Roampal Demo - AI with Persistent Memory"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin"
-        ></iframe>
-      </div>
+      <img src="assets/whatwebeenupto.png" alt="Roampal Desktop: LLM recalling technical context from tagged Memory Panel" style="width: 100%; max-width: 1100px; margin: 0 auto; display: block; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
     </div>
   </section>
 
@@ -317,109 +322,85 @@
       </h2>
 
       <p data-animate style="text-align: center; font-size: 1.2rem; color: #cbd5e1; max-width: 800px; margin: 0 auto 3rem auto; line-height: 1.7;">
-        Most AI memory finds things that <em>sound similar</em> to your question.<br>
-        But <strong style="color: #ef4444;">sounding similar doesn't mean it helped you before.</strong>
+        Most AI memory hands the LLM whatever <em>sounds similar</em> to your question.<br>
+        It doesn't tell the LLM <strong style="color: #ef4444;">which of those memories have actually helped before.</strong>
       </p>
 
-      <!-- The problem illustrated -->
-      <div data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto 2.5rem auto;">
-        <h3 style="color: #60a5fa; margin: 0 0 1.5rem 0; font-size: 1.1rem;">Say you ask:</h3>
-
-        <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0 0 1.5rem 0;">
-          <strong style="color: white;">"This function is broken, fix it"</strong>
-        </p>
-
-        <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0 0 1rem 0;">
-          Your AI remembers two approaches from last week:
-        </p>
-
-        <div class="memory-comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
-          <div style="padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border-left: 3px solid #ef4444;">
-            <p style="color: #ef4444; font-size: 0.85rem; margin: 0 0 0.5rem 0; font-weight: 600;">Memory A:</p>
-            <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0;">
-              "Rewrote the whole <strong>function</strong> to <strong>fix</strong> the edge case"
-            </p>
-            <p style="color: #ef4444; font-size: 0.8rem; margin: 0.5rem 0 0 0;">Tried this — introduced 3 new bugs</p>
-          </div>
-          <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border-left: 3px solid #10b981;">
-            <p style="color: #10b981; font-size: 0.85rem; margin: 0 0 0.5rem 0; font-weight: 600;">Memory B:</p>
-            <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0;">
-              "Fixed just the one line that was actually broken"
-            </p>
-            <p style="color: #10b981; font-size: 0.8rem; margin: 0.5rem 0 0 0;">Clean fix — worked first try</p>
-          </div>
-        </div>
-
-        <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0;">
-          <strong style="color: #ef4444;">Regular AI picks Memory A</strong> because "function" and "fix" are closer keyword matches.<br>
-          <strong style="color: #10b981;">Roampal picks Memory B</strong> because it knows that approach actually worked.
-        </p>
-
-        <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border-left: 3px solid #10b981;">
-          <p style="color: #10b981; font-weight: 600; margin: 0 0 0.5rem 0; font-size: 0.9rem;">How does it know what worked?</p>
-          <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin: 0;">
-            Just talk naturally. The AI reads your response, determines if you were satisfied, and scores the memory in Roampal. No buttons to click, no ratings to give - it learns from the conversation itself.
-          </p>
-        </div>
-      </div>
-
-      <!-- 4-Way Comparison - THE PROOF -->
-      <div data-animate style="background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto;">
-        <h3 style="color: #a78bfa; margin: 0 0 0.5rem 0; font-size: 1.1rem;">We tested this:</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">Questions designed to trick the AI into giving the wrong answer.</p>
+      <!-- LoCoMo Benchmark - THE PROOF -->
+      <div data-animate style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 0 auto;">
+        <h3 style="color: #60a5fa; margin: 0 0 0.5rem 0; font-size: 1.1rem;">We tested this on LoCoMo:</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">1,986 questions across long multi-session conversations. Dual-graded end-to-end.</p>
         <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
           <thead>
-            <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.3);">
+            <tr style="border-bottom: 1px solid rgba(59, 130, 246, 0.3);">
               <th style="text-align: left; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Approach</th>
-              <th style="text-align: center; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Got It Right</th>
-              <th style="text-align: center; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Improvement</th>
+              <th style="text-align: center; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">Answer Accuracy</th>
+              <th style="text-align: center; padding: 0.75rem; color: #cbd5e1; font-weight: 600;">vs Raw Ingestion</th>
             </tr>
           </thead>
           <tbody>
-            <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.15);">
-              <td style="padding: 0.75rem; color: #94a3b8;">Standard AI search</td>
-              <td style="padding: 0.75rem; color: #ef4444; text-align: center;">10%</td>
-              <td style="padding: 0.75rem; color: #64748b; text-align: center;">-</td>
-            </tr>
-            <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.15);">
-              <td style="padding: 0.75rem; color: #94a3b8;">+ Smarter ranking</td>
-              <td style="padding: 0.75rem; color: #f59e0b; text-align: center;">20%</td>
-              <td style="padding: 0.75rem; color: #60a5fa; text-align: center;">+10 pts</td>
+            <tr style="border-bottom: 1px solid rgba(59, 130, 246, 0.15);">
+              <td style="padding: 0.75rem; color: #94a3b8;">Raw ingestion (standard RAG)</td>
+              <td style="padding: 0.75rem; color: #ef4444; text-align: center;">53.0%</td>
+              <td style="padding: 0.75rem; color: #64748b; text-align: center;">&mdash;</td>
             </tr>
             <tr>
-              <td style="padding: 0.75rem; color: #10b981; font-weight: 600;">Roampal (ranking + outcomes)</td>
-              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">60% at maturity</td>
-              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">+50 pts</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600;">TagCascade (Roampal)</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">76.6%</td>
+              <td style="padding: 0.75rem; color: #10b981; font-weight: 600; text-align: center;">+23.6 pts</td>
             </tr>
           </tbody>
         </table>
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin: 0; text-align: center;">
-          Smarter ranking helps a little. <strong style="color: #a78bfa;">At maturity, outcome tracking helps 5× more</strong> (+50 pts vs +10 pts).
+          <strong style="color: #60a5fa;">+23 points over raw ingestion</strong> (p&lt;0.0001). Non-adversarial ceiling: <strong style="color: #60a5fa;">85.8%</strong>.
         </p>
       </div>
 
-      <!-- Learning curve test -->
-      <div data-animate style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
-        <h3 style="color: #10b981; margin: 0 0 0.5rem 0; font-size: 1.1rem;">It gets better the more you use it</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">We measured how well it finds the right answer over time.</p>
+      <!-- What Roampal actually does -->
+      <div data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
+        <h3 style="color: #60a5fa; margin: 0 0 1.5rem 0; font-size: 1.1rem;">What Roampal actually does with your exchanges:</h3>
 
-        <div class="stats-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 1.5rem 0;">
-          <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">10%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Cold start (0 uses)</p>
+        <dl style="display: grid; grid-template-columns: minmax(180px, auto) 1fr; gap: 1rem 2rem; margin: 0; font-size: 0.95rem; line-height: 1.6;">
+          <dt style="color: #60a5fa; font-weight: 600;">Summarize</dt>
+          <dd style="color: #cbd5e1; margin: 0;">A background sidecar LLM condenses every exchange into a short summary. Raw transcripts never clutter retrieval.</dd>
+
+          <dt style="color: #60a5fa; font-weight: 600;">Extract facts</dt>
+          <dd style="color: #cbd5e1; margin: 0;">Atomic facts are pulled out as their own records. "User prefers tabs over spaces" lives separately from the conversation it came from.</dd>
+
+          <dt style="color: #60a5fa; font-weight: 600;">Tag</dt>
+          <dd style="color: #cbd5e1; margin: 0;">Sidecar extracts noun tags at store time. TagCascade uses them to narrow the retrieval pool before the cross-encoder reranks.</dd>
+
+          <dt style="color: #60a5fa; font-weight: 600;">Score outcomes</dt>
+          <dd style="color: #cbd5e1; margin: 0;">After each response, the LLM marks which retrieved memories helped or failed. Each outcome adjusts a running score (worked +0.2, failed &minus;0.3, partial +0.05).</dd>
+
+          <dt style="color: #60a5fa; font-weight: 600;">Lifecycle &amp; decay</dt>
+          <dd style="color: #cbd5e1; margin: 0;">Score plus usage count drive promotion from working (24h) to history (30d) to patterns (permanent). Patterns whose score drops below the demotion threshold move back down. Working and history age out on a timer unless promoted. Memory bank holds identity and preferences outside the tier system.</dd>
+
+          <dt style="color: #60a5fa; font-weight: 600;">Two-lane retrieval</dt>
+          <dd style="color: #cbd5e1; margin: 0;">4 summaries + 4 atomic facts injected per turn. Summaries carry narrative, facts carry specifics. Both surface in the LLM's context with their metadata.</dd>
+        </dl>
+      </div>
+
+      <!-- Poison resilience -->
+      <div data-animate style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
+        <h3 style="color: #f59e0b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Poison-resilient</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">We injected 1,135 poisoned memories designed to fool both retrieval lanes: near-identical semantic similarity to correct facts, plus spoofed trust signals (fake wilson scores and usage counts). Accuracy barely moved.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
+          <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
+            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">2.6&ndash;4.2</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">points of degradation</p>
+            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">under adversarial load</p>
           </div>
-          <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">60%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">At maturity (20 uses)</p>
-          </div>
-          <div style="text-align: center;">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">5×</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Better than ranking alone</p>
+          <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(96, 165, 250, 0.05); border: 1px solid rgba(96, 165, 250, 0.2);">
+            <div style="font-size: 2.5rem; font-weight: bold; color: #60a5fa;">1,135</div>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">poisoned memories</p>
+            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">semantic match + spoofed trust</p>
           </div>
         </div>
 
         <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: center;">
-          The more you use it, the better it gets at finding what actually helps you.
+          Same benchmark, poisoned memories included. Accuracy held within 2.6&ndash;4.2 points of the clean run.
         </p>
       </div>
 
@@ -427,31 +408,8 @@
       <div data-animate style="background: rgba(96, 165, 250, 0.05); border: 1px solid rgba(96, 165, 250, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
         <h3 style="color: #60a5fa; margin: 0 0 1rem 0; font-size: 1.1rem;">Why this matters:</h3>
         <p style="color: #cbd5e1; font-size: 1rem; line-height: 1.7; margin: 0;">
-          <strong style="color: white;">Better answers with less noise.</strong> Roampal only retrieves what's proven helpful, not everything that sounds related.
+          <strong style="color: white;">Better answers with less noise.</strong> TagCascade narrows candidates, the cross-encoder picks the best of them, and trust tags let the LLM separate what's already proven from what's untested.
           That means lower API costs, faster responses, and more accurate answers.
-        </p>
-      </div>
-
-      <!-- Roampal vs Vector DB -->
-      <div data-animate style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 2rem; max-width: 850px; margin: 2rem auto 0 auto;">
-        <h3 style="color: #f59e0b; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Roampal vs pure vector search</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; margin: 0 0 1rem 0;">30 adversarial scenarios designed to trick similarity search. Real embeddings (all-mpnet-base-v2).</p>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0;">
-          <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2);">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #ef4444;">0%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Vector DB accuracy</p>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">0/30 correct on adversarial queries</p>
-          </div>
-          <div style="text-align: center; padding: 1rem; border-radius: 8px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
-            <div style="font-size: 2.5rem; font-weight: bold; color: #10b981;">40%</div>
-            <p style="color: #94a3b8; font-size: 0.85rem; margin: 0.25rem 0 0 0;">Roampal accuracy</p>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">12/30 correct &mdash; p=0.000135</p>
-          </div>
-        </div>
-
-        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 0; text-align: center;">
-          When the semantically similar answer is wrong and the right answer doesn't sound related, vector search fails every time. Outcome learning finds what actually worked.
         </p>
       </div>
 
@@ -459,317 +417,11 @@
       <details data-animate style="text-align: center; margin-top: 2rem; color: #64748b;">
         <summary style="cursor: pointer; font-size: 0.9rem; color: #60a5fa;">Technical details for researchers</summary>
         <p style="font-size: 0.85rem; margin-top: 1rem;">
-          4-way comparison: 200 tests (10 scenarios × 5 levels × 4 conditions) • Learning curve: 50 tests • Token efficiency: 100 adversarial scenarios<br>
-          <a href="https://github.com/roampal-ai/roampal-core/tree/main/dev/benchmarks" target="_blank" style="color: #60a5fa;">Full methodology & reproducible benchmarks</a>
+          LoCoMo: 1,986 questions, dual-graded end-to-end, p&lt;0.0001. Poison resilience: 1,135 adversarial memories across multiple trust-signal spoofing scenarios.<br>
+          <a href="https://github.com/roampal-ai/roampal-labs" target="_blank" style="color: #60a5fa;">Full paper & reproducible code</a>
         </p>
       </details>
 
-    </div>
-  </section>
-
-  <!-- Industry-Standard Benchmarks Section -->
-  <section class="benchmarks" id="benchmarks" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 5rem 0;">
-    <div class="container">
-      <h2 class="section-title" data-animate style="color: white; text-align: center; margin-bottom: 1.5rem;">
-        Your AI Gets Smarter Over Time
-      </h2>
-
-      <p data-animate style="text-align: center; font-size: 1.25rem; color: #cbd5e1; max-width: 900px; margin: 0 auto 3rem auto; line-height: 1.6;">
-        Traditional AI memory gets fuller. Roampal gets smarter.
-      </p>
-
-      <!-- Benchmark Grid -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-
-        <!-- Test 1 -->
-        <div class="feature-card" data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2);">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-              <polyline points="17 6 23 6 23 12"></polyline>
-            </svg>
-            <h3 style="color: #60a5fa; margin: 0; font-size: 1.1rem;">Remembers What Worked</h3>
-          </div>
-          <div style="font-size: 2rem; font-weight: bold; color: #10b981; margin-bottom: 0.5rem;">
-            Auto
-          </div>
-          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            Good advice rises to the top. Bad advice sinks. Automatically.
-          </p>
-        </div>
-
-        <!-- Test 2 -->
-        <div class="feature-card" data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2);">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <circle cx="12" cy="12" r="6"></circle>
-              <circle cx="12" cy="12" r="2"></circle>
-            </svg>
-            <h3 style="color: #60a5fa; margin: 0; font-size: 1.1rem;">Organized Memory</h3>
-          </div>
-          <div style="font-size: 2rem; font-weight: bold; color: #10b981; margin-bottom: 0.5rem;">
-            Smart
-          </div>
-          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            Short-term, long-term, permanent - your memories organized by how often you need them
-          </p>
-        </div>
-
-        <!-- Test 3 -->
-        <div class="feature-card" data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2);">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 4 23 10 17 10"></polyline>
-              <polyline points="1 20 1 14 7 14"></polyline>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-            </svg>
-            <h3 style="color: #60a5fa; margin: 0; font-size: 1.1rem;">Learns Your Patterns</h3>
-          </div>
-          <div style="font-size: 2rem; font-weight: bold; color: #10b981; margin-bottom: 0.5rem;">
-            Adapts
-          </div>
-          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            Learns which tools work, which topics connect, and what advice helps you specifically
-          </p>
-        </div>
-
-        <!-- Test 4 -->
-        <div class="feature-card" data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2);">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
-              <path d="M5 10a2 2 0 0 1 2-2h1"></path>
-              <path d="M16 8h1a2 2 0 0 1 2 2v1"></path>
-              <path d="M19 15a2 2 0 0 1-2 2h-1"></path>
-              <path d="M8 19h-1a2 2 0 0 1-2-2v-1"></path>
-            </svg>
-            <h3 style="color: #60a5fa; margin: 0; font-size: 1.1rem;">Instant Responses</h3>
-          </div>
-          <div style="font-size: 2rem; font-weight: bold; color: #10b981; margin-bottom: 0.5rem;">
-            Fast
-          </div>
-          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            Local search — no round-trip to a cloud server. All on your machine.
-          </p>
-        </div>
-
-        <!-- Test 5 -->
-        <div class="feature-card" data-animate style="background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(96, 165, 250, 0.2);">
-          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-            <h3 style="color: #60a5fa; margin: 0; font-size: 1.1rem;">100% Privacy</h3>
-          </div>
-          <div style="font-size: 2rem; font-weight: bold; color: #10b981; margin-bottom: 0.5rem;">
-            Local
-          </div>
-          <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0.75rem;">
-            All memory data stays on your machine. No cloud. No tracking. Your AI tool connects to its own API as usual.
-          </p>
-        </div>
-
-      </div>
-
-      <!-- How We Tested -->
-      <div data-animate style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(96, 165, 250, 0.2); border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
-        <h3 style="color: #60a5fa; text-align: center; margin-bottom: 1.5rem; font-size: 1.3rem;">
-          How It Works
-        </h3>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; color: #cbd5e1; font-size: 0.95rem;">
-          <div>
-            <div style="color: #60a5fa; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
-                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                <polyline points="17 6 23 6 23 12"></polyline>
-              </svg>
-              Handles Confusing Situations
-            </div>
-            <div style="color: #94a3b8;">Even when there's lots of similar-sounding info, <strong style="color: #10b981;">outcome scoring surfaces what actually worked</strong> instead of just what sounds similar.</div>
-          </div>
-          <div>
-            <div style="color: #60a5fa; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <circle cx="12" cy="12" r="6"></circle>
-                <circle cx="12" cy="12" r="2"></circle>
-              </svg>
-              Knows Where to Look
-            </div>
-            <div style="color: #94a3b8;">Learns which memories are useful for which questions. Ask about recipes? Checks your food notes. Ask about work? Checks your project notes.</div>
-          </div>
-          <div>
-            <div style="color: #60a5fa; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
-                <polyline points="23 4 23 10 17 10"></polyline>
-                <polyline points="1 20 1 14 7 14"></polyline>
-                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-              </svg>
-              Remembers What Worked
-            </div>
-            <div style="color: #94a3b8;">When something helps you, it remembers. When something doesn't, it learns from that too. Next time, helpful stuff comes first.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div data-animate style="text-align: center; margin-top: 3rem;">
-        <p style="color: #cbd5e1; font-size: 1.1rem; margin-bottom: 1.5rem;">
-          All of this is tested and verified. Want to see the details?
-        </p>
-
-        <a href="https://github.com/roampal-ai/roampal-core/tree/main/dev/benchmarks" class="btn-secondary" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          View Benchmark Source Code
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- How It Works Section -->
-  <section class="how-it-works" id="how-it-works" style="padding: 5rem 0;">
-    <div class="container">
-      <h2 class="section-title" data-animate>How It Learns</h2>
-
-      <div class="demo-steps">
-        <!-- Step 1 -->
-        <div class="demo-step" data-animate>
-          <div class="step-content">
-            <div class="step-number">1</div>
-            <h3>Bad Advice Fails</h3>
-            <div class="demo-box">
-              <div class="demo-conversation">
-                <p class="user-msg">This function is broken, fix it</p>
-                <p class="ai-msg">I'll rewrite the whole thing to handle the edge case properly.</p>
-                <p class="user-msg">That introduced 3 new bugs, had to revert.</p>
-              </div>
-              <div class="demo-outcome">
-                <span class="outcome-badge failed">
-                  Recording: FAILED
-                </span>
-                <span class="score-change">
-                  Bad advice sinks ↓
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="demo-step" data-animate>
-          <div class="step-content">
-            <div class="step-number">2</div>
-            <h3>Good Advice Works</h3>
-            <div class="demo-box">
-              <div class="demo-conversation">
-                <p class="user-msg">Can you try a smaller fix?</p>
-                <p class="ai-msg">Found it — just this one line was wrong. Here's the fix.</p>
-                <p class="user-msg">That worked, clean fix.</p>
-              </div>
-              <div class="demo-outcome">
-                <span class="outcome-badge success">
-                  Recording: WORKED
-                </span>
-                <span class="score-change">
-                  Good advice rises ↑
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="demo-step" data-animate>
-          <div class="step-content">
-            <div class="step-number">3</div>
-            <h3>Next Time It Remembers</h3>
-            <div class="demo-box">
-              <div class="demo-conversation">
-                <p class="user-msg">This function is broken again</p>
-                <div class="context-box">
-                  <div class="context-header">Past Experience</div>
-                  <ul class="context-list">
-                    <li class="failed">Full rewrite: Introduced new bugs</li>
-                    <li class="success">Targeted one-line fix: Worked first try</li>
-                  </ul>
-                </div>
-                <p class="ai-msg smart">
-                  Last time a targeted fix worked better than a rewrite. Let me find the specific line that's broken.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Unique Features Section -->
-  <section class="solution" style="background: var(--bg-secondary);">
-    <div class="container">
-      <h2 class="section-title" data-animate>Why Not Just Use CLAUDE.md?</h2>
-
-      <div class="feature-grid">
-        <!-- Outcome Learning -->
-        <div class="feature-card" data-animate>
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="3"></circle>
-              <path d="M12 1v6m0 6v6M1 12h6m6 0h6"></path>
-              <circle cx="12" cy="5" r="1"></circle>
-              <circle cx="12" cy="19" r="1"></circle>
-              <circle cx="5" cy="12" r="1"></circle>
-              <circle cx="19" cy="12" r="1"></circle>
-            </svg>
-          </div>
-          <h3 class="feature-title">Learns From Results</h3>
-          <p class="feature-desc">
-            CLAUDE.md is static — you write it, it stays the same. Roampal tracks what actually helped and what didn't. Bad advice gets demoted automatically.
-          </p>
-          <div class="feature-example" style="background: rgba(96, 165, 250, 0.1); padding: 1rem; border-radius: 8px; font-size: 0.9rem; color: #cbd5e1;">
-            AI suggests a fix → you say "that broke it" → Roampal scores it as failed<br>
-            Next time → that approach gets deprioritized automatically
-          </div>
-        </div>
-
-        <!-- Zero Config -->
-        <div class="feature-card" data-animate>
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-          </div>
-          <h3 class="feature-title">Zero Workflow Changes</h3>
-          <p class="feature-desc">
-            No files to maintain. No prompts to write. Relevant context is injected before every message automatically. You just code.
-          </p>
-          <div class="feature-example" style="background: rgba(96, 165, 250, 0.1); padding: 1rem; border-radius: 8px; font-size: 0.9rem; color: #cbd5e1;">
-            <code>pip install roampal && roampal init</code><br>
-            That's it. Context injection, scoring, and memory management happen in the background.
-          </div>
-        </div>
-
-        <!-- Cross-Session -->
-        <div class="feature-card" data-animate>
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </div>
-          <h3 class="feature-title">Remembers Across Sessions</h3>
-          <p class="feature-desc">
-            Your preferences, your architecture decisions, what worked last week — it's all there when you start a new session. No re-explaining.
-          </p>
-          <div class="feature-example" style="background: rgba(96, 165, 250, 0.1); padding: 1rem; border-radius: 8px; font-size: 0.9rem; color: #cbd5e1;">
-            <strong>Monday:</strong> "Always use snake_case in this project"<br>
-            <strong>Thursday:</strong> AI already knows — no need to remind it
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -846,36 +498,36 @@ elif outcome == "partial":
         </details>
 
         <details class="tech-accordion">
-          <summary>Learns Your Patterns</summary>
+          <summary>TagCascade Retrieval</summary>
           <div class="accordion-content">
-            <p>Roampal builds <strong>3 interconnected Knowledge Graphs</strong> that learn different aspects of your memory:</p>
+            <p>Roampal uses a <strong>tag-first cascade</strong> followed by a cross-encoder reranker. Two lanes retrieve separately and merge: summaries and atomic facts. Benchmark-validated against LoCoMo.</p>
 
-            <h4 style="color: #60a5fa; margin-top: 1.5rem; margin-bottom: 0.75rem;">1. Routing KG - "Where to Look"</h4>
-            <p>Learns which memory collections answer which types of questions.</p>
+            <h4 style="color: #60a5fa; margin-top: 1.5rem; margin-bottom: 0.75rem;">1. Tag-First Cascade</h4>
+            <p>At store time, the sidecar LLM extracts noun tags from each memory and adds them to a known-tag index.</p>
+            <p>At query time, the system scans the query for words that match the index. Each matched tag runs a ChromaDB lookup, then results are merged. Each candidate gets an <strong>overlap count</strong> &mdash; how many of the query's matched tags it carries.</p>
+            <p><strong>The cascade is the overlap tier sort:</strong> candidates matching all the query's tags rank first, then those matching one fewer, then one fewer again, down to single-tag matches. Cosine distance tiebreaks within each tier. If the pool falls short of 40, straight cosine fills the rest. If the query matches no tags at all, retrieval skips the tag step and uses pure cosine. The cross-encoder reranks the final pool.</p>
             <div style="background: #1e293b; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
-              <p style="margin: 0; color: #94a3b8;"><strong>You ask:</strong> "What books did I read about investing?"</p>
-              <p style="margin: 0.5rem 0 0 0; color: #10b981;"><strong>System learned:</strong> Questions about "books" → books collection (85% success)</p>
-              <p style="margin: 0.5rem 0 0 0; color: #60a5fa;"><strong>Result:</strong> Searches books first, skips less relevant collections → faster answers</p>
+              <p style="margin: 0; color: #94a3b8;"><strong>You ask:</strong> "What was the decision on the auth refactor?"</p>
+              <p style="margin: 0.5rem 0 0 0; color: #10b981;"><strong>Tag lookup:</strong> <code>auth</code>, <code>refactor</code>, <code>decision</code> match the known-tag index &rarr; three per-tag ChromaDB queries &rarr; merged pool with overlap counts</p>
+              <p style="margin: 0.5rem 0 0 0; color: #60a5fa;"><strong>Tier sort:</strong> 3-tag matches first, then 2-tag, then 1-tag. Cosine fills any remaining slots to 40.</p>
+              <p style="margin: 0.5rem 0 0 0; color: #60a5fa;"><strong>Cross-encoder:</strong> reranks the pool against the full query for precision</p>
             </div>
 
-            <h4 style="color: #10b981; margin-top: 1.5rem; margin-bottom: 0.75rem;">2. Content KG - "What's Connected"</h4>
-            <p>Extracts people, places, tools, and concepts from your memories and tracks relationships.</p>
+            <h4 style="color: #10b981; margin-top: 1.5rem; margin-bottom: 0.75rem;">2. Two-Lane Context</h4>
+            <p>Summaries and atomic facts are retrieved in separate lanes and both injected. Summaries carry narrative; facts carry hard specifics.</p>
             <div style="background: #1e293b; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
-              <p style="margin: 0; color: #94a3b8;"><strong>Your memories mention:</strong> "Sarah Chen works at TechCorp as an engineer"</p>
-              <p style="margin: 0.5rem 0 0 0; color: #10b981;"><strong>System extracts:</strong> Sarah Chen → TechCorp → engineer (with quality scores)</p>
-              <p style="margin: 0.5rem 0 0 0; color: #60a5fa;"><strong>Result:</strong> "Who works at TechCorp?" → finds Sarah even without exact keyword match</p>
+              <p style="margin: 0; color: #94a3b8;"><strong>Per turn:</strong> 4 summaries + 4 atomic facts injected into context</p>
+              <p style="margin: 0.5rem 0 0 0; color: #10b981;"><strong>Why both:</strong> facts surface the exact number, name, or decision; summaries preserve the why</p>
             </div>
 
-            <h4 style="color: #f59e0b; margin-top: 1.5rem; margin-bottom: 0.75rem;">3. Action-Effectiveness KG - "What Works"</h4>
-            <p>Tracks which tools and actions succeed or fail in different contexts.</p>
+            <h4 style="color: #f59e0b; margin-top: 1.5rem; margin-bottom: 0.75rem;">3. Outcome Tracking</h4>
+            <p>Retrieval itself is just tags and cross-encoder. Outcome scores don't weight retrieval. They drive two separate things:</p>
             <div style="background: #1e293b; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
-              <p style="margin: 0; color: #94a3b8;"><strong>During a quiz:</strong> AI uses create_memory() to answer questions</p>
-              <p style="margin: 0.5rem 0 0 0; color: #ef4444;"><strong>System tracks:</strong> create_memory in "recall_test" → 5% success (hallucinating!)</p>
-              <p style="margin: 0.5rem 0 0 0; color: #10b981;"><strong>System tracks:</strong> search_memory in "recall_test" → 85% success</p>
-              <p style="margin: 0.5rem 0 0 0; color: #60a5fa;"><strong>Result:</strong> After 3+ failures, warns AI: "create_memory has 5% success here - use search_memory instead"</p>
+              <p style="margin: 0; color: #94a3b8;"><strong>Lifecycle:</strong> each outcome shifts a memory's score (<code>worked</code> +0.2, <code>failed</code> &minus;0.3, <code>partial</code> +0.05). Cross the promotion threshold with enough usage and the memory moves up: working &rarr; history &rarr; patterns. Cross the demotion threshold and it moves back down. Working ages out at 24 hours, history at 30 days, unless promoted.</p>
+              <p style="margin: 0.5rem 0 0 0; color: #10b981;"><strong>Context metadata:</strong> retrieved memories arrive in the LLM's context tagged with <code>wilson:N%, used:Nx, last:worked|failed</code>. Wilson is a confidence metric calculated from success count and usage for display only &mdash; it does not affect retrieval ranking or lifecycle.</p>
             </div>
 
-            <p style="margin-top: 1.5rem; color: #94a3b8;"><strong>Together:</strong> Routing KG finds the right place, Content KG finds connected information, Action-Effectiveness KG prevents mistakes. All three learn from real outcomes.</p>
+            <p style="margin-top: 1.5rem; color: #94a3b8;"><strong>Together:</strong> tags route retrieval, the cross-encoder picks the best candidates, and outcome scores decide which memories survive the lifecycle long enough to be candidates next time. <a href="https://github.com/roampal-ai/roampal-labs" style="color: #60a5fa;">Benchmark and reproducible code &rarr;</a></p>
           </div>
         </details>
 
@@ -886,8 +538,7 @@ elif outcome == "partial":
             <ul>
               <li>Vector DB: ChromaDB (local files)</li>
               <li>Outcomes: stored as vector metadata in ChromaDB</li>
-              <li>Knowledge graph: JSON file</li>
-              <li>Desktop: Ollama or LM Studio (local inference)</li>
+              <li>Desktop: Ollama or LM Studio (local inference, includes sidecar LLM for memory processing)</li>
               <li>Core: uses your existing AI tool's LLM (Claude, etc.)</li>
             </ul>
             <p><strong>Zero telemetry. Your data never leaves your machine.</strong> Minimal network: PyPI version check on startup, embedding model download on first run.</p>
@@ -898,43 +549,6 @@ elif outcome == "partial":
   </section>
 
   <!-- Use Cases Section -->
-  <section class="use-cases" id="use-cases" style="padding: 5rem 0;">
-    <div class="container">
-      <h2 class="section-title" data-animate>Built for Developers</h2>
-
-      <!-- Primary: Developer card -->
-      <div style="max-width: 700px; margin: 0 auto 2rem;" data-animate>
-        <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; padding: 2.5rem; text-align: center;">
-          <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: linear-gradient(135deg, var(--accent-color), #9333ea); border-radius: 12px; margin-bottom: 1.5rem;">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <polyline points="16 18 22 12 16 6"></polyline>
-              <polyline points="8 6 2 12 8 18"></polyline>
-            </svg>
-          </div>
-          <p style="font-size: 1.25rem; color: var(--text-primary); font-style: italic; margin-bottom: 1.5rem;">
-            "Remembers my entire stack. Never suggests Python when I use Rust."
-          </p>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
-            <li style="color: var(--text-secondary); font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--accent-color);">✓</span> Learns debugging patterns that work with YOU
-            </li>
-            <li style="color: var(--text-secondary); font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--accent-color);">✓</span> Recalls past solutions
-            </li>
-            <li style="color: var(--text-secondary); font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem;">
-              <span style="color: var(--accent-color);">✓</span> Builds knowledge of your architecture
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Secondary: Other use cases as simple text -->
-      <p style="text-align: center; color: var(--text-tertiary); font-size: 0.9rem;" data-animate>
-        Works with any project — from solo side projects to production codebases.
-      </p>
-    </div>
-  </section>
-
   <!-- Claude Code Section -->
   <section class="claude-code-section" id="claude-code" style="padding: 5rem 0; background: var(--bg-primary);">
     <div class="container">
@@ -975,44 +589,44 @@ elif outcome == "partial":
             Automatic Context Injection
           </h3>
           <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
-            Other memory tools wait for you to ask. Roampal injects context automatically &mdash; before every prompt, after every response. No manual calls. No workflow changes.
+            Other memory tools wait for you to ask. Roampal injects context automatically: before every prompt, after every response. No manual calls. No workflow changes.
           </p>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
             <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border-left: 3px solid var(--accent-color);">
               <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">Before You Prompt</h4>
               <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
-                Context injected automatically. Claude Code uses hooks, OpenCode uses a plugin &mdash; same result. Your AI sees what worked before.
+                Context injected automatically. Claude Code uses hooks. OpenCode uses a plugin. Same result either way: your AI sees what worked before.
               </p>
             </div>
             <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border-left: 3px solid var(--accent-color);">
               <h4 style="color: var(--text-primary); margin-bottom: 0.5rem;">After Each Response</h4>
               <p style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;">
-                The exchange is captured and scoring is enforced &mdash; not optional. Both Claude Code hooks and OpenCode plugin handle this automatically.
+                The exchange is captured and scoring is enforced, not optional. Both Claude Code hooks and the OpenCode plugin handle this automatically.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 6 MCP Tools -->
+      <!-- MCP Tools -->
       <div style="max-width: 900px; margin: 0 auto 3rem;">
         <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; text-align: center;">
           Memory Tools via MCP
         </h3>
-        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; text-align: center;">Core: 6 tools &nbsp;|&nbsp; Desktop: 6 tools</p>
+        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.5rem; text-align: center;">Core: 6 tools &nbsp;|&nbsp; Desktop: 7 tools</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;">
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">search_memory</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">add_to_memory_bank</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">update_memory</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">delete_memory</code>
           <code style="padding: 0.5rem 1rem; background: var(--bg-secondary); border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.875rem;">record_response</code>
-          <code style="padding: 0.5rem 1rem; background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; border-radius: 6px; font-size: 0.875rem;">score_memories</code>
+          <code style="padding: 0.5rem 1rem; background: linear-gradient(135deg, var(--accent-color), #2563eb); color: white; border-radius: 6px; font-size: 0.875rem;">score_memories</code>
         </div>
         <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 1rem; text-align: center;">
-          Scoring is automatic &mdash; Claude Code uses hooks to prompt <code style="background: linear-gradient(135deg, var(--accent-color), #9333ea); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_memories</code>, OpenCode uses an independent sidecar so the model never self-scores.
+          Scoring is automatic. Claude Code uses hooks to prompt <code style="background: linear-gradient(135deg, var(--accent-color), #2563eb); color: white; padding: 0.15rem 0.4rem; border-radius: 3px;">score_memories</code>. OpenCode uses an independent sidecar so the model never self-scores.
         </p>
         <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
-          Desktop uses <code style="font-size: 0.75rem;">get_context_insights</code> + <code style="font-size: 0.75rem;">archive_memory</code> instead of Core's <code style="font-size: 0.75rem;">delete_memory</code> + <code style="font-size: 0.75rem;">score_memories</code>, and bundles scoring into <code style="font-size: 0.75rem;">record_response</code>.
+          Desktop adds <code style="font-size: 0.75rem;">get_context_insights</code> for manual context retrieval and swaps <code style="font-size: 0.75rem;">delete_memory</code> for <code style="font-size: 0.75rem;">archive_memory</code> (soft-delete). <code style="font-size: 0.75rem;">score_memories</code> is available in both, but only Core enforces it via hooks.
         </p>
       </div>
 
@@ -1066,7 +680,7 @@ elif outcome == "partial":
           <li>Remind mid-conversation: <em>"Check memory for what we discussed about X"</em></li>
           <li>Record outcomes: <em>"Record in Roampal - this worked"</em> or <em>"...failed"</em></li>
         </ul>
-        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; font-style: italic;">With roampal-core (Claude Code &amp; OpenCode), this happens automatically &mdash; hooks and plugin inject context so the AI knows to use memory tools.</p>
+        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 1rem; font-style: italic;">With roampal-core (Claude Code and OpenCode), this happens automatically. Hooks and plugin inject context so the AI knows to use memory tools.</p>
       </div>
 
       <!-- Learn More -->
@@ -1100,7 +714,7 @@ elif outcome == "partial":
           Connect via Roampal Desktop
         </h2>
         <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto;">
-          Roampal Desktop can connect to any MCP-compatible AI tool via its Settings panel. Note: Desktop MCP provides memory tools but does not include hooks-based context injection or automatic scoring &mdash; for that, use <a href="#claude-code" style="color: var(--accent-color);">roampal-core</a> with Claude Code or OpenCode.
+          Roampal Desktop can connect to any MCP-compatible AI tool via its Settings panel. Note: Desktop MCP provides memory tools but does not include hooks-based context injection or automatic scoring. For that, use <a href="#claude-code" style="color: var(--accent-color);">roampal-core</a> with Claude Code or OpenCode.
         </p>
       </div>
 
@@ -1165,13 +779,14 @@ elif outcome == "partial":
           <div style="text-align: center; padding: 2rem; background: var(--bg-secondary); border-radius: 8px;">
             <div style="font-size: 3rem; margin-bottom: 1rem;">🔌</div>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              <strong>Desktop Memory Tools (6):</strong><br>
+              <strong>Desktop Memory Tools (7):</strong><br>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">get_context_insights</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">search_memory</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">add_to_memory_bank</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">update_memory</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">archive_memory</code>
               <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">record_response</code>
+              <code style="display: inline-block; margin-top: 0.5rem; padding: 0.25rem 0.5rem; background: var(--bg-primary); border-radius: 4px; font-size: 0.8rem;">score_memories</code>
             </p>
           </div>
         </div>
@@ -1189,38 +804,21 @@ elif outcome == "partial":
 
       </div>
 
-      <!-- Key Features -->
-      <div style="max-width: 900px; margin: 3rem auto 0;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-          <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 2rem; height: 2rem; margin: 0 auto 0.5rem; color: var(--accent-color);">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-            <h4 style="font-size: 1rem; color: var(--text-primary); margin-bottom: 0.5rem;">Auto-Discovery</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">No manual JSON editing required</p>
-          </div>
-          <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 2rem; height: 2rem; margin: 0 auto 0.5rem; color: var(--accent-color);">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" />
-            </svg>
-            <h4 style="font-size: 1rem; color: var(--text-primary); margin-bottom: 0.5rem;">50+ Languages</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Bundled paraphrase-multilingual-mpnet-base-v2, no Ollama needed</p>
-          </div>
-          <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 2rem; height: 2rem; margin: 0 auto 0.5rem; color: var(--accent-color);">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-            </svg>
-            <h4 style="font-size: 1rem; color: var(--text-primary); margin-bottom: 0.5rem;">Cross-Tool Memory</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Memories shared across all connected tools</p>
-          </div>
-          <div style="padding: 1.5rem; background: var(--bg-primary); border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 2rem; height: 2rem; margin: 0 auto 0.5rem; color: var(--accent-color);">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-            </svg>
-            <h4 style="font-size: 1rem; color: var(--text-primary); margin-bottom: 0.5rem;">Works Offline</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem;">Fully local after initial setup</p>
-          </div>
-        </div>
+      <!-- Spec sheet -->
+      <div style="max-width: 900px; margin: 3rem auto 0; padding: 1.5rem 2rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 8px;">
+        <dl style="display: grid; grid-template-columns: minmax(180px, auto) 1fr; gap: 0.75rem 2rem; margin: 0; font-size: 0.925rem; line-height: 1.6;">
+          <dt style="color: var(--text-secondary); font-weight: 600;">Setup</dt>
+          <dd style="color: var(--text-primary); margin: 0;">Auto-discovers MCP-compatible tools. No manual JSON editing.</dd>
+
+          <dt style="color: var(--text-secondary); font-weight: 600;">Embedding model</dt>
+          <dd style="color: var(--text-primary); margin: 0;"><code style="background: var(--bg-secondary); padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.85rem;">paraphrase-multilingual-mpnet-base-v2</code> bundled. 50+ languages. No Ollama required for the embedder.</dd>
+
+          <dt style="color: var(--text-secondary); font-weight: 600;">Cross-tool memory</dt>
+          <dd style="color: var(--text-primary); margin: 0;">One memory store shared across every connected MCP client.</dd>
+
+          <dt style="color: var(--text-secondary); font-weight: 600;">Network</dt>
+          <dd style="color: var(--text-primary); margin: 0;">Fully offline after first launch. No telemetry, no phone-home.</dd>
+        </dl>
       </div>
 
       <!-- Troubleshooting Callout -->
@@ -1247,12 +845,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.4.8 Release Card -->
+      <!-- v0.5.0 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.4.8 - Sidecar Reliability + Benchmark Alignment
+              v0.5.0 - Plugin Reliability, Subagent Filtering, Scoring Observability
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released April 2026
@@ -1262,34 +860,20 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Mirrors the benchmark&rsquo;s proven sidecar architecture. Removes autoSummarize (eliminated Ollama contention), splits sidecar into 2 focused LLM calls, restores noun_tags on facts for TagCascade retrieval. Net &minus;274 lines.
+          Five OpenCode plugin fixes. Subagent exchanges no longer pollute the memory store. OpenAI-compatible sidecars work again. Persistent sidecar failures are now surfaced instead of silently masked.
         </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">2-Call Sidecar Split</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Matches benchmark: scoreExchange (summary + outcome + memory_scores) then extractFacts (atomic facts). Focused prompts improve quality from small models. Tags extracted server-side at store time.</p>
-          </div>
-
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Contention Eliminated</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">autoSummarize removed &mdash; was competing with scoring for the single inference slot on local models (Ollama, LM Studio), causing 20% scoring failures. Sequential calls with no background tasks means clean queueing.</p>
-          </div>
-        </div>
 
         <details style="margin-bottom: 1.5rem;">
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>autoSummarize removed &mdash; eliminated local model contention (Ollama, LM Studio) causing 20% scoring failures</li>
-              <li>storeExchange removed &mdash; sidecar failure = nothing stored, no transcript pollution</li>
-              <li>noun_tags restored on facts &mdash; enables TagCascade retrieval for atomic facts</li>
-              <li>Sidecar split into 2 sequential LLM calls matching benchmark architecture</li>
-              <li>Tags handled server-side at store time, not in plugin LLM calls</li>
-              <li>Re-tag migration for facts with empty noun_tags on upgrade</li>
-              <li>500 tests passing</li>
+              <li>Subagent filtering: mode-based detection via OpenCode&rsquo;s <code>client.app.agents()</code> API. Subagent sessions skip context fetch, injection, exchange capture, and scoring.</li>
+              <li>OpenAI sidecar fix: removed <code>think:false</code> field that broke all non-Ollama sidecar targets (Zen, OpenAI-compatible endpoints).</li>
+              <li>Fact extraction input cap raised from 800 chars to 16K (8K user + 8K assistant).</li>
+              <li>Summary output cap raised from 300 chars to 2000 chars.</li>
+              <li>Replaced boolean <code>scoringBroken</code> with consecutive-failure counter. Persistent sidecar failures now surface to the user.</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.8/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -1297,7 +881,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.4.8" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1307,8 +891,22 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.4.7 and earlier)
+          View Previous Releases (v0.4.9 and earlier)
         </summary>
+
+        <!-- v0.4.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.9 - Sidecar Robustness + Regex Tag Removal</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Robust backend selection with health tracking and circuit breakers. Wires TagService to sidecar LLM (fixes v0.4.8 bug where tag extraction silently fell back to regex). Once-per-session failure hints instead of popups. New <code>roampal retag</code> cleanup tool.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.4.8 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.8 - Sidecar Reliability + Benchmark Alignment</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Removed autoSummarize (eliminated Ollama contention causing 20% scoring failures). Split sidecar into 2 focused LLM calls: scoreExchange then extractFacts. Restored noun_tags on facts for TagCascade. Net &minus;274 lines. 500 tests passing.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.8/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.4.7 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
@@ -1335,7 +933,7 @@ elif outcome == "partial":
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.4 - Async Parallelization</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
-            March 2026 &mdash; All independent operations run concurrently via asyncio.gather. Full memory metadata visible to LLM.
+            March 2026. All independent operations run concurrently via asyncio.gather. Full memory metadata visible to LLM.
           </p>
           <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.4/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
@@ -1344,7 +942,7 @@ elif outcome == "partial":
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.3 - Lightweight Install: Drop PyTorch, Go Pure ONNX</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
-            March 2026 &mdash; Replaces PyTorch + sentence-transformers with direct ONNX Runtime inference. Install drops from ~2.5GB to ~200MB.
+            March 2026. Replaces PyTorch and sentence-transformers with direct ONNX Runtime inference. Install drops from ~2.5GB to ~200MB.
           </p>
           <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
@@ -1353,7 +951,7 @@ elif outcome == "partial":
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.2 - Hook Reliability, Embedding Performance &amp; OpenCode Plugin Fixes</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
-            March 2026 &mdash; Embedding cache fixes hook timeouts, OpenCode scoring fixes, ONNX groundwork.
+            March 2026. Embedding cache fixes hook timeouts, OpenCode scoring fixes, ONNX groundwork.
           </p>
           <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
@@ -1362,7 +960,7 @@ elif outcome == "partial":
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.1 - Linux Stability, Performance &amp; Sidecar-Only Scoring</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">
-            March 2026 &mdash; Linux reliability fixes, event loop unblocking, performance caps, sidecar-only scoring on OpenCode.
+            March 2026. Linux reliability fixes, event loop unblocking, performance caps, sidecar-only scoring on OpenCode.
           </p>
           <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
@@ -1398,7 +996,7 @@ elif outcome == "partial":
         <!-- v0.3.6 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.6 - Retrieval Fairness &amp; Token Optimization</h4>
-          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026 - 78% token reduction via exchange summarization. Retrieval rebalanced so memory_bank no longer dominates. Wilson scores carry through promotion. Platform-split scoring &mdash; main LLM for Claude Code, sidecar for OpenCode.</p>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">February 2026. 78% token reduction via exchange summarization. Retrieval rebalanced so memory_bank no longer dominates. Wilson scores carry through promotion. Platform-split scoring: main LLM for Claude Code, sidecar for OpenCode.</p>
           <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.3.6/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
@@ -1561,38 +1159,38 @@ elif outcome == "partial":
       <!-- Roampal Desktop Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">Roampal Desktop</h3>
 
-      <!-- v0.3.0 Release Card -->
+      <!-- v0.3.1 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.0 - Performance &amp; Polish
+              v0.3.1 - TagCascade Retrieval, Sidecar Memory Processing, ONNX Runtime
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released January 2026
+              Released April 2026
             </p>
           </div>
           <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          TanStack Virtual migration for smoother scrolling, streaming fixes, message virtualization, and 50+ bug fixes. Security hardened with ZIP traversal, XSS, and query logging fixes.
+          Benchmark-validated retrieval replaces the knowledge graph. A background sidecar LLM summarizes every exchange, extracts atomic facts, and tags them automatically. PyTorch replaced with ONNX Runtime for a lighter install.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">TanStack Virtual</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Smooth scrolling for conversations with 5000+ messages. No more lag or jank.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">TagCascade Retrieval</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Tag-first search with cross-encoder reranking. 76.6% vs 53.0% raw ingestion on LoCoMo (+23 pts, p&lt;0.0001).</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Streaming Fixes</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Reliable token-by-token display. Fixed tool chaining and reconnection issues.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Background Sidecar</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Dedicated LLM summarizes, extracts atomic facts, and tags them. Two-lane context: 4 summaries + 4 facts.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">50+ Bug Fixes</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Security hardened: ZIP traversal, XSS, query logging. Plus message virtualization and scrollbar fixes.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Lighter Install</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">PyTorch replaced with ONNX Runtime. Multilingual cross-encoder (14+ languages). Tag filtering UI and unified model-first selector.</p>
           </div>
         </div>
 
@@ -1600,25 +1198,25 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>TanStack Virtual migration - smooth scrolling for 5000+ messages</li>
-              <li>Streaming fixes - text overlap, thinking icon, loading indicator</li>
-              <li>Tool interleaving - text and tools now display in correct order</li>
-              <li>Cancel button fix - actually stops generation now</li>
-              <li>Surfaced memories display - see what memories were used</li>
-              <li>Context overflow detection - warns before context limit is exceeded</li>
-              <li>Model switch race condition fixed</li>
-              <li>Security: ZIP path traversal, XSS in citations, query logging fixed</li>
-              <li>876 tests passing (509 frontend, 367 backend)</li>
+              <li>TagCascade retrieval: tag-first cascade before cross-encoder rerank</li>
+              <li>Sidecar model: background LLM for automatic summarization, fact extraction, and tagging</li>
+              <li>Two-lane context: 4 summaries + 4 atomic facts injected per turn (doubles prior allocation)</li>
+              <li>Multilingual cross-encoder: 14+ languages (was English-only)</li>
+              <li>ONNX Runtime replaces PyTorch, smaller install</li>
+              <li>Tag filtering UI: Substack-style typeahead in the Memory Panel</li>
+              <li>Model-first selector: all Ollama and LM Studio models in one list, no provider tabs</li>
+              <li>Memory migration tool for legacy data</li>
+              <li>7 MCP tools including new score_memories</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.1/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            Download v0.3.0 - $9.99
+            Download v0.3.1 - $19.99
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.3.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.3.1" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1628,8 +1226,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.2.12 and earlier)
+          View Previous Releases (v0.3.0 and earlier)
         </summary>
+
+        <!-- v0.3.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.0 - Performance &amp; Polish</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - TanStack Virtual migration for smooth scrolling, streaming fixes, message virtualization, 50+ bug fixes, security hardening.</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.2.12 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
@@ -1691,14 +1296,14 @@ elif outcome == "partial":
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.1 - Action-Effectiveness KG + Enhanced Retrieval + Benchmarks</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - 3rd Knowledge Graph learns tool effectiveness, enhanced retrieval pipeline</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/main/docs/RELEASE_NOTES_0.2.1.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.2.0 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.2.0 - Learning-Based KG Routing + MCP Integration</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">November 2025 - Intelligent knowledge graph routing, enhanced MCP with semantic learning storage</p>
-          <a href="https://github.com/roampal-ai/roampal/blob/main/docs/RELEASE_NOTES_0.2.0.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.2.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
         </div>
 
         <!-- v0.1.6 -->
@@ -1727,29 +1332,28 @@ elif outcome == "partial":
 
       <div class="faq-list">
         <details class="faq-item" data-animate>
-          <summary>How is this different from cloud AI memory (ChatGPT, Claude, etc.)?</summary>
+          <summary>How is this different from ChatGPT memory, CLAUDE.md, or agent-managed markdown (OpenClaw, Hermes)?</summary>
           <div class="faq-answer">
-            <p>Cloud AI stores what you say. Roampal learns what works.</p>
-            <p>Three key differences:</p>
-            <ol>
-              <li><strong>It learns from results:</strong> When something helps you, Roampal remembers. When it doesn't work, it learns from that too. Regular AI just stores what you said.</li>
-              <li><strong>Local-first privacy:</strong> Your data stays on your machine. No cloud servers, no recurring subscriptions. roampal-core is free and open source. Desktop is a one-time $9.99 purchase.</li>
-              <li><strong>True ownership:</strong> You own your data and your memory. Export everything anytime. No vendor lock-in.</li>
-            </ol>
+            <p><strong>ChatGPT Memory:</strong> stored on OpenAI's servers, only works inside ChatGPT clients. Not available via the OpenAI API, so it does nothing for you in Claude Code, Cursor, or OpenCode. Stores content, not outcomes.</p>
+            <p><strong>CLAUDE.md:</strong> a static Markdown file you write and commit by hand. Full contents get injected every session. It doesn't update itself, doesn't decay, doesn't track which parts actually helped. Claude Code only.</p>
+            <p><strong>Agent-managed markdown</strong> (OpenClaw, Hermes Agent): also MD files, but the agent reads and writes them as part of its own workflow. That works, but memory maintenance becomes the agent's job — spending tokens every turn reading files and deciding what to update.</p>
+            <p><strong>Roampal:</strong> summarization, fact extraction, tagging, and lifecycle all happen in a background sidecar the agent never sees. Context is injected before each prompt, not requested in-workflow. Every memory carries metadata (age, usage, outcome score) directly in the LLM's context. Data lives in a local ChromaDB and works with any MCP-compatible tool (Claude Code, OpenCode, Cursor, Cline, or Roampal Desktop).</p>
           </div>
         </details>
 
         <details class="faq-item" data-animate>
-          <summary>What models does it support?</summary>
+          <summary>Is my data private?</summary>
           <div class="faq-answer">
-            <p><strong>roampal-core:</strong> Works with whatever model your AI tool already uses (Claude, GPT, etc.). Memory and scoring are model-agnostic &mdash; just <code>pip install roampal</code>.</p>
-            <p><strong>Roampal Desktop:</strong> Supports local models via Ollama or LM Studio:</p>
-            <ul>
-              <li><strong>Llama</strong> - Meta's free models</li>
-              <li><strong>Qwen</strong> - Great for many languages</li>
-              <li><strong>Mixtral</strong> - Fast and efficient</li>
-            </ul>
-            <p>Install from Desktop Settings.</p>
+            <p>Yes. All memory storage and retrieval happens on your machine. No cloud servers, no telemetry, no tracking. Your AI tool (Claude Code, OpenCode, etc.) still connects to its own API provider as usual — Roampal doesn't route your prompts anywhere new.</p>
+            <p>roampal-core is free and open source. Roampal Desktop is a one-time $19.99 purchase. Export everything anytime.</p>
+          </div>
+        </details>
+
+        <details class="faq-item" data-animate>
+          <summary>What tools and models does it work with?</summary>
+          <div class="faq-answer">
+            <p><strong>roampal-core</strong> integrates with <strong>Claude Code</strong> (via hooks) and <strong>OpenCode</strong> (via plugin). Those are the two supported clients. Whatever underlying LLM those tools use (Claude, GPT, local models) is fine &mdash; the memory and scoring hooks don't care about the model. Just <code>pip install roampal</code> and <code>roampal init</code>.</p>
+            <p><strong>Roampal Desktop</strong> exposes a standard MCP server, so any MCP-compatible client (Claude Desktop, Cursor, Cline, Continue.dev, etc.) can connect to it. For local chat in the Desktop app itself, you bring your own Ollama or LM Studio model (Llama, Qwen, Mixtral, or anything else they support).</p>
           </div>
         </details>
 
@@ -1765,7 +1369,7 @@ elif outcome == "partial":
           <summary>What are the system requirements?</summary>
           <div class="faq-answer">
             <p><strong>roampal-core:</strong> Python 3.10+, minimal disk space. Runs on anything that runs Python.</p>
-            <p><strong>Roampal Desktop:</strong> Minimum 8GB RAM, 10GB free disk space. Recommended: 16GB RAM and a GPU for faster local model responses.</p>
+            <p><strong>Roampal Desktop:</strong> Windows 10/11 (64-bit), 8GB RAM minimum (16GB recommended).</p>
           </div>
         </details>
 
@@ -1781,7 +1385,7 @@ elif outcome == "partial":
           <summary>Why charge if it's open source?</summary>
           <div class="faq-answer">
             <p><strong>roampal-core is 100% free.</strong> Install with <code>pip install roampal</code> and use it forever.</p>
-            <p><strong>Roampal Desktop</strong> ($9.99 one-time) gets you:</p>
+            <p><strong>Roampal Desktop</strong> ($19.99 one-time) gets you:</p>
             <ul>
               <li><strong>Pre-packaged executable</strong> - No Python setup required</li>
               <li><strong>Bundled dependencies</strong> - Everything included</li>
@@ -1789,19 +1393,6 @@ elif outcome == "partial":
               <li><strong>Lifetime updates</strong> - All future releases included</li>
             </ul>
             <p>You can also <a href="https://roampal.gumroad.com/l/aagzxv" target="_blank" rel="noopener" style="color: var(--accent-color);">support Core development</a> with an optional subscription.</p>
-          </div>
-        </details>
-
-        <details class="faq-item" data-animate>
-          <summary>Is Roampal's advice always reliable?</summary>
-          <div class="faq-answer">
-            <p><strong>No.</strong> Roampal uses AI models that can generate incorrect information, hallucinate facts, or reflect training biases.</p>
-            <p><strong>Always verify critical information</strong> from authoritative sources. Do not rely on AI-generated content for:</p>
-            <ul>
-              <li>Medical, legal, or financial advice</li>
-              <li>Safety-critical systems or decisions</li>
-              <li>Production code without thorough review</li>
-            </ul>
           </div>
         </details>
 
@@ -1817,12 +1408,13 @@ elif outcome == "partial":
               <li><strong>score_memories</strong> - Scores cached memories from previous context (enforced automatically via hooks)</li>
               <li><strong>record_response</strong> - Stores key takeaways from significant exchanges</li>
             </ul>
-            <p><strong>Roampal Desktop</strong> provides 6 MCP tools:</p>
+            <p><strong>Roampal Desktop</strong> provides 7 MCP tools:</p>
             <ul>
               <li><strong>get_context_insights</strong> - Returns context about the user (Core handles this automatically via hooks)</li>
               <li><strong>search_memory</strong>, <strong>add_to_memory_bank</strong>, <strong>update_memory</strong> - Same as Core</li>
               <li><strong>archive_memory</strong> - Soft-deletes outdated information (vs Core's hard delete)</li>
-              <li><strong>record_response</strong> - Combined outcome scoring + key takeaways in one tool</li>
+              <li><strong>record_response</strong> - Stores key takeaways from significant exchanges</li>
+              <li><strong>score_memories</strong> - Scores cached memories from previous context (available but not hook-enforced like Core)</li>
             </ul>
             <p>With roampal-core, context injection and scoring happen automatically via hooks. With Desktop, you may need to prompt the AI to use memory tools.</p>
           </div>
@@ -1847,50 +1439,6 @@ elif outcome == "partial":
   </section>
 
 
-  <!-- Philosophy Section -->
-  <section class="philosophy" id="philosophy" style="padding: 5rem 0; background: var(--bg-secondary);">
-    <div class="container" style="max-width: 900px; margin: 0 auto;">
-      <h2 class="section-title" data-animate style="text-align: center; margin-bottom: 1.5rem;">Why Roampal Exists</h2>
-      
-      <p class="philosophy-text" data-animate style="font-size: 1.25rem; line-height: 1.8; text-align: center; color: var(--text-primary); margin-bottom: 2rem; font-weight: 500;">
-        Roampal is built on a simple idea: software that respects you. No hidden fees, no data collection, no lock-in.
-      </p>
-
-      <ul class="philosophy-principles" data-animate style="list-style: none; padding: 0; display: grid; gap: 1rem; max-width: 600px; margin: 0 auto;">
-        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>Open source from day one (Apache 2.0 License)</span>
-        </li>
-        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>One-time payment, not subscription trap</span>
-        </li>
-        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>Zero telemetry, zero tracking</span>
-        </li>
-        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>Your data stays on your machine</span>
-        </li>
-        <li style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.1rem;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" style="flex-shrink: 0;">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>Free to View on GitHub forever</span>
-        </li>
-      </ul>
-    </div>
-  </section>
-
   <!-- Final CTA Section -->
   <section class="final-cta" id="download">
     <div class="container">
@@ -1909,7 +1457,7 @@ elif outcome == "partial":
             <span class="btn-note">pip install roampal • Claude Code & OpenCode • Open source</span>
           </a>
           <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-large" target="_blank" rel="noopener" style="background: transparent; border: 2px solid var(--border-color);">
-            <span>Desktop App - $9.99</span>
+            <span>Desktop App - $19.99</span>
             <span class="btn-note">Pre-built • Local models • MCP for any tool</span>
           </a>
         </div>

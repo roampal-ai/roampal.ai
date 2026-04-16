@@ -16,8 +16,11 @@
 
   /* Accents */
   --accent-primary: #2563eb;          /* blue-600 (CTAs, buttons) */
+  --accent-color: #3b82f6;            /* blue-500 (legacy alias used in index.html) */
   --accent-hover: #1d4ed8;            /* blue-700 (hover) */
   --accent-muted: rgba(37, 99, 235, 0.3); /* blue-600/30 (selection) */
+  --border-color: #27272a;            /* zinc-800 (borders, dividers) */
+  --text-muted: #71717a;              /* zinc-500 (de-emphasized text, matches --text-tertiary) */
 
   /* Status Colors */
   --success: #10b981;                 /* green-500 (worked) */
