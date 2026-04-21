@@ -1,7 +1,7 @@
 {
-  "version": "0.3.1",
-  "notes": "TagCascade Retrieval, Sidecar Memory Processing, ONNX Runtime - benchmark-validated retrieval replaces knowledge graph, background sidecar extracts atomic facts and tags, PyTorch replaced with ONNX Runtime",
-  "pub_date": "2026-04-16T00:00:00Z",
+  "version": "0.3.2",
+  "notes": "Chat-path latency fixes + v0.3.1 correctness repairs - parallelized retrieval lanes, startup ONNX warm-up, TagCascade now actually tag-filters in production, Memory Panel renders tags, fact dedup on store, universal Ollama/LM Studio error handling",
+  "pub_date": "2026-04-21T00:00:00Z",
   "download_url": "https://roampal.gumroad.com/l/mjxtfg",
   "min_version": "0.2.0"
 }
