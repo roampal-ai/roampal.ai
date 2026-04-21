@@ -132,7 +132,7 @@
     "price": "19.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.5.0",
+  "softwareVersion": "0.5.2",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -845,12 +845,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.5.0 Release Card -->
+      <!-- v0.5.2 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.5.0 - Plugin Reliability, Subagent Filtering, Scoring Observability
+              v0.5.2 - Chat-Path Performance + Lifecycle Age-Gate Fix
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released April 2026
@@ -860,20 +860,21 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Five OpenCode plugin fixes. Subagent exchanges no longer pollute the memory store. OpenAI-compatible sidecars work again. Persistent sidecar failures are now surfaced instead of silently masked.
+          Cuts per-MCP-call latency by parallelizing retrieval lanes, warming ONNX at startup, and unblocking CE rerank. Fixes a lifecycle bug that silently shielded core-written memories from the 7-day deletion threshold. Addresses v0.5.1 profile-resolution bugs reported in issue #6.
         </p>
 
         <details style="margin-bottom: 1.5rem;">
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Subagent filtering: mode-based detection via OpenCode&rsquo;s <code>client.app.agents()</code> API. Subagent sessions skip context fetch, injection, exchange capture, and scoring.</li>
-              <li>OpenAI sidecar fix: removed <code>think:false</code> field that broke all non-Ollama sidecar targets (Zen, OpenAI-compatible endpoints).</li>
-              <li>Fact extraction input cap raised from 800 chars to 16K (8K user + 8K assistant).</li>
-              <li>Summary output cap raised from 300 chars to 2000 chars.</li>
-              <li>Replaced boolean <code>scoringBroken</code> with consecutive-failure counter. Persistent sidecar failures now surface to the user.</li>
+              <li>Parallelized two-lane retrieval via <code>asyncio.gather</code> &mdash; ~500&ndash;1000 ms saved per MCP call.</li>
+              <li>Warm ONNX models at server startup instead of cold-loading on first tool call &mdash; ~2&ndash;4 s saved on the first memory operation after spawn.</li>
+              <li>Offloaded blocking CE rerank into <code>asyncio.to_thread</code> so heartbeats and concurrent tool calls aren&rsquo;t starved during inference.</li>
+              <li>Lifecycle age-gate bugfix: <code>promotion_service.py</code> now falls back to <code>created_at</code> when <code>timestamp</code> is absent. Core-written memories were silently shielded from the 7-day deletion threshold before.</li>
+              <li>Issue #6 fixes: <code>roampal doctor</code> honors <code>--profile</code> / <code>ROAMPAL_PROFILE</code>; <code>roampal start --profile</code> prints the resolved data path in its banner instead of the unexpanded <code>%APPDATA%</code> literal.</li>
+              <li>Retrieval quality unchanged &mdash; same TagCascade + CE pipeline, just unblocked.</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.0/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.2/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -881,7 +882,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.0" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.2" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -891,11 +892,25 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.4.9 and earlier)
+          View Previous Releases (v0.5.1 and earlier)
         </summary>
 
-        <!-- v0.4.9 -->
+        <!-- v0.5.1 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.5.1 - Named Memory Profiles</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Multiple isolated memory stores per user, switchable per command, per shell, per project (via MCP config <code>env</code>), or globally. New <code>roampal profile</code> subcommand with <code>list/show/create/register/delete/use/unuse/switch</code>. <code>--profile</code> flag on <code>start</code> and <code>doctor</code>. Also caps sidecar scoring exchange fields at 8K chars to match fact-extraction.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.5.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.5.0 - Plugin Reliability, Subagent Filtering, Scoring Observability</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Five OpenCode plugin fixes: subagent exchanges no longer pollute the memory store, OpenAI-compatible sidecars work again (<code>think:false</code> field removed), fact-extraction input cap raised to 16K, summary cap raised to 2000 chars, persistent sidecar failures now surface via a consecutive-failure counter instead of a boolean.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.4.9 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.4.9 - Sidecar Robustness + Regex Tag Removal</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Robust backend selection with health tracking and circuit breakers. Wires TagService to sidecar LLM (fixes v0.4.8 bug where tag extraction silently fell back to regex). Once-per-session failure hints instead of popups. New <code>roampal retag</code> cleanup tool.</p>
           <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.4.9/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
@@ -1159,12 +1174,12 @@ elif outcome == "partial":
       <!-- Roampal Desktop Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-top: 3rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">Roampal Desktop</h3>
 
-      <!-- v0.3.1 Release Card -->
+      <!-- v0.3.2 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.3.1 - TagCascade Retrieval, Sidecar Memory Processing, ONNX Runtime
+              v0.3.2 - Chat-Path Performance + v0.3.1 Correctness Repairs
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released April 2026
@@ -1174,23 +1189,23 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Benchmark-validated retrieval replaces the knowledge graph. A background sidecar LLM summarizes every exchange, extracts atomic facts, and tags them automatically. PyTorch replaced with ONNX Runtime for a lighter install.
+          Cuts per-message latency, fixes silent failures in the v0.3.1 retrieval and tagging pipeline, adds fact dedup, and resolves a batch of customer-reported model and provider bugs.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">TagCascade Retrieval</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Tag-first search with cross-encoder reranking. 76.6% vs 53.0% raw ingestion on LoCoMo (+23 pts, p&lt;0.0001).</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Faster Chat Path</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Parallelized retrieval lanes + startup ONNX warm-up. Pre-LLM overhead cut ~800 ms per message, first-message 2&ndash;4 s faster.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Background Sidecar</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Dedicated LLM summarizes, extracts atomic facts, and tags them. Two-lane context: 4 summaries + 4 facts.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Retrieval Fixes</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">TagCascade tag-filtering actually runs in production (was silently erroring since v0.3.1). Memory Panel tag pills render for working, history, and patterns memories. Memory bank entries get auto noun-tags internally, improving retrieval ranking.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Lighter Install</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">PyTorch replaced with ONNX Runtime. Multilingual cross-encoder (14+ languages). Tag filtering UI and unified model-first selector.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Robustness</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Fact dedup on store. Universal Ollama/LM Studio error handling. Persistent model selection. VRAM-aware picker. Sidecar mirrors chat by default.</p>
           </div>
         </div>
 
@@ -1198,25 +1213,26 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>TagCascade retrieval: tag-first cascade before cross-encoder rerank</li>
-              <li>Sidecar model: background LLM for automatic summarization, fact extraction, and tagging</li>
-              <li>Two-lane context: 4 summaries + 4 atomic facts injected per turn (doubles prior allocation)</li>
-              <li>Multilingual cross-encoder: 14+ languages (was English-only)</li>
-              <li>ONNX Runtime replaces PyTorch, smaller install</li>
-              <li>Tag filtering UI: Substack-style typeahead in the Memory Panel</li>
-              <li>Model-first selector: all Ollama and LM Studio models in one list, no provider tabs</li>
-              <li>Memory migration tool for legacy data</li>
-              <li>7 MCP tools including new score_memories</li>
+              <li>Faster chat: pre-LLM overhead cut ~800 ms per message; first-message latency down 2&ndash;4 s via startup model warm-up</li>
+              <li>Memory tags now render in the Memory Panel (were being stored but silently dropped by the endpoint)</li>
+              <li>TagCascade actually runs in production (v0.3.1 was erroring every query and falling through to plain cosine)</li>
+              <li>Fact dedup on store: semantically identical facts no longer create duplicate memory entries</li>
+              <li>Memory bank auto-tagging: AI-saved facts now get noun tags via the sidecar, improving retrieval</li>
+              <li>Universal provider errors: Ollama and LM Studio errors surface as readable chat text, no more silently dying streams</li>
+              <li>Smarter model picker: distinguishes <code>gemma4:26b</code> from <code>gemma4:e2b</code>, warns before you download a too-big model, sidecar mirrors the chat model on single-GPU systems</li>
+              <li>Persistent model selection: chat model survives restart (v0.3.1 wrote to a Windows path often blocked by default permissions)</li>
+              <li>Shared-DB timestamp tolerance: works correctly alongside the <code>pip install roampal</code> MCP server</li>
+              <li>Error toasts for chat + sidecar with parity visibility</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.1/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.2/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
         <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
           <a href="https://roampal.gumroad.com/l/mjxtfg" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
-            Download v0.3.1 - $19.99
+            Download v0.3.2 - $19.99
           </a>
-          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.3.1" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal/releases/tag/v0.3.2" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -1226,11 +1242,18 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.3.0 and earlier)
+          View Previous Releases (v0.3.1 and earlier)
         </summary>
 
-        <!-- v0.3.0 -->
+        <!-- v0.3.1 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.1 - TagCascade Retrieval, Sidecar Memory Processing, ONNX Runtime</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Benchmark-validated retrieval replaces the knowledge graph. Background sidecar LLM summarizes every exchange, extracts atomic facts, and tags them automatically. PyTorch replaced with ONNX Runtime for a lighter install. Multilingual cross-encoder (14+ languages), tag filtering UI, model-first selector.</p>
+          <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.3.0 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
           <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.3.0 - Performance &amp; Polish</h4>
           <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">January 2026 - TanStack Virtual migration for smooth scrolling, streaming fixes, message virtualization, 50+ bug fixes, security hardening.</p>
           <a href="https://github.com/roampal-ai/roampal/blob/main/dev/docs/releases/v0.3.0/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
