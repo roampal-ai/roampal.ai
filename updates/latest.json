@@ -1,7 +1,7 @@
 {
-  "version": "0.3.2",
-  "notes": "Chat-path latency fixes + v0.3.1 correctness repairs - parallelized retrieval lanes, startup ONNX warm-up, TagCascade now actually tag-filters in production, Memory Panel renders tags, fact dedup on store, universal Ollama/LM Studio error handling",
-  "pub_date": "2026-04-21T00:00:00Z",
+  "version": "0.3.2.1",
+  "notes": "Hotfix - removed hardcoded num_gpu=99 Ollama override. Was causing 'memory layout cannot be allocated' errors on hardware where Ollama's preferred backend couldn't fit all layers. Modern Ollama auto-detection now handles layer offload.",
+  "pub_date": "2026-04-22T00:00:00Z",
   "download_url": "https://roampal.gumroad.com/l/mjxtfg",
   "min_version": "0.2.0"
 }
