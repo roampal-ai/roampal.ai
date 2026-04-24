@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TQFYTGH715"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TQFYTGH715');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="https://roampal.ai/research.html">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Logan Teague">
+  <meta name="description" content="Beyond Ingestion: What Conversational Memory Learning Reveals on a Corrected LoCoMo Benchmark. Research paper on conversational memory learning, retrieval architectures, and the corrected LoCoMo evaluation.">
+  <meta name="keywords" content="LoCoMo, conversational memory, AI memory benchmark, retrieval, TagCascade, Wilson scoring, roampal research">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://roampal.ai/research.html">
+  <meta property="og:title" content="Roampal Research - Beyond Ingestion: Conversational Memory Learning on a Corrected LoCoMo Benchmark">
+  <meta property="og:description" content="Conversational learning outperforms raw ingestion by 23 points on the corrected LoCoMo benchmark. Architecture contributes ~10x more than the model.">
+  <meta property="og:image" content="https://roampal.ai/assets/social-share.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://roampal.ai/research.html">
+  <meta name="twitter:title" content="Roampal Research - Beyond Ingestion (LoCoMo)">
+  <meta name="twitter:description" content="Conversational learning outperforms raw ingestion by 23 points on the corrected LoCoMo benchmark.">
+  <meta name="twitter:image" content="https://roampal.ai/assets/social-share.jpg">
+
+  <title>Research | Roampal - Beyond Ingestion (Corrected LoCoMo Benchmark)</title>
+
+  <!-- Article Structured Data -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  "headline": "Beyond Ingestion: What Conversational Memory Learning Reveals on a Corrected LoCoMo Benchmark",
+  "author": {
+    "@type": "Person",
+    "name": "Logan Teague"
+  },
+  "datePublished": "2026-04-01",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Roampal",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://roampal.ai/assets/logo.png"
+    }
+  },
+  "url": "https://roampal.ai/research.html",
+  "description": "Research paper on conversational memory learning evaluated against a corrected LoCoMo benchmark. Conversational learning outperforms raw ingestion by 23 points; architecture contributes ~10x more than model swap."
+}
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/typography.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/sections.css">
+  <link rel="stylesheet" href="styles/responsive.css">
+
+  <style>
+    .research-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-6);
+      padding-top: 120px;
+    }
+
+    .research-header {
+      text-align: center;
+      margin-bottom: var(--space-10);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .research-eyebrow {
+      font-size: var(--text-sm);
+      color: var(--accent-color);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-3);
+    }
+
+    .research-title {
+      font-size: var(--text-3xl);
+      font-weight: var(--weight-bold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+      line-height: 1.25;
+    }
+
+    .research-meta {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .research-source-links {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--space-4);
+    }
+
+    .research-source-links a {
+      color: var(--accent-color);
+      font-size: var(--text-sm);
+      text-decoration: none;
+      border: 1px solid var(--border-color);
+      padding: var(--space-2) var(--space-4);
+      border-radius: 6px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .research-source-links a:hover {
+      background: var(--bg-secondary);
+      border-color: var(--accent-color);
+    }
+
+    .research-loading {
+      text-align: center;
+      color: var(--text-secondary);
+      padding: var(--space-12);
+      font-size: var(--text-base);
+    }
+
+    .research-error {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: var(--space-6);
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    .research-error a {
+      color: var(--accent-color);
+    }
+
+    .paper-body {
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-size: var(--text-base);
+    }
+
+    .paper-body h1 {
+      display: none;
+    }
+
+    .paper-body h2 {
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-bold);
+      color: var(--text-primary);
+      margin-top: var(--space-10);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .paper-body h3 {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-top: var(--space-8);
+      margin-bottom: var(--space-3);
+    }
+
+    .paper-body h4 {
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      color: var(--text-primary);
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-2);
+    }
+
+    .paper-body p {
+      margin-bottom: var(--space-4);
+    }
+
+    .paper-body ul, .paper-body ol {
+      margin-bottom: var(--space-4);
+      padding-left: var(--space-6);
+    }
+
+    .paper-body li {
+      margin-bottom: var(--space-2);
+    }
+
+    .paper-body code {
+      background: var(--bg-secondary);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.92em;
+      font-family: var(--font-mono, monospace);
+    }
+
+    .paper-body pre {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: var(--space-4);
+      overflow-x: auto;
+      margin-bottom: var(--space-4);
+      font-size: var(--text-sm);
+    }
+
+    .paper-body pre code {
+      background: transparent;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    .paper-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: var(--space-4);
+      font-size: var(--text-sm);
+    }
+
+    .paper-body th, .paper-body td {
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .paper-body th {
+      background: var(--bg-secondary);
+      font-weight: var(--weight-semibold);
+    }
+
+    .paper-body blockquote {
+      border-left: 3px solid var(--accent-color);
+      padding-left: var(--space-4);
+      margin-left: 0;
+      margin-bottom: var(--space-4);
+      color: var(--text-secondary);
+    }
+
+    .paper-body hr {
+      border: none;
+      border-top: 1px solid var(--border-color);
+      margin: var(--space-8) 0;
+    }
+
+    .paper-body a {
+      color: var(--accent-color);
+    }
+
+    .paper-body strong {
+      color: var(--text-primary);
+      font-weight: var(--weight-semibold);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-content">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Roampal">
+        <span>Roampal</span>
+      </a>
+
+      <div class="nav-links">
+        <div class="nav-dropdown">
+          <a href="index.html#features" class="nav-dropdown-trigger">Product <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <a href="index.html#features">Features</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#mcp-setup">MCP Setup</a>
+          </div>
+        </div>
+        <a href="index.html#benchmarks">Benchmarks</a>
+        <a href="index.html#philosophy">Philosophy</a>
+        <a href="index.html#releases">Releases</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="research.html" style="color: var(--text-primary);">Research</a>
+        <a href="blog.html">Blog</a>
+        <a href="https://github.com/roampal-ai" class="nav-github" target="_blank" rel="noopener" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="research-container">
+      <div class="research-header">
+        <div class="research-eyebrow">Research Paper</div>
+        <h1 class="research-title">Beyond Ingestion: What Conversational Memory Learning Reveals on a Corrected LoCoMo Benchmark</h1>
+        <p class="research-meta">Logan Teague &middot; April 2026</p>
+        <div class="research-source-links">
+          <a href="https://github.com/roampal-ai/roampal-labs/blob/main/paper.md" target="_blank" rel="noopener">View on GitHub</a>
+          <a href="https://github.com/roampal-ai/roampal-labs" target="_blank" rel="noopener">Code &amp; Data Repo</a>
+        </div>
+      </div>
+
+      <div id="paper-content" class="paper-body">
+        <div class="research-loading">Loading paper...</div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: var(--space-8); color: var(--text-tertiary); font-size: var(--text-sm);">
+    <p>&copy; 2026 Roampal. Open source under Apache 2.0.</p>
+    <p style="margin-top: var(--space-2);">
+      <a href="privacy.html" style="color: var(--text-secondary);">Privacy</a> &bull;
+      <a href="terms.html" style="color: var(--text-secondary);">Terms</a> &bull;
+      <a href="https://github.com/roampal-ai" style="color: var(--text-secondary);">GitHub</a>
+    </p>
+  </footer>
+
+  <!-- Markdown renderer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+  <script>
+    (function() {
+      var PAPER_URL = 'https://raw.githubusercontent.com/roampal-ai/roampal-labs/main/paper.md';
+      var GITHUB_URL = 'https://github.com/roampal-ai/roampal-labs/blob/main/paper.md';
+      var container = document.getElementById('paper-content');
+
+      fetch(PAPER_URL)
+        .then(function(resp) {
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          return resp.text();
+        })
+        .then(function(md) {
+          marked.setOptions({ gfm: true, breaks: false, headerIds: true });
+          container.innerHTML = marked.parse(md);
+        })
+        .catch(function(err) {
+          container.innerHTML = '<div class="research-error">'
+            + '<p>Could not load the paper inline (' + (err.message || err) + ').</p>'
+            + '<p>Read it directly on GitHub: <a href="' + GITHUB_URL + '" target="_blank" rel="noopener">paper.md</a></p>'
+            + '</div>';
+        });
+    })();
+  </script>
+</body>
+</html>

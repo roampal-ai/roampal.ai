@@ -132,7 +132,7 @@
     "price": "19.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.5.2",
+  "softwareVersion": "0.5.4",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -192,6 +192,7 @@
         <a href="#releases">Releases</a>
 
         <a href="#faq">FAQ</a>
+        <a href="research.html">Research</a>
         <a href="blog.html">Blog</a>
         <a href="https://github.com/roampal-ai" class="nav-github" target="_blank" rel="noopener" title="GitHub"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
         <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary-small" target="_blank" rel="noopener">Get Started</a>
@@ -845,12 +846,12 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.5.2 Release Card -->
+      <!-- v0.5.4 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.5.2 - Chat-Path Performance + Lifecycle Age-Gate Fix
+              v0.5.4 - Per-Request Profile Binding + Cross-Client Header Propagation
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
               Released April 2026
@@ -860,21 +861,26 @@ elif outcome == "partial":
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Cuts per-MCP-call latency by parallelizing retrieval lanes, warming ONNX at startup, and unblocking CE rerank. Fixes a lifecycle bug that silently shielded core-written memories from the 7-day deletion threshold. Addresses v0.5.1 profile-resolution bugs reported in issue #6.
+          Replaces the FastAPI singleton with a per-profile registry resolved at request time via an <code>X-Roampal-Profile</code> header. Every client sends the header (MCP server, OpenCode plugin, Claude Code hooks). Fixes issue #7 where OpenCode Desktop's per-project <code>ROAMPAL_PROFILE</code> in <code>opencode.json</code> was ignored. Also: sidecar config hydration, TagService unification with Desktop, and 8 audit-driven bug fixes.
         </p>
 
         <details style="margin-bottom: 1.5rem;">
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>Parallelized two-lane retrieval via <code>asyncio.gather</code> &mdash; ~500&ndash;1000 ms saved per MCP call.</li>
-              <li>Warm ONNX models at server startup instead of cold-loading on first tool call &mdash; ~2&ndash;4 s saved on the first memory operation after spawn.</li>
-              <li>Offloaded blocking CE rerank into <code>asyncio.to_thread</code> so heartbeats and concurrent tool calls aren&rsquo;t starved during inference.</li>
-              <li>Lifecycle age-gate bugfix: <code>promotion_service.py</code> now falls back to <code>created_at</code> when <code>timestamp</code> is absent. Core-written memories were silently shielded from the 7-day deletion threshold before.</li>
-              <li>Issue #6 fixes: <code>roampal doctor</code> honors <code>--profile</code> / <code>ROAMPAL_PROFILE</code>; <code>roampal start --profile</code> prints the resolved data path in its banner instead of the unexpanded <code>%APPDATA%</code> literal.</li>
-              <li>Retrieval quality unchanged &mdash; same TagCascade + CE pipeline, just unblocked.</li>
+              <li>FastAPI singleton replaced with <code>_memory_by_profile</code> / <code>_session_manager_by_profile</code> registries; <code>_resolve_profile_name(request)</code> reads <code>X-Roampal-Profile</code> header first, falls back to <code>active_profile_name()</code>.</li>
+              <li>Lazy init under <code>asyncio.Lock</code>; shared <code>EmbeddingService</code> keeps ONNX model memory flat (~420MB total) regardless of profile count.</li>
+              <li>OpenCode plugin <code>resolveRoampalProfile()</code> reads env var, then project's <code>opencode.json</code>, then user-global <code>opencode.json</code> - covers Marcus's per-project Desktop repro where the plugin process can't see the env block Desktop passes to the MCP subprocess.</li>
+              <li>Claude Code Python hooks attach <code>X-Roampal-Profile</code> via <code>_roampal_headers()</code> using <code>active_profile_name()</code>.</li>
+              <li>Sidecar config hydration: FastAPI <code>lifespan</code> reads <code>opencode.json</code> at startup so server-side <code>extract_tags()</code> can reach the sidecar without per-request env propagation.</li>
+              <li>TagService unified with Desktop: <code>set_llm_extract_fn</code> setter, <code>extract_tags_async</code>, <code>asyncio.Lock</code> client lock to prevent GPU OOM on local models.</li>
+              <li><code>/api/summarize</code> now makes 1 sidecar call per request (was 3-4). <code>store_working</code> auto-extracts tags via TagService when caller omits.</li>
+              <li>OpenCode plugin facts extraction wrapped in 3-attempt retry loop with exponential backoff (matches summary path).</li>
+              <li>8 audit-driven bug fixes: per-profile init failures return 503 instead of killing the server, removed dead <code>_deferred_action_kg_updates</code>, MCP default-profile cache fixed, <code>effective_summary_tags</code> NameError fixed, plus 4 more.</li>
+              <li>Plugin background fetch timeouts bumped 5s -> 30s to suppress cosmetic <code>TimeoutError</code> log noise (data was always being stored).</li>
+              <li>603 tests passing, 3 pre-existing skips, 0 failed. Live-validated across OpenCode CLI, OpenCode with per-project <code>opencode.json</code>, and Claude Code hooks.</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.2/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.4/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -882,7 +888,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.2" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.4" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -892,8 +898,29 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.5.1 and earlier)
+          View Previous Releases (v0.5.3.1 and earlier)
         </summary>
+
+        <!-- v0.5.3.1 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.5.3.1 - Hotfix: OpenCode Plugin JSON Extraction + max_tokens for Thinking Models</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Hotfix for the OpenCode plugin's JSON extraction logic - facts and summary lanes were silently failing on responses from thinking/reasoning models. Both lanes refactored onto a shared <code>extractJson()</code> helper that handles markdown fences, nested objects, and embedded brace characters. Bumped scoring <code>max_tokens</code> 2000 -> 4000 and facts <code>max_tokens</code> 1000 -> 2000 to give verbose reasoning models headroom.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.3.1/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.5.3 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.5.3 - Sidecar Privacy + opencode.json Safety + Retrieval Bug Fixes</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Sidecar scoring now requires explicit configuration (no automatic Zen/localhost fallback). <code>opencode.json</code> writes are now atomic via temp-file + <code>os.replace</code>, with timestamped backups and parse-failure skip to prevent the silent config clobbering seen in v0.5.1. Server-side shape tolerance for small local models that return bare JSON arrays. Multi-key filter wrapping fix in TagCascade <code>$contains</code> path.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.3/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
+
+        <!-- v0.5.2 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.5.2 - Chat-Path Performance + Lifecycle Age-Gate Fix</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">April 2026 - Cuts per-MCP-call latency by parallelizing retrieval lanes via <code>asyncio.gather</code>, warming ONNX at startup, and unblocking CE rerank. Fixes a lifecycle bug that silently shielded core-written memories from the 7-day deletion threshold. Addresses v0.5.1 profile-resolution bugs reported in issue #6.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.2/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.5.1 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
