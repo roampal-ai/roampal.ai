@@ -1,7 +1,7 @@
 {
-  "version": "0.3.2.1",
-  "notes": "Hotfix - removed hardcoded num_gpu=99 Ollama override. Was causing 'memory layout cannot be allocated' errors on hardware where Ollama's preferred backend couldn't fit all layers. Modern Ollama auto-detection now handles layer offload.",
-  "pub_date": "2026-04-22T00:00:00Z",
+  "version": "0.3.3",
+  "notes": "Image attachments in chat (paste or photo icon, vision-capable models), auto-detected model capabilities (no more hardcoded family lists - new models work the day they're released), reliable model switching on Windows (fixed a pipe-handle deadlock that caused switches to hang silently), and memory bank phantom cleanup closing issue #8 (deleted entries no longer block similar new memories). 22 defects resolved in dev + laptop verification.",
+  "pub_date": "2026-05-12T22:00:00Z",
   "download_url": "https://roampal.gumroad.com/l/mjxtfg",
   "min_version": "0.2.0"
 }
