@@ -213,9 +213,8 @@
   "datePublished": "2025-12-01",
   "dateModified": "2025-12-11",
   "author": {
-    "@type": "Organization",
-    "name": "Roampal",
-    "url": "https://roampal.ai"
+    "@type": "Person",
+    "name": "Logan"
   },
   "publisher": {
     "@type": "Organization",
@@ -266,104 +265,83 @@
 
     <header class="blog-header">
       <h1 class="blog-title">Your AI Keeps Forgetting What You Told It. Here's Why.</h1>
-      <p class="blog-meta">December 2025 &bull; 5 min read</p>
+      <p class="blog-meta">December 2025 &bull; 5 min read &bull; Updated May 2026</p>
     </header>
 
     <img src="assets/roboshake.jpg" alt="Human and AI hand reaching toward each other" class="blog-hero-image">
     <p class="blog-hero-caption">Image generated with Google Gemini</p>
 
     <div class="blog-content">
-      <p>Have you ever told an AI something important and watched it forget completely the next conversation?</p>
-
-      <p>Or worse: it retrieves something, but it's the wrong thing. Again. For the 10th time.</p>
+      <p>Have you ever told an AI something important and watched it forget completely the next conversation? Or worse: it retrieves something, but it's the wrong thing. Again. For the 10th time.</p>
 
       <p>You're not crazy. This is a real problem.</p>
 
       <h2>The Problem: Passive Memory</h2>
 
-      <p>Most AI memory today works like a filing cabinet. You put information in. The AI searches for what seems relevant. It pulls something out.</p>
+      <p>Most AI memory today works like a search engine. You put information in. The AI searches for what seems relevant. It pulls something out.</p>
 
-      <p>Sounds reasonable. But here's what's missing:</p>
-
-      <p><strong>The AI doesn't know if what it retrieved actually helped.</strong></p>
-
-      <p>Think about that for a second.</p>
+      <p>Sounds reasonable. But it's missing something critical: the AI doesn't know if what it retrieved actually helped.</p>
 
       <p>Your AI pulls up a note about "the budget." You say "no, I meant Q4, not Q1." The AI apologizes, gives you the right answer, and moves on.</p>
 
       <p>But next time you ask about the budget? Same wrong note. Same correction. Same wasted time.</p>
 
-      <p>The AI stored facts. It didn't learn what worked.</p>
+      <p>The AI stored facts — it didn't learn what worked. This is the state of AI memory right now.</p>
 
-      <p>Does this bother you? It should.</p>
+      <h2>Outcome Learning</h2>
 
-      <h2>A Different Approach: Outcome Learning</h2>
-
-      <p>What if your AI paid attention to whether the information it retrieved actually helped?</p>
-
-      <p>Here's how it works:</p>
+      <p>Roampal tracks whether retrieved information actually helped. Here's how it works:</p>
 
       <ul>
         <li>You ask a question</li>
-        <li>The AI retrieves stored information</li>
-        <li>It gives you an answer</li>
-        <li>You either confirm it's right, or you correct it</li>
+        <li>The system retrieves stored memories via TagCascade</li>
+        <li>The AI gives you an answer</li>
+        <li>You confirm or correct it</li>
       </ul>
 
-      <p>That confirmation or correction? Most systems ignore it completely.</p>
+      <p>That confirmation or correction? Most systems throw it away. Roampal doesn't.</p>
 
-      <p>Mine doesn't.</p>
+      <p>Worked, failed, partial, or unknown — each outcome adjusts the score. Score plus usage count drives promotion: working (24h) → history (30d) → patterns (permanent). Cross the demotion threshold and it moves back down.</p>
 
-      <p>When the AI gets it right, that memory's score goes up. When it gets corrected, the score goes down. Next time, the helpful stuff surfaces first. The unhelpful stuff sinks.</p>
-
-      <p><strong>The AI learns from the conversation itself.</strong> No rating buttons. No manual tagging. Just natural interaction.</p>
+      <p>Retrieval is tag-first cascade plus cross-encoder reranker. The score drives lifecycle, not retrieval ranking — two separate jobs. No buttons or tags to click; an AI reads your reaction and scores its own memories.</p>
 
       <h2>The Numbers</h2>
 
-      <p>I ran a benchmark comparing different approaches to memory retrieval. 200 test scenarios designed to be tricky: queries that would fool standard search because the wrong answer sounds more relevant than the right one.</p>
+      <p>I ran a benchmark on <a href="https://github.com/roampal-ai/roampal-labs" target="_blank">corrected LoCoMo</a>: 1,986 questions across long multi-session conversations, dual-graded end-to-end. Queries designed to fool standard search because the wrong answer sounds more relevant than the right one.</p>
 
       <table>
         <thead>
           <tr>
             <th>Approach</th>
-            <th>Top-1 Accuracy</th>
+            <th>LoCoMo Accuracy</th>
+            <th>vs Baseline</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Standard search</td>
-            <td>10%</td>
+            <td>Raw ingestion (standard RAG)</td>
+            <td>53.0%</td>
+            <td>&mdash;</td>
           </tr>
           <tr>
-            <td>+ Smarter ranking</td>
-            <td>20%</td>
-          </tr>
-          <tr>
-            <td>+ Outcome learning</td>
-            <td>50%</td>
+            <td>TagCascade (Roampal)</td>
+            <td>76.6%</td>
+            <td>+23.6 pts</td>
           </tr>
         </tbody>
       </table>
 
-      <p>Smarter ranking (using AI to reorder results) helped. +10 points.</p>
+      <p>TagCascade added 23.6 percentage points over raw ingestion (p&lt;0.0001). The non-adversarial ceiling is 98.4%.</p>
 
-      <p>Outcome learning? +40 points. Four times the improvement.</p>
-
-      <p>Here's what surprised me: the system only needs about 3 interactions with a piece of information before it knows whether it's useful. Three. After that, accuracy jumps from 0% to 50%.</p>
-
-      <p>The statistics back it up: p=0.005. Less than 1% chance this is random noise.</p>
+      <p>The system only needs about 3 interactions with a piece of information before it knows whether it's useful. After that, the gap opens.</p>
 
       <h2>Why This Matters</h2>
 
       <p>Every time your AI retrieves the wrong information, that's time lost. For one person, it's annoying. Multiply that across a team, and it adds up fast.</p>
 
-      <p>But there's a deeper issue.</p>
+      <p>Traditional AI memory gets fuller over time — the retrieval problem compounds as you add more documents, notes, and noise. You're fighting entropy.</p>
 
-      <p>Traditional AI memory gets <em>fuller</em> over time. More documents. More notes. More noise. The retrieval problem gets harder, not easier. You're fighting entropy.</p>
-
-      <p>Outcome learning flips this. Your AI gets <em>smarter</em> over time. The signal rises. The noise sinks. The system learns what actually matters to you.</p>
-
-      <p>Think about what that means:</p>
+      <p>Outcome learning flips this. Your AI gets <em>smarter</em> over time: the signal rises, the noise sinks, the system learns what actually matters to you.</p>
 
       <ul>
         <li>Preferences that stick after you state them once</li>
@@ -372,39 +350,23 @@
         <li>Bad data that automatically deprioritizes itself</li>
       </ul>
 
-      <p>This is how memory should work. Not just storage. Learning.</p>
-
-      <h2>The Math (For Those Who Care)</h2>
-
-      <p>The naive approach would be: usefulness = successes / total uses.</p>
-
-      <p>But that breaks immediately. A memory used once with one success looks better than a memory used 100 times with 90 successes. That's wrong.</p>
-
-      <p>The fix is Wilson score. Same formula Reddit uses to sort comments. It's a confidence interval that respects sample size. A single success doesn't trump proven reliability. The system stays skeptical of new information while trusting what's been validated repeatedly.</p>
-
-      <p>Trust is earned, not assumed.</p>
+      <p>This is how memory should work — not just about storing information, but learning from what actually helped.</p>
 
       <h2>Your Data, Your Machine</h2>
 
-      <p>One more thing.</p>
+      <p>All of this runs locally. Your memories, your corrections, your patterns — they stay on your machine. No cloud. No telemetry. Works offline.</p>
 
-      <p>All of this runs locally. Your memories, your corrections, your patterns - they stay on your machine. No cloud. No telemetry. Works offline.</p>
+      <p>This isn't just a privacy checkbox; it's the whole point.</p>
 
-      <p>This isn't just a privacy checkbox. It's the whole point.</p>
-
-      <p>The system gets better because <em>you</em> used it. Not because a million other people did. What works for you might not work for anyone else. That's fine. That's the point.</p>
-
-      <p>Your outcomes. Your learning. Your AI.</p>
+      <p>The system gets better because <em>you</em> used it — not because a million other people did. What works for you might not work for anyone else, and that's the point.</p>
 
       <h2>The Bigger Picture</h2>
 
-      <p>We've been building AI memory like a database. Put information in, search it later, hope for the best.</p>
+      <p>We've been building AI memory like a database: put information in, search it later, hope for the best.</p>
 
-      <p>But memory isn't just storage. Real memory is shaped by experience. The things that helped you stick around. The things that failed fade away.</p>
+      <p>But memory isn't just storage. The things that helped stick around. The things that failed fade. That's not philosophy — it's what makes a system actually useful over time.</p>
 
-      <p>That's not philosophy. That's how useful systems work.</p>
-
-      <p>Outcome learning enables exactly this. Not just remembering facts. Remembering what worked.</p>
+      <p>Outcome learning does exactly this: not just remembering facts, but remembering what worked.</p>
 
       <div class="blog-cta">
         <h3>Try It</h3>
@@ -417,7 +379,7 @@
             View on GitHub
           </a>
           <a href="https://roampal.gumroad.com/l/mjxtfg" class="btn-primary" target="_blank" rel="noopener">
-            Get Started - $9.99
+            Get Started - $19.99
             <span class="btn-icon">→</span>
           </a>
         </div>
@@ -431,7 +393,6 @@
     </div>
 
     <footer class="blog-footer">
-      Written with AI assistance (using Roampal). Header image generated with Google Gemini.
     </footer>
   </article>
 

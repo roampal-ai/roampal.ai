@@ -12,24 +12,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="canonical" href="https://roampal.ai/blog-context-rot.html">
-  <meta name="description" content="Chroma's research proves bigger context windows don't fix the problem. Performance degrades regardless. Here's how we built memory that actually learns from outcomes.">
+  <meta name="description" content="Chroma's research proves bigger context windows don't fix the problem. Performance degrades regardless. Here's how I built memory that actually learns from outcomes.">
   <meta name="keywords" content="context rot, AI memory, RAG, outcome-based learning, Claude Code, MCP, vector search, LLM context window">
 
   <!-- Open Graph / Social Media -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://roampal.ai/blog-context-rot.html">
-  <meta property="og:title" content="Context Rot is Real. Here's How We Built Memory That Learns.">
+  <meta property="og:title" content="Context Rot is Real. Here's How I Built Memory That Learns.">
   <meta property="og:description" content="Chroma's research proves bigger context windows don't fix the problem. Here's how outcome-based learning changes that.">
   <meta property="og:image" content="https://roampal.ai/assets/context-rot-hero.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://roampal.ai/blog-context-rot.html">
-  <meta name="twitter:title" content="Context Rot is Real. Here's How We Built Memory That Learns.">
+  <meta name="twitter:title" content="Context Rot is Real. Here's How I Built Memory That Learns.">
   <meta name="twitter:description" content="Chroma's research proves bigger context windows don't fix the problem. Here's how outcome-based learning changes that.">
   <meta name="twitter:image" content="https://roampal.ai/assets/context-rot-hero.png">
 
-  <title>Context Rot is Real. Here's How We Built Memory That Learns. | Roampal</title>
+  <title>Context Rot is Real. Here's How I Built Memory That Learns. | Roampal</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
@@ -251,8 +251,8 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Context Rot is Real. Here's How We Built Memory That Learns.",
-    "description": "Chroma's research proves bigger context windows don't fix the problem. Performance degrades regardless. Here's how we built memory that actually learns from outcomes.",
+    "headline": "Context Rot is Real. Here's How I Built Memory That Learns.",
+    "description": "Chroma's research proves bigger context windows don't fix the problem. Performance degrades regardless. Here's how I built memory that actually learns from outcomes.",
     "image": "https://roampal.ai/assets/context-rot-hero.png",
     "datePublished": "2026-01-06",
     "dateModified": "2026-01-06",
@@ -314,233 +314,80 @@
     </a>
 
     <header class="blog-header">
-      <h1 class="blog-title">Context Rot is Real. Here's How We Built Memory That Learns.</h1>
-      <p class="blog-meta">January 2026 &bull; 8 min read</p>
+      <h1 class="blog-title">Context Rot is Real. Here's How I Built Memory That Learns.</h1>
+      <p class="blog-meta">January 2026 &bull; 8 min read &bull; Updated May 2026</p>
     </header>
 
     <img src="assets/context-rot-hero.png" alt="Context window degradation visualization" class="blog-hero-image">
     <p class="blog-hero-caption">Image generated with Google Gemini</p>
 
     <article class="blog-content">
-      <p><a href="https://research.trychroma.com/context-rot" target="_blank">Chroma's research last July</a> confirms what we've been building around: <strong>bigger context windows don't solve the retrieval problem</strong>. They tested 18 LLMs including Claude, GPT-4.1, Gemini 2.5. Performance degrades regardless of how much you can fit in.</p>
+      <p><a href="https://research.trychroma.com/context-rot" target="_blank">Chroma's research</a> confirmed something I'd been hitting head-on: bigger context windows don't solve memory, they make it worse. They tested a collection of models and found that as you stuff more conversation history into a prompt, the model's accuracy degrades, losing context, producing worse answers.</p>
 
-      <p>Here's the part nobody talks about.</p>
+      <p>The real issue goes deeper: retrieval and generation are decoupled. The retriever finds "relevant" chunks, the generator uses them, but nothing connects what got retrieved to whether the answer actually helped. Rerankers, query rewriting, hybrid search. They all try to fix retrieval quality at query time. They optimize for similarity, and do it well, but what about success?</p>
 
-      <p>Retrieval and generation are decoupled. The retriever finds "relevant" chunks. The generator uses them. But nothing connects what got retrieved to whether the answer actually helped.</p>
+      <p>Your AI pulls up a memory, uses it, gets it wrong. That memory sits there waiting to surface again with the same confidence. What if it had a feedback loop? I built outcome-based learning: when you say "that worked" or "no, that's wrong," those signals attach to the memories themselves. Good ones surface more. Bad ones sink.</p>
 
-      <p>Your AI pulls up a memory. Uses it. Gets it wrong. And then... nothing. That memory sits there, waiting to surface again. Same confidence. Same ranking. No feedback.</p>
+      <h2>How Memories Are Created and Retrieved</h2>
 
-      <p>Where's the feedback loop?</p>
+      <p>If the user has to click a thumbs up button, they won't. A sidecar LLM handles it instead: after each exchange it infers whether the response helped or not, summarizes the exchange, extracts facts from it, applies tags, and scores memories. Every function is compression. Summarizing replaces raw conversation history with distilled context (roughly 300 characters), fact extraction pulls hard specifics out of noise, tagging enables tag-first cascade lookup instead of blind vector search.</p>
 
-      <h2>The Learning Gap</h2>
+      <p>Fresh memories enter at working tier (24h) and move through history (30d) to patterns (permanent) as they accumulate positive feedback. Scores accumulate through flat deltas: worked adds +0.2, failed subtracts -0.3, partial adds +0.05, unknown subtracts -0.05. Only patterns are protected from decay, and even then they can demote back into an unprotected tier if they prove unhelpful over time.</p>
 
-      <p>Rerankers, query rewriting, hybrid search - they all try to fix retrieval quality at query time. But they can't learn from outcomes. They optimize for similarity, not success.</p>
+      <h3>Why extract tags?</h3>
 
-      <p>We built outcome-based learning. When you say "that worked" or "no, that's wrong," those signals attach to the memories themselves. Good memories surface more. Bad ones sink.</p>
+      <p>The sidecar extracts noun tags from every memory and adds them to an in-memory known-tag index. At query time, whether triggered by a user prompt or the LLM itself manually searching its own memory, word-boundary matching finds which of those tags appear in the query text. For each matched tag, ChromaDB returns candidates that carry it. Results are counted by overlap, how many of the query's tags each memory shares, and cascade from highest overlap down to single-tag hits. Remaining slots fill with semantic similarity before a cross-encoder reranks the final pool for precision.</p>
 
-      <p>It's not complicated. It's just not how anyone else builds this.</p>
+      <p>Two lanes retrieve separately, with summaries carrying narrative context about the exchange while facts capture hard specifics. Each retrieved memory surfaces with outcome metadata (score, Wilson confidence, use count, recent outcomes) so the LLM sees not just what matched but how reliable each one has proven to be.</p>
 
-      <h2>Three Problems We Had to Solve</h2>
 
-      <h3>Problem 1: Cold Start</h3>
+      <h2>The Benchmark</h2>
 
-      <p>A new memory helps once. 1/1 = 100% success rate. A veteran memory has helped 90 times out of 100. 90/100 = 90%. Raw math says the new one is better. That's insane.</p>
-
-      <p>Wilson score fixes this by asking: how much do I actually trust this number? One data point? Could be luck. A hundred data points? That's a pattern. So 9/10 and 90/100 are both 90% raw, but Wilson scores them at ~60% and ~83% respectively. More evidence, higher floor. Memories have to prove themselves.</p>
-
-      <h3>Problem 2: When to Trust What</h3>
-
-      <p>New memories have no track record. You can't rank them by outcome because there's no outcome yet. But if you only trust embeddings, you're back to semantic similarity. No learning.</p>
-
-      <p>We use dynamic weighting. As memories get used and scored, the balance shifts:</p>
-
-      <svg viewBox="0 0 420 140" style="width: 100%; max-width: 520px; margin: var(--space-4) 0;">
-        <!-- Legend -->
-        <rect x="100" y="0" width="12" height="12" fill="#3b82f6" rx="2"/>
-        <text x="116" y="10" fill="var(--text-tertiary)" font-size="11">Embedding similarity</text>
-        <rect x="250" y="0" width="12" height="12" fill="#10b981" rx="2"/>
-        <text x="266" y="10" fill="var(--text-tertiary)" font-size="11">outcome-based learning</text>
-
-        <!-- New Memory -->
-        <text x="0" y="45" fill="var(--text-secondary)" font-size="13" font-weight="500">New</text>
-        <rect x="100" y="32" width="240" height="24" fill="#3b82f6" rx="4"/>
-        <rect x="340" y="32" width="60" height="24" fill="#10b981" rx="4"/>
-        <text x="220" y="48" fill="white" font-size="12" font-weight="500" text-anchor="middle">80%</text>
-        <text x="370" y="48" fill="white" font-size="12" font-weight="500" text-anchor="middle">20%</text>
-
-        <!-- Arrow with label -->
-        <path d="M200 65 L200 85 M195 80 L200 85 L205 80" stroke="var(--text-tertiary)" stroke-width="2" fill="none"/>
-        <text x="215" y="78" fill="var(--text-tertiary)" font-size="10">feedback</text>
-
-        <!-- Proven Memory -->
-        <text x="0" y="110" fill="var(--text-secondary)" font-size="13" font-weight="500">Proven</text>
-        <rect x="100" y="97" width="60" height="24" fill="#3b82f6" rx="4"/>
-        <rect x="160" y="97" width="240" height="24" fill="#10b981" rx="4"/>
-        <text x="130" y="113" fill="white" font-size="12" font-weight="500" text-anchor="middle">20%</text>
-        <text x="280" y="113" fill="white" font-size="12" font-weight="500" text-anchor="middle">80%</text>
-      </svg>
-
-      <p>Trust is earned, not assumed.</p>
-
-      <h3>Problem 3: Making Scoring Frictionless</h3>
-
-      <p>If the user has to click a thumbs up button, they won't. The feedback loop dies.</p>
-
-      <p>Here's how we solve it: the LLM does the work. After each exchange, we prompt the model to read your next message and infer whether its response actually helped:</p>
-
-      <ul>
-        <li>"Thanks, that worked!" &rarr; outcome = worked</li>
-        <li>"No, that's wrong" &rarr; outcome = failed</li>
-        <li>User moves to a new topic &rarr; outcome = worked (previous issue resolved)</li>
-        <li>User asks follow-up questions &rarr; outcome = partial or unknown</li>
-      </ul>
-
-      <p>No buttons. No friction. The AI reads your reaction and scores its own memories.</p>
-
-      <h2>The Results</h2>
-
-      <p>We ran 30 adversarial tests where semantic similarity points to the wrong answer. Example: "My code keeps crashing" might semantically match a memory about "the crash course I took" instead of "the buffer overflow fix that worked."</p>
+      <p>I tested Roampal on a corrected LoCoMo benchmark: the LLM recorded memories over long multi-session conversations, then was tested on its recall across 1,986 questions graded end-to-end.</p>
 
       <table>
         <thead>
           <tr>
             <th>Approach</th>
-            <th>Accuracy</th>
+            <th>Answer Accuracy</th>
+            <th>vs Raw Ingestion</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>ChromaDB baseline (similarity only)</td>
-            <td>0%</td>
+            <td>Raw ingestion (standard RAG)</td>
+            <td>53.0%</td>
+            <td>&mdash;</td>
           </tr>
           <tr>
-            <td>Roampal with outcome-based learning</td>
-            <td>60%</td>
+            <td>TagCascade (Roampal)</td>
+            <td>76.6%</td>
+            <td>+23.6 pts</td>
           </tr>
         </tbody>
       </table>
 
-      <p>60 percentage points. On queries where the semantically similar answer is wrong, outcome-based learning surfaces the answer that actually worked.</p>
+      <p>+23 points over raw ingestion (p&lt;0.0001). The system learned entirely through conversation across 10 conversations with 20 characters sharing 3,015 facts. Out of that dialogue came approximately 5,000 memories. TagCascade proved surgical at scale.</p>
 
-      <p>How the test works: we plant a trap. Two memories go in - one that worked, one that failed but sounds more like the query. "My code keeps crashing" matches "crash course" better than "null pointer fix." Pure vector search falls for it every time. outcome-based learning doesn't care about word similarity - it remembers what actually helped.</p>
+      <h2>The Answer</h2>
 
-      <div class="callout-box">
-        <strong>Honest caveat:</strong> Learning takes time. At zero uses, both approaches perform identically. The gap opens around 3+ uses per memory. This isn't magic - it's compounding feedback.
-      </div>
+      <p>Chroma's research showed that stuffing more conversation history into a prompt makes accuracy worse. The answer isn't bigger context windows, it is knowing what to leave out. I built Roampal with a sliding window of four exchanges plus surgical retrieval through TagCascade. Instead of drowning the LLM in everything ever said, it pulls only the memories that actually helped before, and those memories earn their place through outcome feedback, promoting over time or decaying when they don't.</p>
 
-      <h2>Token Efficiency</h2>
-
-      <p>Context rot is partly a token problem. Standard RAG grabs everything that looks relevant and stuffs it into context. More tokens, worse performance, higher costs.</p>
-
-      <p>We tested a different approach: what if you retrieved less, but retrieved <em>better</em>?</p>
-
-      <p>The test: 100 scenarios where the query matches lots of memories semantically, but only a few actually helped before. Example - you ask "Why is my API slow?" Your memory contains discussions about API rate limits, authentication timeouts, that time you complained about slow coffee, and one memory about adding a database index that actually fixed a slow API last month.</p>
-
-      <p>Standard RAG pulls in everything with "slow" or "API" in it. Roampal checks which memories had good outcomes and prioritizes those.</p>
-
-      <p><strong>The metric:</strong> does the memory that actually helped appear in the top 3 results?</p>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Approach</th>
-            <th>Retrieved the helpful memory</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Naive RAG (semantic similarity)</td>
-            <td>1%</td>
-          </tr>
-          <tr>
-            <td>Roampal with outcome-based learning</td>
-            <td>67%</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>And because Roampal only retrieves 3-5 high-confidence memories instead of 50 "relevant" chunks, you use fewer tokens too.</p>
-
-      <div class="callout-box">
-        <strong>The numbers:</strong> ~19 tokens per retrieval vs 50-90 for typical RAG. At 1M queries/month, that's <strong>$18-37K/year saved</strong> on API costs - while getting better answers.
-      </div>
-
-      <h2>Where Memories Live</h2>
-
-      <p>Five collections, each with a purpose:</p>
-
-      <div class="outcome-scored-group">
-        <p class="group-label">↓ Outcome-scored (worked/failed feedback)</p>
-        <ul>
-          <li><strong>working</strong> - Live conversation. Auto-cleaned after 24 hours.</li>
-          <li><strong>history</strong> - Graduated from working. 30 day decay.</li>
-          <li><strong>patterns</strong> - Promoted solutions. Can demote.</li>
-        </ul>
-      </div>
-
-      <ul>
-        <li><strong>memory_bank</strong> - User facts, preferences. Ranked by importance × confidence. Updateable. Deletable.</li>
-        <li><strong>books</strong> - Uploaded docs. Permanent. Searchable.</li>
-      </ul>
-
-      <p>Wilson scoring ranks ALL results, but only the top three collections learn from feedback. Memory_bank and books don't update based on outcomes - they're static reference.</p>
-
-      <p>Memories flow up as they prove useful. Bad ones decay out. The system self-cleans.</p>
-
-      <h2>Learning How to Search</h2>
-
-      <p>Three knowledge graphs work together:</p>
-
-      <ul>
-        <li><strong>Routing KG</strong> - Which collection has the answer? Learns from outcomes.</li>
-        <li><strong>Content KG</strong> - How are concepts related? Tracks entity connections.</li>
-        <li><strong>Action KG</strong> - Which tools work when? Tracks success rates per context type.</li>
-      </ul>
-
-      <p>Zero hardcoded rules. The system learns YOUR patterns:</p>
-
-      <p>"Database timeout" → patterns (solutions that worked)</p>
-      <p>"How did we fix this last week" → history (past sessions)</p>
-      <p>"My logging style" → memory_bank (stored facts)</p>
-
-      <p>Start fresh, and it explores everything. After a few sessions, it knows where to look.</p>
-
-      <h2>Something Like Intuition</h2>
-
-      <p>After enough scored interactions, the system develops something like intuition. Not rules. Weights.</p>
-
-      <p>It knows which solutions actually helped you. It knows which advice you rejected. The database fix from last week? Scored highly now. The suggestion you rejected three times? Demoted.</p>
-
-      <p>None of this is magic. It's feedback, accumulated.</p>
-
-      <h2>Context Injection</h2>
-
-      <p>On session start, we inject high-confidence context automatically. Core facts from memory_bank. Recent patterns that worked.</p>
-
-      <p>And it continues. Every message, the KGs surface what worked before, what to avoid, where to look first. You don't ask for it.</p>
-
-      <p>Cold starts feel warm. And it stays that way.</p>
-
-      <h2>What We're Not</h2>
-
-      <p>Not funded. Side project that got traction. It breaks? Roampal and I fix it. Want features? Open an issue.</p>
-
-      <h2>The Bet</h2>
-
-      <p>Context windows will keep getting bigger. Retrieval will keep getting fancier. And none of it will matter if the system can't learn from whether the answer helped.</p>
+      <p>Bigger context windows will keep getting bigger. Retrieval will keep getting fancier. And none of it matters if the system cannot learn from whether the answer helped.</p>
 
       <div class="cta-box">
-        <p><strong>Want to learn more?</strong> <a href="https://github.com/roampal-ai" target="_blank">github.com/roampal-ai</a> | <a href="https://github.com/roampal-ai/roampal/tree/master/dev/benchmarks" target="_blank">See the benchmarks</a></p>
-        <p><strong>Have Claude Code?</strong></p>
-        <pre><code>pip install roampal
-roampal init</code></pre>
-        <p>Restart Claude Code. Done.</p>
+        <p><strong>Want to learn more?</strong> <a href="https://github.com/roampal-ai" target="_blank">GitHub</a> | <a href="https://github.com/roampal-ai/roampal-labs" target="_blank">Benchmarks</a></p>
+        <p><strong>OpenCode:</strong></p>
+        <pre><code>pip install roampal-core
+roampal init --opencode</code></pre>
+        <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">Uses a sidecar LLM that handles extraction, summarization, and tagging automatically.</p>
+        <p><strong>Claude Code:</strong></p>
+        <pre><code>pip install roampal-core
+roampal init --claude-code</code></pre>
+        <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">Uses an MCP tool where the main LLM manages extraction, summarization, and tagging.</p>
+        <p><strong>Want it all in one app?</strong> <a href="https://roampal.gumroad.com/l/mjxtfg" target="_blank">Get Roampal Desktop</a></p>
         <p style="margin-top: var(--space-4); font-size: var(--text-sm); color: var(--text-tertiary);">Your memories stay local. Your learning stays yours.</p>
       </div>
-
-      <p style="margin-top: var(--space-6); font-size: var(--text-sm); color: var(--text-tertiary); text-align: center;">
-        Written with AI assistance (using Roampal). References Chroma's context rot research.
-      </p>
 
     </article>
 

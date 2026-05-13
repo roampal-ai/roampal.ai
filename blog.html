@@ -55,8 +55,8 @@
       {
         "@type": "ListItem",
         "position": 1,
-        "url": "https://roampal.ai/blog-forgetting.html",
-        "name": "Your AI Remembers Too Much. That's the Problem."
+        "url": "https://roampal.ai/blog-context-rot.html",
+        "name": "Context Rot is Real. Here's How We Built Memory That Learns."
       },
       {
         "@type": "ListItem",
@@ -67,12 +67,24 @@
       {
         "@type": "ListItem",
         "position": 3,
+        "url": "https://roampal.ai/blog-better-writing.html",
+        "name": "You Wanted Better Writing. Now You Have It."
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "url": "https://roampal.ai/blog-forgetting.html",
+        "name": "Your AI Remembers Too Much. That's the Problem."
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "url": "https://roampal.ai/blog-ai-learns.html",
         "name": "Your AI Remembers Everything. But Does It Learn?"
       },
       {
         "@type": "ListItem",
-        "position": 4,
+        "position": 6,
         "url": "https://roampal.ai/blog-outcome-learning.html",
         "name": "Your AI Keeps Forgetting What You Told It. Here's Why."
       }
@@ -94,7 +106,7 @@
 
   <style>
     .blog-index-container {
-      max-width: 900px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: var(--space-8) var(--space-6);
       padding-top: 120px;
@@ -102,119 +114,152 @@
 
     .blog-index-header {
       text-align: center;
-      margin-bottom: var(--space-12);
+      margin-bottom: var(--space-16);
     }
 
     .blog-index-title {
       font-size: var(--text-4xl);
-      font-weight: var(--weight-bold);
+      font-weight: var(--weight-semibold);
       color: var(--text-primary);
-      margin-bottom: var(--space-4);
+      line-height: var(--leading-tight);
+      letter-spacing: -0.02em;
     }
 
-    .blog-index-subtitle {
-      font-size: var(--text-lg);
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
+    /* Featured section - always full width */
+    .blog-featured-section {
+      margin-bottom: var(--space-16);
+    }
+
+    .blog-featured-grid {
+      display: grid;
+      gap: var(--space-6);
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .blog-featured-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Regular posts section */
+    .blog-posts-section {
+      margin-bottom: var(--space-20);
     }
 
     .blog-posts-grid {
       display: grid;
-      gap: var(--space-8);
+      gap: var(--space-4);
+      grid-template-columns: 1fr;
     }
 
-    .blog-post-card {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: var(--space-6);
-      background: var(--bg-secondary);
+    /* Card base - Turso style */
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(to bottom, #0a0a0a, transparent);
       border: 1px solid var(--bg-tertiary);
-      border-radius: var(--radius-lg);
       overflow: hidden;
       transition: all var(--transition-base);
+      text-decoration: none;
     }
 
-    .blog-post-card:hover {
+    .blog-card:hover {
       border-color: var(--accent-primary);
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
     }
 
-    .blog-post-image {
+    .blog-card-image-wrapper {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--bg-secondary);
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-4);
+    }
+
+    .blog-card-image-wrapper img {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
       object-position: center 55%;
     }
 
-    .blog-post-content {
-      padding: var(--space-6);
-      padding-left: 0;
+    .blog-card-content {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      flex: 1;
+      padding-right: var(--space-6);
+      padding-left: var(--space-6);
+      padding-bottom: var(--space-6);
     }
 
-    .blog-post-meta {
-      font-size: var(--text-sm);
-      color: var(--text-tertiary);
-      margin-bottom: var(--space-2);
-    }
-
-    .blog-post-title {
+    .blog-card-title {
       font-size: var(--text-xl);
       font-weight: var(--weight-semibold);
       color: var(--text-primary);
-      margin-bottom: var(--space-3);
-      line-height: var(--leading-tight);
-    }
-
-    .blog-post-excerpt {
-      font-size: var(--text-base);
-      color: var(--text-secondary);
-      line-height: var(--leading-relaxed);
-      margin-bottom: var(--space-4);
-    }
-
-    .blog-post-link {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      font-size: var(--text-sm);
-      font-weight: var(--weight-medium);
-      color: var(--accent-primary);
+      line-height: 1.35;
+      margin-bottom: var(--space-2);
       transition: color var(--transition-fast);
+      max-width: 100%;
+      overflow-wrap: break-word;
     }
 
-    .blog-post-link:hover {
-      color: var(--accent-hover);
+    .blog-card:hover .blog-card-title {
+      color: var(--accent-primary);
     }
 
-    .blog-post-link svg {
-      transition: transform var(--transition-fast);
+    .blog-card-meta {
+      font-size: var(--text-sm);
+      color: var(--text-tertiary);
     }
 
-    .blog-post-link:hover svg {
-      transform: translateX(4px);
+    /* Featured card - full width hero */
+    .blog-card.featured {
+      border-width: 1px;
+    }
+
+    .blog-card.featured .blog-card-image-wrapper {
+      aspect-ratio: auto;
+      height: 320px;
+      margin-bottom: 0;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    }
+
+    .blog-card.featured .blog-card-content {
+      padding-top: var(--space-6);
+    }
+
+    .blog-card.featured .blog-card-title {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-2);
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .blog-post-card {
-        grid-template-columns: 1fr;
-      }
-
-      .blog-post-image {
-        height: 200px;
-      }
-
-      .blog-post-content {
-        padding: var(--space-6);
+    @media (min-width: 768px) {
+      .blog-posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-6);
       }
 
       .blog-index-title {
-        font-size: var(--text-3xl);
+        font-size: var(--text-5xl);
+      }
+
+      .blog-card.featured .blog-card-image-wrapper {
+        height: 400px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .blog-posts-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .blog-card.featured .blog-card-image-wrapper {
+        height: 480px;
       }
     }
   </style>
@@ -257,107 +302,83 @@
   <main class="blog-index-container">
     <header class="blog-index-header">
       <h1 class="blog-index-title">Blog</h1>
-      <p class="blog-index-subtitle">Insights on AI memory, outcome learning, and building AI that actually remembers.</p>
     </header>
 
-    
-      <!-- Post 6: Better Writing - NEW -->
-      <a href=blog-better-writing.html class=blog-post-card>
-        <img src="assets/same_but_different.jpg" alt="Same critic, opposite complaints" class="blog-post-image">
-        <div class=blog-post-content>
-          <p class=blog-post-meta>January 2026</p>
-          <h2 class=blog-post-title>You Wanted Better Writing. Now You Have It.</h2>
-          <p class=blog-post-excerpt>For a decade, critics said technology was ruining writing. Now AI helps people write clearly, and the response is make it worse. What''s really going on?</p>
-          <span class=blog-post-link>
-            Read more
-            <svg width=16 height=16 viewBox=0 0 24 24 fill=none stroke=currentColor stroke-width=2>
-              <path d=M5 12h14M12 5l7 7-7 7/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- Post 5: Context Rot -->
-      <a href="blog-context-rot.html" class="blog-post-card">
-        <img src="assets/context-rot-hero.png" alt="Digital context decaying" class="blog-post-image">
-        <div class="blog-post-content">
-          <p class="blog-post-meta">January 2026</p>
-          <h2 class="blog-post-title">Context Rot is Real. Here's How We Built Memory That Learns.</h2>
-          <p class="blog-post-excerpt">Chroma's research proves bigger context windows don't fix the problem. Here's how outcome-based learning changes that.</p>
-          <span class="blog-post-link">
-            Read more
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- Post 4: Forgetting -->
-      <a href="blog-forgetting.html" class="blog-post-card">
-        <img src="assets/forgetting-hero.jpg" alt="Digital brain dissolving or fading at the edges" class="blog-post-image">
-        <div class="blog-post-content">
-          <p class="blog-post-meta">December 2025</p>
-          <h2 class="blog-post-title">Your AI Remembers Too Much. That's the Problem.</h2>
-          <p class="blog-post-excerpt">Everyone's racing to give AI more memory. Bigger context windows. Better retrieval. What if we've got it backwards?</p>
-          <span class="blog-post-link">
-            Read more
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- Post 3: Privacy -->
-      <a href="blog-privacy.html" class="blog-post-card">
-        <img src="assets/privacy-hero.jpg" alt="Neural network contained inside a glowing glass cube" class="blog-post-image">
-        <div class="blog-post-content">
-          <p class="blog-post-meta">December 2025</p>
-          <h2 class="blog-post-title">Your AI's Memory Shouldn't Belong to Someone Else</h2>
-          <p class="blog-post-excerpt">Your AI assistant is building a map of your mind. Cloud providers see every question and correction. Here's why local-first matters.</p>
-          <span class="blog-post-link">
-            Read more
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- Post 2: AI Learns -->
-      <a href="blog-ai-learns.html" class="blog-post-card">
-        <img src="assets/livingstorage.jpg" alt="A living creature emerging from a storage box" class="blog-post-image">
-        <div class="blog-post-content">
-          <p class="blog-post-meta">December 2025</p>
-          <h2 class="blog-post-title">Your AI Remembers Everything. But Does It Learn?</h2>
-          <p class="blog-post-excerpt">We gave AI memory. It still makes the same mistakes. Here is how outcome learning changes that - 60% accuracy vs 10% for standard RAG.</p>
-          <span class="blog-post-link">
-            Read more
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
-      <!-- Post 1: Outcome Learning -->
-      <a href="blog-outcome-learning.html" class="blog-post-card">
-        <img src="assets/roboshake.jpg" alt="Human and AI hand reaching toward each other" class="blog-post-image">
-        <div class="blog-post-content">
-          <p class="blog-post-meta">December 2025</p>
-          <h2 class="blog-post-title">Your AI Keeps Forgetting What You Told It. Here's Why.</h2>
-          <p class="blog-post-excerpt">Most AI memory works like a filing cabinet. But the AI doesn't know if what it retrieved actually helped. Here's a different approach that learns from outcomes.</p>
-          <span class="blog-post-link">
-            Read more
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </span>
-        </div>
-      </a>
-
+    <!-- Featured Posts -->
+    <section class="blog-featured-section">
+      <div class="blog-featured-grid">
+        <a href="blog-context-rot.html" class="blog-card featured">
+          <div class="blog-card-image-wrapper">
+            <img src="assets/context-rot-hero.png" alt="Digital context decaying">
           </div>
+          <div class="blog-card-content">
+            <h2 class="blog-card-title">Context Rot is Real. Here's How We Built Memory That Learns.</h2>
+            <p class="blog-card-meta">January 2026 &bull; Updated May 2026</p>
+          </div>
+        </a>
+
+        <a href="blog-privacy.html" class="blog-card featured">
+          <div class="blog-card-image-wrapper">
+            <img src="assets/privacy-hero.jpg" alt="Neural network contained inside a glowing glass cube">
+          </div>
+          <div class="blog-card-content">
+            <h2 class="blog-card-title">Your AI's Memory Shouldn't Belong to Someone Else</h2>
+            <p class="blog-card-meta">December 2025 &bull; Updated May 2026</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- All Posts -->
+    <section class="blog-posts-section">
+      <div class="blog-posts-grid">
+
+        <!-- Better Writing -->
+        <a href="blog-better-writing.html" class="blog-card">
+          <div class="blog-card-image-wrapper">
+            <img src="assets/same_but_different.jpg" alt="Same critic, opposite complaints">
+          </div>
+          <div class="blog-card-content">
+            <h3 class="blog-card-title">You Wanted Better Writing. Now You Have It.</h3>
+            <p class="blog-card-meta">January 2026</p>
+          </div>
+        </a>
+
+        <!-- Forgetting -->
+        <a href="blog-forgetting.html" class="blog-card">
+          <div class="blog-card-image-wrapper">
+            <img src="assets/forgetting-hero.jpg" alt="Digital brain dissolving or fading at the edges">
+          </div>
+          <div class="blog-card-content">
+            <h3 class="blog-card-title">Your AI Remembers Too Much. That's the Problem.</h3>
+            <p class="blog-card-meta">December 2025 &bull; Updated May 2026</p>
+          </div>
+        </a>
+
+        <!-- AI Learns -->
+        <a href="blog-ai-learns.html" class="blog-card">
+          <div class="blog-card-image-wrapper">
+            <img src="assets/livingstorage.jpg" alt="A living creature emerging from a storage box">
+          </div>
+          <div class="blog-card-content">
+            <h3 class="blog-card-title">Your AI Remembers Everything. But Does It Learn?</h3>
+            <p class="blog-card-meta">December 2025 &bull; Updated May 2026</p>
+          </div>
+        </a>
+
+        <!-- Outcome Learning -->
+        <a href="blog-outcome-learning.html" class="blog-card">
+          <div class="blog-card-image-wrapper">
+            <img src="assets/roboshake.jpg" alt="Human and AI hand reaching toward each other">
+          </div>
+          <div class="blog-card-content">
+            <h3 class="blog-card-title">Your AI Keeps Forgetting What You Told It. Here's Why.</h3>
+            <p class="blog-card-meta">December 2025 &bull; Updated May 2026</p>
+          </div>
+        </a>
+
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
