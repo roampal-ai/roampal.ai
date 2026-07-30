@@ -132,7 +132,7 @@
     "price": "19.99",
     "priceCurrency": "USD"
   },
-  "softwareVersion": "0.5.7",
+  "softwareVersion": "0.5.8",
   "author": {
     "@type": "Organization",
     "name": "Roampal",
@@ -846,38 +846,38 @@ elif outcome == "partial":
       <!-- roampal-core Section -->
       <h3 style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color);">roampal-core</h3>
 
-      <!-- v0.5.7 Release Card -->
+      <!-- v0.5.8 Release Card -->
       <div class="release-card" data-animate style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 2rem; margin-bottom: 2rem;">
         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
           <div>
             <h3 style="font-size: 1.5rem; color: var(--text-primary); margin-bottom: 0.5rem;">
-              v0.5.7 - Core-Side GC for Completion State + 30-Day TTL
+              v0.5.8 - SQLite WAL + Atomic Session Transcript Rewrite
             </h3>
             <p style="color: var(--text-secondary); font-size: 0.875rem;">
-              Released May 2026
+              Released July 2026
             </p>
           </div>
           <span style="background: var(--accent-color); color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 600;">LATEST</span>
         </div>
 
         <p style="color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.6;">
-          Core-side garbage collection for <code>_completion_state.json</code>. The file accumulates one entry per <code>conversation_id</code> ever seen, with no GC. Fixes I/O amplification, cross-session fallback correctness hazards, and latent ID-collision risk. TTL set to 30 days. 720 tests passing.
+          Critical data integrity hardening for crashes. Switches the embedded ChromaDB SQLite catalog to WAL journal mode with <code>FULL</code> durability, and makes session transcript rewrites atomic so a hard kill or power loss can no longer truncate conversation history.
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Automatic Cleanup</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Prunes stale entries at startup (older than 30 days or with no matching JSONL). Hard ceiling at 500 entries so the file never grows unbounded.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Crash-Safe SQLite</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">WAL journal mode keeps writes in a separate log so the main DB survives hard kills. <code>PRAGMA synchronous=FULL</code> forces fsync on every commit. PRAGMAs persist across all future connections.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Crash-Safe Writes</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">Single atomic write at end of prune pass. Defensive on malformed input: non-dict entries and unparseable timestamps handled without raising.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Atomic Transcript Writes</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;"><code>SessionManager.mark_scored()</code> now writes to a temp file and atomically replaces the original <code>.jsonl</code> with <code>os.replace()</code>. Windows fd-close fix prevents open-handle leaks on failure.</p>
           </div>
 
           <div style="background: var(--bg-primary); padding: 1rem; border-radius: 6px; border-left: 3px solid var(--accent-color);">
-            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Proven Robust</h4>
-            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">720/720 tests passing. Live shared-DB smoke-test passed with Desktop v0.3.3. Idempotent: second startup finds nothing to prune.</p>
+            <h4 style="color: var(--text-primary); font-size: 1rem; margin-bottom: 0.5rem;">Test Coverage</h4>
+            <p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5;">16 new tests covering WAL configuration, header persistence, integration under real ChromaDB, and the atomic transcript rewrite. Full suite: 733 tests passing.</p>
           </div>
         </div>
 
@@ -885,16 +885,15 @@ elif outcome == "partial":
           <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600;">View Full Details</summary>
           <div style="padding: 1rem; background: var(--bg-primary); border-radius: 6px; margin-top: 0.5rem;">
             <ul style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; margin-left: 1.25rem;">
-              <li>New <code>_cleanup_completion_state(max_age_days=30, max_entries=500)</code> prunes stale entries at startup: drops entries older than 30 days or whose JSONL transcript no longer exists.</li>
-              <li>Hard ceiling at 500 entries: after age-based pruning, oldest entries are evicted until count &le; 500.</li>
-              <li>Single atomic write at end of prune pass; skipped when nothing was pruned to avoid pointless rewrites.</li>
-              <li>Defensive on malformed input: non-dict state, non-dict entries, and unparseable timestamps handled without raising.</li>
-              <li>TTL set to 30 days to stay in lockstep with state-file cleanup; prevents re-cold-starting paused conversations.</li>
-              <li>Startup log line reports prune count (never silent).</li>
-              <li>4 new unit tests cover stale-timestamp prune, missing-JSONL prune, entry ceiling, and atomic-write contract.</li>
-              <li>720/720 tests passing. Live shared-DB smoke-test passed with Desktop v0.3.3.</li>
+              <li>New <code>_configure_sqlite_wal(db_path)</code> in <code>chromadb_adapter.py</code> runs immediately after <code>PersistentClient</code> initialization.</li>
+              <li>Sets <code>PRAGMA journal_mode=WAL</code> and <code>PRAGMA synchronous=FULL</code>; header persistence verified across connections.</li>
+              <li>Defensive no-op if the SQLite file does not exist yet; logs warning on failure without blocking startup.</li>
+              <li>Session transcript rewrite switched from in-place overwrite to temp-file + <code>os.replace()</code> for atomicity.</li>
+              <li>Windows-specific fix: closes the temp file descriptor before unlinking on failure.</li>
+              <li>Pre-existing v0.5.x test debt fixed (predictable vs UUID-based IDs, profile banner assertion).</li>
+              <li>733/733 tests passing.</li>
             </ul>
-            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.7/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
+            <p style="margin-top: 1rem;"><a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.8/RELEASE_NOTES.md" style="color: var(--accent-color);">Full Release Notes</a></p>
           </div>
         </details>
 
@@ -902,7 +901,7 @@ elif outcome == "partial":
           <a href="https://pypi.org/project/roampal/" style="display: inline-block; background: var(--accent-color); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             pip install roampal
           </a>
-          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.7" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
+          <a href="https://github.com/roampal-ai/roampal-core/releases/tag/v0.5.8" style="display: inline-block; background: transparent; color: var(--text-primary); padding: 0.75rem 1.5rem; border: 1px solid var(--border-color); border-radius: 6px; text-decoration: none; font-weight: 600;" target="_blank" rel="noopener">
             View on GitHub
           </a>
         </div>
@@ -912,8 +911,15 @@ elif outcome == "partial":
       <details style="margin-top: 2rem;">
         <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; font-size: 1.1rem; padding: 1rem 0; display: flex; align-items: center; gap: 0.5rem;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><path d="M6 9l6 6 6-6"/></svg>
-          View Previous Releases (v0.5.6 and earlier)
+          View Previous Releases (v0.5.7 and earlier)
         </summary>
+
+        <!-- v0.5.7 -->
+        <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
+          <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem;">v0.5.7 - Core-Side GC for Completion State + 30-Day TTL</h4>
+          <p style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.75rem;">May 2026. Garbage collection for <code>_completion_state.json</code> — prunes stale entries, caps at 500, atomic writes, 720 tests passing.</p>
+          <a href="https://github.com/roampal-ai/roampal-core/blob/main/dev/docs/releases/v0.5.7/RELEASE_NOTES.md" style="color: var(--accent-color); font-size: 0.875rem;">Release Notes &rarr;</a>
+        </div>
 
         <!-- v0.5.6 -->
         <div class="release-card" style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; margin-top: 1rem;">
